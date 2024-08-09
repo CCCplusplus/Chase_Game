@@ -706,7 +706,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &874860207
 GameObject:
@@ -774,7 +774,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1240109154
 GameObject:
@@ -805,8 +805,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 600d681b431ab8b42a8502e395d78050, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runnerPrefab: {fileID: 6376415447245733665, guid: 1c14826ee2cc6ee4eaffeac0851482fb, type: 3}
-  chaserPrefab: {fileID: 5340496883371629233, guid: 13df6115919731f4886eb958038f5353, type: 3}
   customNetworkManager: {fileID: 1465502535}
 --- !u!4 &1240109156
 Transform:
@@ -1026,7 +1024,7 @@ MonoBehaviour:
   chaserPrefab: {fileID: 5340496883371629233, guid: 13df6115919731f4886eb958038f5353, type: 3}
   runnerTransform: {fileID: 1627158859}
   chaserTransform: {fileID: 1598001577}
-  visibleCode: {fileID: 77464907}
+  visibleLobbyId: {fileID: 0}
 --- !u!4 &1465502536
 Transform:
   m_ObjectHideFlags: 0
@@ -1202,7 +1200,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1598001576
 GameObject:
@@ -1233,7 +1231,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1627158858
 GameObject:
@@ -1412,7 +1410,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8681144018262632619, guid: fc990e32f3fef6b4ba8b703a91f20f88, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8681144018262632619, guid: fc990e32f3fef6b4ba8b703a91f20f88, type: 3}
       propertyPath: m_LocalPosition.x
