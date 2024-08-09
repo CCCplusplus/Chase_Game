@@ -14,6 +14,9 @@ public class FireTrap : MonoBehaviour
     private bool triggered; //when the trap gets triggered
     private bool active; //when the trap is active and can hurt the player
 
+    public Transform runnerTransform;
+    public Transform chaserTransform;
+
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -29,8 +32,10 @@ public class FireTrap : MonoBehaviour
 
             if (active)
             {
-                Debug.Log("Morido");
-                collision.gameObject.SetActive(false);
+                if (collision.gameObject.tag == "Runner" || collision.gameObject.tag == "Invencible")
+                    collision.gameObject.transform.position = runnerTransform.position;
+                else if (collision.gameObject.tag == "Chaser")
+                    collision.gameObject.transform.position = chaserTransform.position;
             }
 
         }

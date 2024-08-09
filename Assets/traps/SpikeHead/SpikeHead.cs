@@ -62,11 +62,11 @@ public class SpikeHead : EnemyDamage
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Chaser" || collision.tag == "Runner")
-        {
-            Debug.Log("Morido");
-            collision.gameObject.SetActive(false);
-        }
+      if (collision.gameObject.tag == "Runner" || collision.gameObject.tag == "Invencible")
+          collision.gameObject.transform.position = runnerTransform.position;
+      else if (collision.gameObject.tag == "Chaser")
+            collision.gameObject.transform.position = chaserTransform.position;
+        
         Stop(); //Stop spikehead once he hits something
     }
 }

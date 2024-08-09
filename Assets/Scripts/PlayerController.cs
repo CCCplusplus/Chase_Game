@@ -46,6 +46,18 @@ public class PlayerController : NetworkBehaviour
     private float jumpForceMultiplier = 3f;
 
     [SerializeField]
+    private AudioClip runnerJumpSound;
+    [SerializeField]
+    private AudioClip chaserJumpSound;
+    [SerializeField]
+    private AudioClip chaserDoubleJumpSound;
+    [SerializeField]
+    private float proximityThreshold = 5f; // Umbral de proximidad para oír sonidos de otros jugadores
+
+    private AudioSource audioSource;
+
+
+    [SerializeField]
     private PhysicsMaterial2D materialWithFriction;  // Material con fricción
     [SerializeField]
     private PhysicsMaterial2D materialNoFriction;    // Material sin fricción
@@ -79,6 +91,7 @@ public class PlayerController : NetworkBehaviour
         renderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();  // Obtener el BoxCollider2D
+        audioSource = GetComponent<AudioSource>();
         originalGravityScale = rb.gravityScale;
         pausa.SetActive(false);
     }
@@ -135,6 +148,7 @@ public class PlayerController : NetworkBehaviour
                 rb.gravityScale = gravityMultiplierAscend;
                 jumpStartTime = Time.time;
                 initialYPosition = transform.position.y;
+                PlayJumpSound();
                 ApplyJumpForce(minJumpHeight * jumpForceMultiplier);
                 CmdJump(rb.velocity.y);
                 if (playerType == PlayerType.Chaser)
@@ -151,6 +165,7 @@ public class PlayerController : NetworkBehaviour
                 rb.gravityScale = gravityMultiplierAscend;
                 jumpStartTime = Time.time;
                 initialYPosition = transform.position.y;
+                PlayDoubleJumpSound();
                 ApplyJumpForce(minJumpHeight * jumpForceMultiplier);
                 CmdJump(rb.velocity.y);
                 canDoubleJump = false;
@@ -189,8 +204,11 @@ public class PlayerController : NetworkBehaviour
         if (!isLocalPlayer)
         {
             rb.velocity = new Vector2(rb.velocity.x, currentJumpVelocity);
+            if (IsPlayerNearby())
+                PlayJumpSound(); 
         }
     }
+
 
     public void OnDash(InputAction.CallbackContext context)
     {
@@ -255,6 +273,24 @@ public class PlayerController : NetworkBehaviour
         else
             pausa.SetActive(true);
     }
+
+    private void PlayJumpSound()
+    {
+        if (playerType == PlayerType.Runner)
+        {
+            audioSource.PlayOneShot(runnerJumpSound);
+        }
+        else if (playerType == PlayerType.Chaser)
+        {
+            audioSource.PlayOneShot(chaserJumpSound);
+        }
+    }
+
+    private void PlayDoubleJumpSound()
+    {
+        audioSource.PlayOneShot(chaserDoubleJumpSound);
+    }
+
 
     private void Update()
     {
@@ -327,6 +363,19 @@ public class PlayerController : NetworkBehaviour
     {
         return Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
+
+    private bool IsPlayerNearby()
+    {
+        foreach (var player in FindObjectsOfType<PlayerController>())
+        {
+            if (player != this && Vector2.Distance(transform.position, player.transform.position) <= proximityThreshold)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     private IEnumerator Invencible()
     {

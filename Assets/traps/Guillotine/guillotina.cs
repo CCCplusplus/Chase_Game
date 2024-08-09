@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class guillotina : MonoBehaviour
 {
@@ -15,8 +13,11 @@ public class guillotina : MonoBehaviour
     private Vector3 targetPosition;
     private bool isDropping = true;
 
+    public Transform runnerTransform;
+    public Transform chaserTransform;
+
     void Start()
-    { 
+    {
         initialPosition = transform.position;
         targetPosition = new Vector3(transform.position.x, transform.position.y - 4f, transform.position.z);
         StartCoroutine(GuillotineCycle());
@@ -51,13 +52,11 @@ public class guillotina : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.CompareTag("Runner") || other.CompareTag("Chaser"))
-        {
-            //Cosas para matar al jugador
-            Debug.Log("Morido");
-            other.gameObject.SetActive(false);
-        }
+        if (collision.gameObject.tag == "Runner" || collision.gameObject.tag == "Invencible")
+            collision.gameObject.transform.position = runnerTransform.position;
+        else if (collision.gameObject.tag == "Chaser")
+            collision.gameObject.transform.position = chaserTransform.position;
     }
 }
