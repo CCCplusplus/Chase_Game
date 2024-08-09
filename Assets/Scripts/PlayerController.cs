@@ -2,7 +2,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Mirror;
-using Unity.VisualScripting;
 
 public class PlayerController : NetworkBehaviour
 {
@@ -14,7 +13,9 @@ public class PlayerController : NetworkBehaviour
     [SerializeField]
     private float moveSpeed = 5f;
     [SerializeField]
-    private float jumpForce = 5f;
+    private float minJumpHeight = 4f;
+    [SerializeField]
+    private float maxJumpHeight = 8f;
     [SerializeField]
     private float dashDuration = 1.5f;
     [SerializeField]
@@ -26,13 +27,31 @@ public class PlayerController : NetworkBehaviour
     [SerializeField]
     private Transform groundCheck;
     [SerializeField]
+    private Transform ceilingCheck; // Para detección de colisiones con el techo
+    [SerializeField]
     private float groundCheckRadius = 0.1f;
     [SerializeField]
     private LayerMask groundLayer;
     [SerializeField]
     private float coyoteTimeDuration = 0.2f;
+    [SerializeField]
+    private float maxJumpTime = 0.15f;
+    [SerializeField]
+    private float gravityMultiplierAscend = 2f;
+    [SerializeField]
+    private float gravityMultiplierDescend = 3.5f;
+    [SerializeField]
+    private float gravityMultiplierFall = 3.5f;
+    [SerializeField]
+    private float jumpForceMultiplier = 3f;
+
+    [SerializeField]
+    private PhysicsMaterial2D materialWithFriction;  // Material con fricción
+    [SerializeField]
+    private PhysicsMaterial2D materialNoFriction;    // Material sin fricción
 
     private Rigidbody2D rb;
+    private BoxCollider2D boxCollider;
     private Vector2 moveInput;
     private bool isDashing;
     private float dashEndTime;
@@ -42,15 +61,25 @@ public class PlayerController : NetworkBehaviour
     public bool isPaused = false;
     public Pausa pausita;
 
-
 #pragma warning disable CS0108 // Member hides inherited member; missing new keyword
     private SpriteRenderer renderer;
 #pragma warning restore CS0108 // Member hides inherited member; missing new keyword
+
+    private float jumpStartTime;
+    private bool isJumping;
+    private bool jumpButtonHeld;
+    private bool isFalling;
+    private bool isFallingFree; // Para detectar caída libre
+    private float initialYPosition;
+    private float currentHeight;
+    private float originalGravityScale;
 
     private void Awake()
     {
         renderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>();  // Obtener el BoxCollider2D
+        originalGravityScale = rb.gravityScale;
         pausa.SetActive(false);
     }
 
@@ -95,12 +124,19 @@ public class PlayerController : NetworkBehaviour
 
         if (!isLocalPlayer) return;
 
-        if (context.performed)
+        if (context.started)
         {
             if (IsGrounded() || (Time.time - lastGroundedTime <= coyoteTimeDuration))
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                CmdJump(jumpForce);
+                isJumping = true;
+                jumpButtonHeld = true;
+                isFalling = false;
+                isFallingFree = false;
+                rb.gravityScale = gravityMultiplierAscend;
+                jumpStartTime = Time.time;
+                initialYPosition = transform.position.y;
+                ApplyJumpForce(minJumpHeight * jumpForceMultiplier);
+                CmdJump(rb.velocity.y);
                 if (playerType == PlayerType.Chaser)
                 {
                     canDoubleJump = true;
@@ -108,25 +144,51 @@ public class PlayerController : NetworkBehaviour
             }
             else if (playerType == PlayerType.Chaser && canDoubleJump)
             {
-                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-                CmdJump(jumpForce);
+                isJumping = true;
+                jumpButtonHeld = true;
+                isFalling = false;
+                isFallingFree = false;
+                rb.gravityScale = gravityMultiplierAscend;
+                jumpStartTime = Time.time;
+                initialYPosition = transform.position.y;
+                ApplyJumpForce(minJumpHeight * jumpForceMultiplier);
+                CmdJump(rb.velocity.y);
                 canDoubleJump = false;
             }
         }
+        else if (context.canceled && isJumping)
+        {
+            isJumping = false;
+            jumpButtonHeld = false;
+            StartFalling();
+        }
+    }
+
+    private void ApplyJumpForce(float height)
+    {
+        rb.velocity = new Vector2(rb.velocity.x, Mathf.Sqrt(2 * height * Mathf.Abs(Physics2D.gravity.y)));
+    }
+
+    private void StartFalling()
+    {
+        isFalling = true;
+        isJumping = false;
+        isFallingFree = false;
+        rb.gravityScale = gravityMultiplierDescend;
     }
 
     [Command]
-    private void CmdJump(float jumpForce)
+    private void CmdJump(float currentJumpVelocity)
     {
-        RpcJump(jumpForce);
+        RpcJump(currentJumpVelocity);
     }
 
     [ClientRpc]
-    private void RpcJump(float jumpForce)
+    private void RpcJump(float currentJumpVelocity)
     {
         if (!isLocalPlayer)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            rb.velocity = new Vector2(rb.velocity.x, currentJumpVelocity);
         }
     }
 
@@ -175,19 +237,12 @@ public class PlayerController : NetworkBehaviour
 
         if (context.performed)
         {
-            if (isPaused)
-            {
-                isPaused = false;
-                pausita.Turnoff();
-            }
-            else
-                isPaused = !isPaused;
-            
+            isPaused = !isPaused;
 
-            if (!isPaused)
-                pausa.SetActive(false);
-            else
+            if (isPaused)
                 pausa.SetActive(true);
+            else
+                pausa.SetActive(false);
         }
     }
 
@@ -204,25 +259,64 @@ public class PlayerController : NetworkBehaviour
     private void Update()
     {
         if (!isLocalPlayer) return;
-        
 
-        if (isDashing)
+        if (isJumping && jumpButtonHeld)
         {
-            if (Time.time >= dashEndTime)
+            float currentJumpTime = Time.time - jumpStartTime;
+            float jumpProgress = currentJumpTime / maxJumpTime;
+
+            float desiredJumpHeight = Mathf.Lerp(minJumpHeight * jumpForceMultiplier, maxJumpHeight * jumpForceMultiplier, jumpProgress);
+            currentHeight = transform.position.y - initialYPosition;
+
+            if (currentHeight < maxJumpHeight * 0.8f && !IsHittingCeiling())
             {
-                isDashing = false;
+                ApplyJumpForce(desiredJumpHeight);
+            }
+            else
+            {
+                StartFalling();
             }
         }
+
+        if (isFalling && rb.velocity.y > 0)
+        {
+            rb.gravityScale = gravityMultiplierDescend;
+        }
+
+        if (!IsGrounded() && !isJumping && !isFalling && rb.velocity.y < 0)
+        {
+            isFallingFree = true;
+            rb.gravityScale = gravityMultiplierFall;
+        }
+
+        if (isDashing && Time.time >= dashEndTime)
+        {
+            isDashing = false;
+        }
+
         if (IsGrounded())
         {
             lastGroundedTime = Time.time;
+            isFalling = false;
+            isFallingFree = false;
+            rb.gravityScale = originalGravityScale;
+            boxCollider.sharedMaterial = materialWithFriction;  // Activar fricción cuando está en el suelo
         }
+        else
+        {
+            boxCollider.sharedMaterial = materialNoFriction;  // Desactivar fricción cuando está en el aire
+        }
+    }
+
+    private bool IsHittingCeiling()
+    {
+        return Physics2D.OverlapCircle(ceilingCheck.position, groundCheckRadius, groundLayer);
     }
 
     private void FixedUpdate()
     {
         if (!isLocalPlayer) return;
-        
+
         if (!isDashing)
             rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
         else
@@ -249,21 +343,17 @@ public class PlayerController : NetworkBehaviour
         {
             int newColorIndex;
 
-            // Genera un nuevo color que sea diferente al último
             do
             {
                 newColorIndex = Random.Range(0, colores.Length);
             } while (newColorIndex == lastColorIndex);
 
-            // Asigna el nuevo color y actualiza el el último color
             this.renderer.color = colores[newColorIndex];
             lastColorIndex = newColorIndex;
 
             yield return new WaitForSeconds(0.1f);
         }
 
-        //esto sera el color white en la version final.
         this.renderer.color = new Color(0.3143499f, 1.0f, 0.0f, 1.0f);
     }
-
 }

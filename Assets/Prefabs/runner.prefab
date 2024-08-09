@@ -70,6 +70,7 @@ Transform:
   - {fileID: 101522248470610070}
   - {fileID: 1806324600922024735}
   - {fileID: 3679358912694033137}
+  - {fileID: 5866390553412074397}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -166,7 +167,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1.9
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -188,8 +189,9 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   playerType: 0
-  moveSpeed: 8
-  jumpForce: 10
+  moveSpeed: 12
+  minJumpHeight: 2
+  maxJumpHeight: 3
   dashDuration: 1.5
   dashCooldown: 5
   colores:
@@ -202,11 +204,19 @@ MonoBehaviour:
   - {r: 0.51320755, g: 1, b: 0.78316766, a: 1}
   pausa: {fileID: 6562166434258560013}
   groundCheck: {fileID: 1806324600922024735}
+  ceilingCheck: {fileID: 5866390553412074397}
   groundCheckRadius: 0.1
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
   coyoteTimeDuration: 0.1
+  maxJumpTime: 0.5
+  gravityMultiplierAscend: 2.5
+  gravityMultiplierDescend: 4
+  gravityMultiplierFall: 4
+  jumpForceMultiplier: 1.5
+  materialWithFriction: {fileID: 6200000, guid: 586897c529206384da556eeaa4e90487, type: 2}
+  materialNoFriction: {fileID: 6200000, guid: 2fbf7d0d97c250246a3d7eead5a1ca87, type: 2}
   isPaused: 0
   pausita: {fileID: 5391481826383929527}
 --- !u!114 &-4525787995646508784
@@ -398,6 +408,37 @@ MonoBehaviour:
   positionSensitivity: 0.01
   rotationSensitivity: 0.01
   scaleSensitivity: 0.01
+--- !u!1 &7778883860004540088
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5866390553412074397}
+  m_Layer: 6
+  m_Name: cellingcheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5866390553412074397
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7778883860004540088}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.438, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4573329763581803320}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3197823771940685059
 PrefabInstance:
   m_ObjectHideFlags: 0
