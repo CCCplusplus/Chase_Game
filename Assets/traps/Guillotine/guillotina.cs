@@ -18,7 +18,7 @@ public class guillotina : MonoBehaviour
     void Start()
     { 
         initialPosition = transform.position;
-        targetPosition = new Vector3(transform.position.x, transform.position.y - 7f, transform.position.z);
+        targetPosition = new Vector3(transform.position.x, transform.position.y - 4f, transform.position.z);
         StartCoroutine(GuillotineCycle());
     }
 

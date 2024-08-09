@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5e42f6a5de09e8b4e92c2d9802e41084
+guid: 9ad8f8ed0bccb7045beb599b600277c4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,13 +117,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: On (38x38)_0
+      name: On (16x32)_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 38
-        height: 38
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a9a8749c716e1f64ea85e443b11b1b16
-      internalID: -610450696
+      spriteID: 2e32bdc1b199d3a44b95fbd94354d6db
+      internalID: -827274575
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: On (38x38)_1
+      name: On (16x32)_1
       rect:
         serializedVersion: 2
-        x: 38
+        x: 16
         y: 0
-        width: 39
-        height: 38
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b33c258d01a955439652420878ff8e5
-      internalID: -892115649
+      spriteID: 71e47defba58a464a8da256f943a45df
+      internalID: -1591607221
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: On (38x38)_2
+      name: On (16x32)_2
       rect:
         serializedVersion: 2
-        x: 77
+        x: 32
         y: 0
-        width: 37
-        height: 38
+        width: 16
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,113 +173,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4480704ff51c1104c84a09a4ecb877b9
-      internalID: -880607351
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: On (38x38)_3
-      rect:
-        serializedVersion: 2
-        x: 114
-        y: 0
-        width: 38
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2c9ded48daf4bed448e4edf951f0e368
-      internalID: -1785419690
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: On (38x38)_4
-      rect:
-        serializedVersion: 2
-        x: 151
-        y: 0
-        width: 39
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8ede9105561661c43b803fa20430877b
-      internalID: -427461646
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: On (38x38)_5
-      rect:
-        serializedVersion: 2
-        x: 190
-        y: 0
-        width: 38
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 285d96e9bfeb08e43903009a18c72dd1
-      internalID: 504096615
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: On (38x38)_6
-      rect:
-        serializedVersion: 2
-        x: 227
-        y: 0
-        width: 39
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 13db09fd585246d498427db777a1b860
-      internalID: -435831382
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: On (38x38)_7
-      rect:
-        serializedVersion: 2
-        x: 266
-        y: 0
-        width: 38
-        height: 38
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fe54b19a029f14f48bb676a9f904478f
-      internalID: 213984268
+      spriteID: 26d2fd9adaaa5844e9fd1323b6129b6b
+      internalID: -644792038
       vertices: []
       indices: 
       edges: []
@@ -295,14 +190,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      On (38x38)_0: -610450696
-      On (38x38)_1: -892115649
-      On (38x38)_2: -880607351
-      On (38x38)_3: -1785419690
-      On (38x38)_4: -427461646
-      On (38x38)_5: 504096615
-      On (38x38)_6: -435831382
-      On (38x38)_7: 213984268
+      On (16x32)_0: -827274575
+      On (16x32)_1: -1591607221
+      On (16x32)_2: -644792038
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
