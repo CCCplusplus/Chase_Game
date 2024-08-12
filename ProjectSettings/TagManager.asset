@@ -9,6 +9,8 @@ TagManager:
   - Invencible
   - Ground
   - Goal
+  - Trap
+  - Hitbox
   layers:
   - Default
   - TransparentFX
@@ -20,8 +22,8 @@ TagManager:
   - Ground
   - Invisble
   - level
-  - 
-  - 
+  - Trap
+  - No pass Trap
   - 
   - 
   - 
