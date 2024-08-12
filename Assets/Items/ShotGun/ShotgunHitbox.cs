@@ -2,6 +2,13 @@ using UnityEngine;
 
 public class ShotgunHitbox : MonoBehaviour
 {
+    private BoxCollider2D hitbox;
+
+    private void Start()
+    {
+        hitbox = GetComponent<BoxCollider2D>();
+        hitbox.enabled = false;
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Chaser"))
