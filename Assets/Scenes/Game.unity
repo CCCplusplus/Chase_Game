@@ -6746,7 +6746,6 @@ MonoBehaviour:
   runnerTransform: {fileID: 1627158859}
   chaserTransform: {fileID: 1598001577}
   visibleLobbyId: {fileID: 77464907}
-  transporta: {fileID: 1465502537}
 --- !u!4 &1465502536
 Transform:
   m_ObjectHideFlags: 0
@@ -9223,6 +9222,10 @@ PrefabInstance:
     - target: {fileID: 836261779876332998, guid: 83d253025afe63942a7b3465f8e988e2, type: 3}
       propertyPath: m_Name
       value: DirectionalCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 836261779876332998, guid: 83d253025afe63942a7b3465f8e988e2, type: 3}
+      propertyPath: m_TagString
+      value: Card
       objectReference: {fileID: 0}
     - target: {fileID: 836261779876333000, guid: 83d253025afe63942a7b3465f8e988e2, type: 3}
       propertyPath: m_RootOrder

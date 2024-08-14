@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1251940212214511311}
   m_Layer: 0
   m_Name: DirectionalCard
-  m_TagString: Item
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,8 +99,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3839e27c99db1314b94b0b3f4c307c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holdPosition: {fileID: 0}
   shootForce: 10
+  holdPosition: {fileID: 0}
+  hit: 0
 --- !u!60 &4381279795526893669
 PolygonCollider2D:
   m_ObjectHideFlags: 0

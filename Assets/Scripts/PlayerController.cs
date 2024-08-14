@@ -44,6 +44,10 @@ public class PlayerController : NetworkBehaviour
     private float gravityMultiplierFall = 3.5f;
     [SerializeField]
     private float jumpForceMultiplier = 3f;
+    [SerializeField]
+    private GameObject carditemG;
+    [SerializeField]
+    private CardItem carditem;
 
     [SerializeField]
     private AudioClip runnerJumpSound;
@@ -94,6 +98,8 @@ public class PlayerController : NetworkBehaviour
         audioSource = GetComponent<AudioSource>();
         originalGravityScale = rb.gravityScale;
         pausa.SetActive(false);
+        carditemG = GameObject.FindGameObjectWithTag("Card");
+        carditem = carditemG.GetComponent<CardItem>();
     }
 
     public override void OnStartLocalPlayer()
@@ -353,10 +359,23 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        if (!isDashing)
-            rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+        if (carditem.hit == false)
+        {
+            if (!isDashing)
+                rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+            else
+                rb.velocity = new Vector2(moveInput.x * moveSpeed * 2, rb.velocity.y);
+        }
         else
-            rb.velocity = new Vector2(moveInput.x * moveSpeed * 2, rb.velocity.y);
+        {
+            if (playerType == PlayerType.Runner)
+            {
+                if (!isDashing)
+                    rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed, rb.velocity.y);
+                else
+                    rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed * 2, rb.velocity.y);
+            }
+        }
     }
 
     private bool IsGrounded()

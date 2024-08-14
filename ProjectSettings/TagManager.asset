@@ -12,6 +12,7 @@ TagManager:
   - Trap
   - Hitbox
   - Item
+  - Card
   layers:
   - Default
   - TransparentFX
