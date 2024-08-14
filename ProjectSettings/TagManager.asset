@@ -11,6 +11,7 @@ TagManager:
   - Goal
   - Trap
   - Hitbox
+  - Item
   layers:
   - Default
   - TransparentFX
