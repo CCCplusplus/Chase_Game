@@ -409,6 +409,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Canon",
+            "id": "c1ed3961-a8e6-4402-b411-b1c89814e5b9",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "d8b1028c-2a70-495b-bc42-7d1e8b1759cf",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c114f0b1-ab8c-4428-8c37-297948873039",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
