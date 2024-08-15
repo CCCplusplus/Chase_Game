@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerCannon : MonoBehaviour
 {
     public Transform exitPoint;
 
-    public bool playerInside = false;
+    private bool playerInside = false;
     private GameObject player;
 
     [SerializeField]
@@ -22,9 +23,9 @@ public class PlayerCannon : MonoBehaviour
         }
     }
 
-    void Update()
+   public void OnFire(InputAction.CallbackContext context)
     {
-        if(playerInside && Input.GetKeyDown(KeyCode.E))
+        if(playerInside && context.performed)
         {
             FirePlayer();
         }
