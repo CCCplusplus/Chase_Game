@@ -7,6 +7,7 @@ public class PortalGeneral : MonoBehaviour
     private HashSet<GameObject> portalObjects = new HashSet<GameObject>();
 
     [SerializeField] private Transform destination; // El destino al que se teletransportan los objetos
+    [SerializeField] private AudioSource portalSound; //Referencia al componente de Audio
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -27,6 +28,12 @@ public class PortalGeneral : MonoBehaviour
 
         // Teletransportar el objeto al destino
         collision.transform.position = destination.position;
+
+        //Reproduri sonido del portal
+        if(portalSound != null)
+        {
+            portalSound.Play();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

@@ -7,6 +7,7 @@ public class PortalChaser : MonoBehaviour
     private HashSet<GameObject> portalObjects = new HashSet<GameObject>();
 
     [SerializeField] private Transform destination;
+    [SerializeField] private AudioSource portalSound;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -17,6 +18,14 @@ public class PortalChaser : MonoBehaviour
 
         if (collision.CompareTag("Chaser"))
         {
+            portalObjects.Add(collision.gameObject);
+
+            //Reproducir sonido del portal
+            if(portalSound != null)
+            {
+                portalSound.Play();
+            }
+
             if (destination.TryGetComponent(out PortalChaser destinationPortal))
             {
                 destinationPortal.portalObjects.Add(collision.gameObject);
