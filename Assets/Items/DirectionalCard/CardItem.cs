@@ -76,20 +76,6 @@ public class CardItem : MonoBehaviour
 
     void InvertPlayerControls(GameObject hitPlayer)
     {
-        //    var playerInput = hitPlayer.GetComponent<PlayerInput>();
-        //    if (playerInput != null)
-        //    {
-        //        // Invertir los controles usando input mappings
-        //        InputActionMap actionMap = playerInput.actions.FindActionMap("Player");
-
-        //        // Invertir las entradas de "Move"
-        //        var moveAction = actionMap.FindAction("Move");
-        //        if (moveAction != null)
-        //        {
-        //            moveAction.ApplyBindingOverride("<Gamepad>/leftStick" /*new InputBinding { processors = "invertVector2(invertX=true)" }*/);
-        //        }
-        //    }
-
         hit = true;
         StartCoroutine(TurnBack());
     }

@@ -198,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentAmmoType: 0
-  weaponSpriteRenderer: {fileID: 0}
+  weaponSpriteRenderer: {fileID: 3648343294093291338}
   iceColor: {r: 0, g: 0, b: 1, a: 1}
   fireColor: {r: 1, g: 0, b: 0, a: 1}
   iceBulletPrefab: {fileID: 4008121463848347498, guid: 7ca7506ed15c3fc4d9efb3014867a431, type: 3}
