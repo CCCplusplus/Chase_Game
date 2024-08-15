@@ -48,6 +48,10 @@ public class PlayerController : NetworkBehaviour
     private GameObject carditemG;
     [SerializeField]
     private CardItem carditem;
+    [SerializeField]
+    private GameObject bulletHitG;
+    [SerializeField] 
+    private bulletScript bulletHit;
 
     [SerializeField]
     private AudioClip runnerJumpSound;
@@ -100,6 +104,8 @@ public class PlayerController : NetworkBehaviour
         pausa.SetActive(false);
         carditemG = GameObject.FindGameObjectWithTag("Card");
         carditem = carditemG.GetComponent<CardItem>();
+        bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
+        bulletHit = bulletHitG.GetComponent<bulletScript>();
     }
 
     public override void OnStartLocalPlayer()
