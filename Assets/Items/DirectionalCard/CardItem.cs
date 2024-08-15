@@ -15,10 +15,14 @@ public class CardItem : MonoBehaviour
     private Collider2D selfCollider;
     private SpriteRenderer selfSprite;
 
+    public AudioClip cardSound;
+    private AudioSource audioSource;
+
     public bool hit = false;
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         selfCollider = GetComponent<Collider2D>();
         selfSprite = GetComponent<SpriteRenderer>();
     }
@@ -67,6 +71,7 @@ public class CardItem : MonoBehaviour
 
     void ShootItem()
     {
+        audioSource.PlayOneShot(cardSound);
         isHeld = false;
         transform.SetParent(null);
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
