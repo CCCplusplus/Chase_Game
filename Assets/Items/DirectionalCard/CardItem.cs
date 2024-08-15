@@ -15,10 +15,14 @@ public class CardItem : MonoBehaviour
     private Collider2D selfCollider;
     private SpriteRenderer selfSprite;
 
+    public AudioClip cardSound;
+    private AudioSource audioSource;
+
     public bool hit = false;
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         selfCollider = GetComponent<Collider2D>();
         selfSprite = GetComponent<SpriteRenderer>();
     }
@@ -67,6 +71,7 @@ public class CardItem : MonoBehaviour
 
     void ShootItem()
     {
+        audioSource.PlayOneShot(cardSound);
         isHeld = false;
         transform.SetParent(null);
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
@@ -76,20 +81,6 @@ public class CardItem : MonoBehaviour
 
     void InvertPlayerControls(GameObject hitPlayer)
     {
-        //    var playerInput = hitPlayer.GetComponent<PlayerInput>();
-        //    if (playerInput != null)
-        //    {
-        //        // Invertir los controles usando input mappings
-        //        InputActionMap actionMap = playerInput.actions.FindActionMap("Player");
-
-        //        // Invertir las entradas de "Move"
-        //        var moveAction = actionMap.FindAction("Move");
-        //        if (moveAction != null)
-        //        {
-        //            moveAction.ApplyBindingOverride("<Gamepad>/leftStick" /*new InputBinding { processors = "invertVector2(invertX=true)" }*/);
-        //        }
-        //    }
-
         hit = true;
         StartCoroutine(TurnBack());
     }

@@ -13,6 +13,7 @@ TagManager:
   - Hitbox
   - Item
   - Card
+  - Bullet
   layers:
   - Default
   - TransparentFX
