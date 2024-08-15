@@ -244,6 +244,8 @@ MonoBehaviour:
   gravityMultiplierDescend: 4
   gravityMultiplierFall: 4
   jumpForceMultiplier: 1.5
+  carditemG: {fileID: 0}
+  carditem: {fileID: 0}
   runnerJumpSound: {fileID: 8300000, guid: 1589e1eef58383a498afb224647926bb, type: 3}
   chaserJumpSound: {fileID: 8300000, guid: 70344bcb043045f48a5b99ac384e1653, type: 3}
   chaserDoubleJumpSound: {fileID: 8300000, guid: e5f10c7460df0cb4bb4392f45aa24f1b, type: 3}
@@ -353,6 +355,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e4cc1def-7276-4871-8e94-654af5add364
     m_ActionName: Player/Use-Item[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d8b1028c-2a70-495b-bc42-7d1e8b1759cf
+    m_ActionName: Canon/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine;
-using Unity.VisualScripting;
 
 public class CardItem : MonoBehaviour
 {
