@@ -11,6 +11,7 @@ using TMPro;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using kcp2k;
 
 public struct PlayerTypeMessage : NetworkMessage
 {
@@ -26,6 +27,9 @@ public class CustomNetworkManager : NetworkManager
 
     public TextMeshProUGUI visibleLobbyId;
     private Lobby currentLobby;
+
+    [SerializeField]
+    private KcpTransport transporta;
 
     public override void OnStartServer()
     {
@@ -64,15 +68,14 @@ public class CustomNetworkManager : NetworkManager
             await UnityServices.InitializeAsync();
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
-            // Crear asignación de Relay
+            // Create Relay allocation and get the join code
             Allocation allocation = await RelayService.Instance.CreateAllocationAsync(4);
             string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
-
-            Debug.Log("Join code creado: " + joinCode); // Debug para verificar el joinCode
+            Debug.Log("Join code creado: " + joinCode);
 
             var relayServerData = new RelayServerData(allocation, "dtls");
 
-            // Crear lobby
+            // Create Lobby
             var lobbyOptions = new CreateLobbyOptions
             {
                 IsPrivate = false,
@@ -86,13 +89,16 @@ public class CustomNetworkManager : NetworkManager
             currentLobby = await LobbyService.Instance.CreateLobbyAsync("LobbyName", 4, lobbyOptions);
             Debug.Log("Lobby creado: " + currentLobby.Id);
 
-            // Mostrar el ID del lobby en la UI
+            // Display the lobby ID in the UI
             if (visibleLobbyId != null)
             {
-                visibleLobbyId.text = "Lobby ID: " + currentLobby.Id;
+                visibleLobbyId.text = "Lobby ID: " + joinCode;
             }
 
-            NetworkManager.singleton.transport = GetComponent<Mirror.SimpleWeb.SimpleWebTransport>();
+            // Set Relay transport
+            NetworkManager.singleton.transport = transporta;
+            ((KcpTransport)NetworkManager.singleton.transport).Port = (ushort)relayServerData.Endpoint.Port;
+
             NetworkManager.singleton.StartHost();
             Debug.Log("Host started");
         }
@@ -112,12 +118,10 @@ public class CustomNetworkManager : NetworkManager
             var queryResponse = await LobbyService.Instance.QueryLobbiesAsync();
             foreach (var lobby in queryResponse.Results)
             {
-                // Aquí puedes mostrar una lista de lobbies disponibles en la UI
-                // Por simplicidad, uniremos al primer lobby encontrado
                 if (lobby.Data["playerType"].Value == "Runner" && PlayerPrefs.GetString("PlayerType") == "Chaser" ||
                     lobby.Data["playerType"].Value == "Chaser" && PlayerPrefs.GetString("PlayerType") == "Runner")
                 {
-                    Debug.Log("Lobby encontrado: " + lobby.Id); // Debug para verificar el lobby encontrado
+                    Debug.Log("Lobby encontrado: " + lobby.Id);
                     await JoinLobbyAndRelay(lobby.Id);
                     break;
                 }
@@ -139,11 +143,14 @@ public class CustomNetworkManager : NetworkManager
             Debug.Log("Join code from lobby: " + joinCode);
 
             JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
-            Debug.Log("JoinAllocation obtenido: " + joinAllocation.AllocationId); // Verificar joinAllocation
+            Debug.Log("JoinAllocation obtenido: " + joinAllocation.AllocationId);
 
             var relayServerData = new RelayServerData(joinAllocation, "dtls");
 
-            NetworkManager.singleton.transport = GetComponent<Mirror.SimpleWeb.SimpleWebTransport>();
+            // Set Relay transport
+            NetworkManager.singleton.transport = transporta;
+            ((KcpTransport)NetworkManager.singleton.transport).Port = (ushort)relayServerData.Endpoint.Port;
+
             NetworkManager.singleton.StartClient();
             Debug.Log("Client started and trying to connect");
         }

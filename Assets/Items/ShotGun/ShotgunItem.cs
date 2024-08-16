@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine;
 
+
 public class ShotgunItem : MonoBehaviour
 {
     [SerializeField] private AudioClip shootSound; // Sonido del disparo
@@ -29,7 +30,7 @@ public class ShotgunItem : MonoBehaviour
 
             if (hitbox == null)
                 Debug.LogError("No se encontró un GameObject con el tag 'Hitbox' en los hijos del jugador.");
-            
+
 
             // Desactivar el objeto o hacerlo invisible al recogerlo
             this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
@@ -44,7 +45,7 @@ public class ShotgunItem : MonoBehaviour
             var inputActions = player.GetComponent<PlayerInput>().actions; // Obtener el input action map
             if (inputActions["Use-Item"].triggered) // Verificar si se presionó el botón de Use-Item
                 Fire();
-            
+
         }
 
         if (hitbox != null)
@@ -62,7 +63,7 @@ public class ShotgunItem : MonoBehaviour
         // Reproducir el sonido del disparo
         if (shootSound != null)
             AudioSource.PlayClipAtPoint(shootSound, player.transform.position);
-        
+
 
         // Activar el efecto de partículas
         if (muzzleFlash != null)
@@ -91,7 +92,7 @@ public class ShotgunItem : MonoBehaviour
         {
             if (child.CompareTag("Hitbox"))
                 return child.gameObject;
-            
+
         }
 
         return null;
