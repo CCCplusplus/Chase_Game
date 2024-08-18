@@ -223,6 +223,7 @@ MonoBehaviour:
   jumpCloudParticles: {fileID: 7481413492691905267}
   dustCloud: {fileID: 0}
   runnerJumpSound: {fileID: 8300000, guid: 1589e1eef58383a498afb224647926bb, type: 3}
+  runnerDashSound: {fileID: 8300000, guid: f99861e69b565d04194cf9e98babcad2, type: 3}
   chaserJumpSound: {fileID: 8300000, guid: 70344bcb043045f48a5b99ac384e1653, type: 3}
   chaserDoubleJumpSound: {fileID: 8300000, guid: e5f10c7460df0cb4bb4392f45aa24f1b, type: 3}
   proximityThreshold: 5
@@ -10512,6 +10513,26 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 2703326772976579649}
+    - target: {fileID: 4683263118971327367, guid: e905ad9d1060d97409fdcb1df858092f, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683263118971327367, guid: e905ad9d1060d97409fdcb1df858092f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
+      value: e4cc1def-7276-4871-8e94-654af5add364
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683263118971327367, guid: e905ad9d1060d97409fdcb1df858092f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: d8b1028c-2a70-495b-bc42-7d1e8b1759cf
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683263118971327367, guid: e905ad9d1060d97409fdcb1df858092f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
+      value: Player/Use-Item[/Keyboard/e]
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683263118971327367, guid: e905ad9d1060d97409fdcb1df858092f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: Canon/New action
+      objectReference: {fileID: 0}
     - target: {fileID: 4741772006000898138, guid: e905ad9d1060d97409fdcb1df858092f, type: 3}
       propertyPath: pausaCanvas
       value: 

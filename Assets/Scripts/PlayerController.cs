@@ -61,6 +61,8 @@ public class PlayerController : NetworkBehaviour
     [SerializeField]
     private AudioClip runnerJumpSound;
     [SerializeField]
+    private AudioClip runnerDashSound;
+    [SerializeField]
     private AudioClip chaserJumpSound;
     [SerializeField]
     private AudioClip chaserDoubleJumpSound;
@@ -244,6 +246,7 @@ public class PlayerController : NetworkBehaviour
             isDashing = true;
             dashEndTime = Time.time + dashDuration;
             nextDashTime = dashEndTime + dashCooldown;
+            audioSource.PlayOneShot(runnerDashSound);
             CmdDash(dashDuration);
             StartCoroutine(Invencible());
             StartCoroutine(ColorChange());
