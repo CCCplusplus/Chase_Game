@@ -48,6 +48,11 @@ public class PlayerController : NetworkBehaviour
     private GameObject carditemG;
     [SerializeField]
     private CardItem carditem;
+    [SerializeField]
+    private GameObject jumpCloudParticles;
+
+    [SerializeField]
+    private ParticleSystem dustCloud;
     //[SerializeField]
     //private GameObject bulletHitG;
     //[SerializeField] 
@@ -104,8 +109,10 @@ public class PlayerController : NetworkBehaviour
         pausa.SetActive(false);
         carditemG = GameObject.FindGameObjectWithTag("Card");
         carditem = carditemG.GetComponent<CardItem>();
+        dustCloud = jumpCloudParticles.GetComponent<ParticleSystem>();
         //bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
         //bulletHit = bulletHitG.GetComponent<bulletScript>();
+
     }
 
     public override void OnStartLocalPlayer()
@@ -213,11 +220,15 @@ public class PlayerController : NetworkBehaviour
     [ClientRpc]
     private void RpcJump(float currentJumpVelocity)
     {
+        PlayJumpVFX();
         if (!isLocalPlayer)
         {
             rb.velocity = new Vector2(rb.velocity.x, currentJumpVelocity);
             if (IsPlayerNearby())
-                PlayJumpSound(); 
+            { 
+                PlayJumpSound();
+                PlayJumpVFX();
+            }
         }
     }
 
@@ -295,6 +306,18 @@ public class PlayerController : NetworkBehaviour
         else if (playerType == PlayerType.Chaser)
         {
             audioSource.PlayOneShot(chaserJumpSound);
+        }
+    }
+
+    private void PlayJumpVFX()
+    {
+        if (playerType == PlayerType.Runner)
+        {
+            dustCloud.Play();
+        }
+        else if (playerType == PlayerType.Chaser)
+        {
+            dustCloud.Play();
         }
     }
 
