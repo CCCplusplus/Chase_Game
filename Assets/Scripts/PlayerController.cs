@@ -243,10 +243,10 @@ public class PlayerController : NetworkBehaviour
 
         if (context.performed && !isDashing && Time.time >= nextDashTime)
         {
+            audioSource.PlayOneShot(runnerDashSound);
             isDashing = true;
             dashEndTime = Time.time + dashDuration;
             nextDashTime = dashEndTime + dashCooldown;
-            audioSource.PlayOneShot(runnerDashSound);
             CmdDash(dashDuration);
             StartCoroutine(Invencible());
             StartCoroutine(ColorChange());
