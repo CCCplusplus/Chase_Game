@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
 
@@ -43,7 +41,7 @@ public class GunScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Chaser") || collision.CompareTag("Runner") && !isHeld)
+        if (collision.gameObject.layer == 6 && !isHeld)
         {
             PickUpItem(collision.gameObject);
         }
