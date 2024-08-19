@@ -10399,6 +10399,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1000030242883852072, guid: fc990e32f3fef6b4ba8b703a91f20f88, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911820436882057717, guid: fc990e32f3fef6b4ba8b703a91f20f88, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8681144018262632613, guid: fc990e32f3fef6b4ba8b703a91f20f88, type: 3}
       propertyPath: sceneId
       value: 3718335795
