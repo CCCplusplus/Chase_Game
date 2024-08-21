@@ -102,10 +102,14 @@ public class PlayerController : NetworkBehaviour
         audioSource = GetComponent<AudioSource>();
         originalGravityScale = rb.gravityScale;
         pausa.SetActive(false);
-        carditemG = GameObject.FindGameObjectWithTag("Card");
-        carditem = carditemG.GetComponent<CardItem>();
         //bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
         //bulletHit = bulletHitG.GetComponent<bulletScript>();
+    }
+
+    private void Start()
+    {
+        carditemG = GameObject.FindGameObjectWithTag("Card");
+        carditem = carditemG.GetComponent<CardItem>();
     }
 
     public override void OnStartLocalPlayer()
