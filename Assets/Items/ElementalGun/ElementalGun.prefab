@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5275588570902762607}
   m_Layer: 0
   m_Name: ElementalGun
-  m_TagString: Untagged
+  m_TagString: ElementalGun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,9 +102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88bc1ba7f0a49014d998c73ccaeaddff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
   currentAmmoType: 0
   weaponSpriteRenderer: {fileID: 3648343294093291338}
   iceColor: {r: 0, g: 0, b: 1, a: 1}
