@@ -8,11 +8,13 @@ public class MainMenu : MonoBehaviour
     public TMP_InputField inputField;
     public GameObject mainMenuCanvas;
     public GameObject settingsCanvas;
+    public GameObject backImage;
 
     private void Start()
     {
         mainMenuCanvas.SetActive(true);
         settingsCanvas.SetActive(false);
+        backImage.SetActive(true);
     }
 
     public void PlayAsRunner()
@@ -38,12 +40,14 @@ public class MainMenu : MonoBehaviour
     {
         mainMenuCanvas.SetActive(false);
         settingsCanvas.SetActive(true);
+        backImage.SetActive(false);
     }
 
     public void BackToMainMenu()
     {
         mainMenuCanvas.SetActive(true);
         settingsCanvas.SetActive(false);
+        backImage.SetActive(true);
     }
 
     private void SetConnectionType()
