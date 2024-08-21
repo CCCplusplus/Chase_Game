@@ -53,10 +53,10 @@ public class PlayerController : NetworkBehaviour
 
     [SerializeField]
     private ParticleSystem dustCloud;
-    //[SerializeField]
-    //private GameObject bulletHitG;
-    //[SerializeField] 
-    //private bulletScript bulletHit;
+    [SerializeField]
+    private GameObject bulletHitG;
+    [SerializeField] 
+    private bulletScript bulletHit;
 
     [SerializeField]
     private AudioClip runnerJumpSound;
@@ -112,8 +112,8 @@ public class PlayerController : NetworkBehaviour
         carditemG = GameObject.FindGameObjectWithTag("Card");
         carditem = carditemG.GetComponent<CardItem>();
         dustCloud = jumpCloudParticles.GetComponent<ParticleSystem>();
-        //bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
-        //bulletHit = bulletHitG.GetComponent<bulletScript>();
+        bulletHitG = GameObject.FindGameObjectWithTag("Bullet");          //Si no está comentado los jugadores no se mueven ._.
+        bulletHit = bulletHitG.GetComponent<bulletScript>();              //Si no está comentado los jugadores no se mueven ._.
 
     }
 
@@ -406,6 +406,27 @@ public class PlayerController : NetworkBehaviour
                     rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed, rb.velocity.y);
                 else
                     rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed * 2, rb.velocity.y);
+            }
+        }
+
+        if(bulletHit == false)
+        {
+            return;
+        }
+        else
+        {
+            if (playerType == PlayerType.Runner)
+            {
+                if (bulletHit.ammotype.currentAmmoType == GunScript.AmmoType.Ice)
+                {
+                    moveSpeed = 2f;
+                    rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+                }
+                else if (bulletHit.ammotype.currentAmmoType == GunScript.AmmoType.Fire)
+                {
+                    moveSpeed = 7f;
+                    rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+                }
             }
         }
     }
