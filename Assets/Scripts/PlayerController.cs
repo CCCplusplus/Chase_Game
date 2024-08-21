@@ -48,20 +48,13 @@ public class PlayerController : NetworkBehaviour
     private GameObject carditemG;
     [SerializeField]
     private CardItem carditem;
-    [SerializeField]
-    private GameObject jumpCloudParticles;
-
-    [SerializeField]
-    private ParticleSystem dustCloud;
-    [SerializeField]
-    private GameObject bulletHitG;
-    [SerializeField] 
-    private bulletScript bulletHit;
+    //[SerializeField]
+    //private GameObject bulletHitG;
+    //[SerializeField] 
+    //private bulletScript bulletHit;
 
     [SerializeField]
     private AudioClip runnerJumpSound;
-    [SerializeField]
-    private AudioClip runnerDashSound;
     [SerializeField]
     private AudioClip chaserJumpSound;
     [SerializeField]
@@ -109,12 +102,14 @@ public class PlayerController : NetworkBehaviour
         audioSource = GetComponent<AudioSource>();
         originalGravityScale = rb.gravityScale;
         pausa.SetActive(false);
+        //bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
+        //bulletHit = bulletHitG.GetComponent<bulletScript>();
+    }
+
+    private void Start()
+    {
         carditemG = GameObject.FindGameObjectWithTag("Card");
         carditem = carditemG.GetComponent<CardItem>();
-        dustCloud = jumpCloudParticles.GetComponent<ParticleSystem>();
-        bulletHitG = GameObject.FindGameObjectWithTag("Bullet");          //Si no está comentado los jugadores no se mueven ._.
-        bulletHit = bulletHitG.GetComponent<bulletScript>();              //Si no está comentado los jugadores no se mueven ._.
-
     }
 
     public override void OnStartLocalPlayer()
@@ -222,15 +217,11 @@ public class PlayerController : NetworkBehaviour
     [ClientRpc]
     private void RpcJump(float currentJumpVelocity)
     {
-        PlayJumpVFX();
         if (!isLocalPlayer)
         {
             rb.velocity = new Vector2(rb.velocity.x, currentJumpVelocity);
             if (IsPlayerNearby())
-            { 
-                PlayJumpSound();
-                PlayJumpVFX();
-            }
+                PlayJumpSound(); 
         }
     }
 
@@ -243,7 +234,6 @@ public class PlayerController : NetworkBehaviour
 
         if (context.performed && !isDashing && Time.time >= nextDashTime)
         {
-            audioSource.PlayOneShot(runnerDashSound);
             isDashing = true;
             dashEndTime = Time.time + dashDuration;
             nextDashTime = dashEndTime + dashCooldown;
@@ -309,18 +299,6 @@ public class PlayerController : NetworkBehaviour
         else if (playerType == PlayerType.Chaser)
         {
             audioSource.PlayOneShot(chaserJumpSound);
-        }
-    }
-
-    private void PlayJumpVFX()
-    {
-        if (playerType == PlayerType.Runner)
-        {
-            dustCloud.Play();
-        }
-        else if (playerType == PlayerType.Chaser)
-        {
-            dustCloud.Play();
         }
     }
 
@@ -406,27 +384,6 @@ public class PlayerController : NetworkBehaviour
                     rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed, rb.velocity.y);
                 else
                     rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed * 2, rb.velocity.y);
-            }
-        }
-
-        if(bulletHit == false)
-        {
-            return;
-        }
-        else
-        {
-            if (playerType == PlayerType.Runner)
-            {
-                if (bulletHit.ammotype.currentAmmoType == GunScript.AmmoType.Ice)
-                {
-                    moveSpeed = 2f;
-                    rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
-                }
-                else if (bulletHit.ammotype.currentAmmoType == GunScript.AmmoType.Fire)
-                {
-                    moveSpeed = 7f;
-                    rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
-                }
             }
         }
     }

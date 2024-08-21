@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: -5374761969757584726}
   - component: {fileID: -5854964458723310282}
   - component: {fileID: 128292316459456101}
+  - component: {fileID: 8455772421537453856}
   m_Layer: 6
   m_Name: runner
   m_TagString: Runner
@@ -524,6 +525,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8455772421537453856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6376415447245733665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3304bceab037ec94aa401a1223c5c8ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  sessionId: 
+  username: 
+  ip: 
+  platform: 
+  playerType: 
+  moveSpeed: 5
 --- !u!1 &7026673395154625684
 GameObject:
   m_ObjectHideFlags: 0

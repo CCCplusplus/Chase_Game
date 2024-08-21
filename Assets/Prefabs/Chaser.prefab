@@ -4951,6 +4951,7 @@ GameObject:
   - component: {fileID: 756602310865868841}
   - component: {fileID: 8333154481225634088}
   - component: {fileID: 5744411929810016264}
+  - component: {fileID: 5458603093625218210}
   m_Layer: 6
   m_Name: Chaser
   m_TagString: Chaser
@@ -5428,6 +5429,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5458603093625218210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5340496883371629233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3304bceab037ec94aa401a1223c5c8ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  sessionId: 
+  playerType: 
 --- !u!1 &8629017051602629400
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using TMPro;
 public class MainMenu : MonoBehaviour
 {
     public TMP_Dropdown connectionTypeDropdown;
+    public TMP_InputField inputField;
     public GameObject mainMenuCanvas;
     public GameObject settingsCanvas;
 
@@ -49,5 +50,10 @@ public class MainMenu : MonoBehaviour
     {
         string connectionType = connectionTypeDropdown.options[connectionTypeDropdown.value].text;
         PlayerPrefs.SetString("ConnectionType", connectionType);
+
+        if (!string.IsNullOrEmpty(inputField.text))
+        {
+            PlayerPrefs.SetString("RelayJoinCode", inputField.text);
+        }
     }
 }
