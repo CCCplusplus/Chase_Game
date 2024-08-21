@@ -141,7 +141,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionTypeDropdown: {fileID: 1612893766}
-  joinCodeInputField: {fileID: 0}
   mainMenuCanvas: {fileID: 67948860}
   settingsCanvas: {fileID: 2038271275}
 --- !u!1001 &366603316
