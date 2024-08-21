@@ -6,11 +6,11 @@ public class Fake_Load_Screen : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private GameObject loadScreen;
-    private float timer = 5;
+    private float timer = 3;
 
     void Start()
     {
-
+        loadScreen.SetActive(true);
     }
     private void Update()
     {
