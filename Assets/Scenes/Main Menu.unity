@@ -144,7 +144,6 @@ MonoBehaviour:
   inputField: {fileID: 1971572061}
   mainMenuCanvas: {fileID: 67948860}
   settingsCanvas: {fileID: 2038271275}
-  backImage: {fileID: 0}
 --- !u!224 &67948863 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3755637484558885261, guid: 4b229e26d1843874b95fbaa0dd67bd01, type: 3}
