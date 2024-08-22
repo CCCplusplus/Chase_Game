@@ -1,5 +1,6 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class GunScript : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class GunScript : MonoBehaviour
     public GameObject iceBulletPrefab;
     public GameObject fireBulletPrefab;
 
+    public List<GameObject> bulletPool; // pool de balas
+    public int poolSize = 3; // tamaño del pool
     public Transform bulletSpawnPoint;
     public float bulletSpeed = 10f;
 
@@ -22,11 +25,15 @@ public class GunScript : MonoBehaviour
 
     private bool isHeld = false;
     private GameObject player;
+    public bool isShooting = false;
+
+    private int shotsLeft = 3; // limite de disparos
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
         RandomizeAmmoType();
+        FillBulletPool();
     }
 
     void Update()
@@ -35,7 +42,10 @@ public class GunScript : MonoBehaviour
         {
             var inputActions = player.GetComponent<PlayerInput>().actions;
             if (inputActions["Use-Item"].triggered)
+            {
+                isShooting = false;
                 Shoot();
+            }
         }
     }
 
@@ -64,29 +74,62 @@ public class GunScript : MonoBehaviour
 
     void Shoot()
     {
-        GameObject bullet = null;
+        isShooting = true;
+        if (shotsLeft == 0)
+        {
+            DestroyGun();
+            return;
+        }
 
+        GameObject bullet = GetBulletFromPool();
+
+        if (bullet != null)
+        {
+            bullet.transform.position = bulletSpawnPoint.position;
+            bullet.transform.rotation = bulletSpawnPoint.rotation;
+            bullet.SetActive(true);
+
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            rb.velocity = bulletSpawnPoint.right * bulletSpeed;
+
+            PlayShootSound();
+            shotsLeft--;
+        }
+    }
+
+    GameObject GetBulletFromPool()
+    {
+        foreach (var bullet in bulletPool)
+        {
+            if (!bullet.activeInHierarchy)
+            {
+                return bullet;
+            }
+        }
+
+        return null;
+    }
+
+    void PlayShootSound()
+    {
         if (currentAmmoType == AmmoType.Ice)
         {
-            bullet = Instantiate(iceBulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             audioSource.PlayOneShot(iceSound);
         }
         else if (currentAmmoType == AmmoType.Fire)
         {
-            bullet = Instantiate(fireBulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
             audioSource.PlayOneShot(fireSound);
         }
+    }
 
-        if (bullet != null)
-        {
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            rb.velocity = bulletSpawnPoint.right * bulletSpeed;
-        }
+    void DestroyGun()
+    {
+        Destroy(gameObject);
     }
 
     void RandomizeAmmoType()
     {
-        currentAmmoType = (AmmoType)Random.Range(0, 2); // Aleatorio entre 0 y 1
+        currentAmmoType = (AmmoType)Random.Range(0, 2);
 
         switch (currentAmmoType)
         {
@@ -98,4 +141,17 @@ public class GunScript : MonoBehaviour
                 break;
         }
     }
+
+    void FillBulletPool()
+    {
+        GameObject bulletPrefab = currentAmmoType == AmmoType.Ice ? iceBulletPrefab : fireBulletPrefab;
+
+        for (int i = 0; i < poolSize; i++)
+        {
+            GameObject bullet = Instantiate(bulletPrefab);
+            bullet.SetActive(false);
+            bulletPool.Add(bullet);
+        }
+    }
 }
+

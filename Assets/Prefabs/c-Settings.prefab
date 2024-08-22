@@ -1319,7 +1319,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4779138847979455479}
+  - {fileID: 5404256594988407770}
   - {fileID: 8907698100499609409}
   - {fileID: 2265106829176297104}
   m_Father: {fileID: 0}
@@ -1480,6 +1480,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 8acdb2dc-afb7-40fe-ac5a-ce1459083c7c
     m_ActionName: Menus/Confirm[/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e4cc1def-7276-4871-8e94-654af5add364
+    m_ActionName: Player/Use-Item[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d8b1028c-2a70-495b-bc42-7d1e8b1759cf
+    m_ActionName: Canon/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Menus
@@ -1499,6 +1507,83 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resolutionDropdown: {fileID: 2265106829176297105}
   fullscreenToggle: {fileID: 9010597091458947807}
+--- !u!1 &2636312232837091918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5404256594988407770}
+  - component: {fileID: 8059898191801920228}
+  - component: {fileID: 8994910504043251065}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5404256594988407770
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2636312232837091918}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4779138847979455479}
+  m_Father: {fileID: 2265106829196959730}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 69.38782, y: 110.99696}
+  m_SizeDelta: {x: 354.7753, y: 53.8595}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8059898191801920228
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2636312232837091918}
+  m_CullTransparentMesh: 1
+--- !u!114 &8994910504043251065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2636312232837091918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 2b9b1616ee67acf4dacaea6491c34035, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3168283731435782366
 GameObject:
   m_ObjectHideFlags: 0
@@ -1530,12 +1615,12 @@ RectTransform:
   m_Children:
   - {fileID: 8244156854482607754}
   - {fileID: 7065109537390574059}
-  m_Father: {fileID: 2265106829196959730}
+  m_Father: {fileID: 5404256594988407770}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 44, y: 110.730225}
+  m_AnchoredPosition: {x: -25.387764, y: -0.26675415}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9010597091458947807
@@ -1746,6 +1831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectionTypeDropdown: {fileID: 0}
+  inputField: {fileID: 0}
   mainMenuCanvas: {fileID: 0}
   settingsCanvas: {fileID: 0}
 --- !u!1 &5410575370624300054

@@ -6027,6 +6027,10 @@ PrefabInstance:
       propertyPath: serverOnly
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 489110459964220787, guid: bc88fa6d644b1b342b6bf051028f7095, type: 3}
+      propertyPath: poolSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 740408193962742497, guid: bc88fa6d644b1b342b6bf051028f7095, type: 3}
       propertyPath: m_Name
       value: ElementalGun

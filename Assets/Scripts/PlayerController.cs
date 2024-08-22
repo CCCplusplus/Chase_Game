@@ -48,10 +48,12 @@ public class PlayerController : NetworkBehaviour
     private GameObject carditemG;
     [SerializeField]
     private CardItem carditem;
-    //[SerializeField]
-    //private GameObject bulletHitG;
-    //[SerializeField] 
-    //private bulletScript bulletHit;
+    [SerializeField]
+    private GameObject bulletHitG;
+    [SerializeField] 
+    private bulletScript bulletHit;
+    [SerializeField]
+    private GunScript gunScript;
 
     [SerializeField]
     private AudioClip runnerJumpSound;
@@ -116,7 +118,7 @@ public class PlayerController : NetworkBehaviour
         carditemG = GameObject.FindGameObjectWithTag("Card");
         carditem = carditemG.GetComponent<CardItem>();
         //bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
-        //bulletHit = bulletHitG.GetComponent<bulletScript>();
+        bulletHit = null;
     }
 
     public override void OnStartLocalPlayer()
@@ -375,6 +377,16 @@ public class PlayerController : NetworkBehaviour
         {
             boxCollider.sharedMaterial = materialNoFriction;  // Desactivar fricción cuando está en el aire
         }
+
+        if(gunScript.isShooting == false)
+        {
+            return;
+        }
+        else
+        {
+            bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
+            bulletHit = bulletHitG.GetComponent<bulletScript>();
+        }
     }
 
     private bool IsHittingCeiling()
@@ -404,7 +416,7 @@ public class PlayerController : NetworkBehaviour
             }
         }
 
-        /*if (bulletHit == false)
+        if (bulletHit == false)
         {
             return;
         }
@@ -423,7 +435,7 @@ public class PlayerController : NetworkBehaviour
                     rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
                 }
             }
-        }*/
+        }
 
     }
 

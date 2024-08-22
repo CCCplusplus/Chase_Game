@@ -108,6 +108,8 @@ MonoBehaviour:
   fireColor: {r: 1, g: 0, b: 0, a: 1}
   iceBulletPrefab: {fileID: 4008121463848347498, guid: 7ca7506ed15c3fc4d9efb3014867a431, type: 3}
   fireBulletPrefab: {fileID: 6703326969013734119, guid: 191534f33a8b6c84da4563544ebfd175, type: 3}
+  bulletPool: []
+  poolSize: 3
   bulletSpawnPoint: {fileID: 347424302369637019}
   bulletSpeed: 10
   iceSound: {fileID: 8300000, guid: 35c9a8ab65609b246b3453501b9b01a6, type: 3}
