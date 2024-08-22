@@ -221,13 +221,12 @@ MonoBehaviour:
   jumpForceMultiplier: 1.5
   carditemG: {fileID: 0}
   carditem: {fileID: 0}
-  jumpCloudParticles: {fileID: 7481413492691905267}
-  dustCloud: {fileID: 0}
   runnerJumpSound: {fileID: 8300000, guid: 1589e1eef58383a498afb224647926bb, type: 3}
-  runnerDashSound: {fileID: 8300000, guid: f99861e69b565d04194cf9e98babcad2, type: 3}
   chaserJumpSound: {fileID: 8300000, guid: 70344bcb043045f48a5b99ac384e1653, type: 3}
   chaserDoubleJumpSound: {fileID: 8300000, guid: e5f10c7460df0cb4bb4392f45aa24f1b, type: 3}
   proximityThreshold: 5
+  dashSound: {fileID: 8300000, guid: f99861e69b565d04194cf9e98babcad2, type: 3}
+  jumpvfxHolder: {fileID: 7481413492691905267}
   materialWithFriction: {fileID: 6200000, guid: 586897c529206384da556eeaa4e90487, type: 2}
   materialNoFriction: {fileID: 6200000, guid: 2fbf7d0d97c250246a3d7eead5a1ca87, type: 2}
   isPaused: 0
@@ -541,11 +540,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   sessionId: 
-  username: 
-  ip: 
-  platform: 
   playerType: 
-  moveSpeed: 5
 --- !u!1 &7026673395154625684
 GameObject:
   m_ObjectHideFlags: 0
