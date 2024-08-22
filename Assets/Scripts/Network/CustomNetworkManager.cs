@@ -1,15 +1,10 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
-using Unity.Services.Relay;
-using Unity.Services.Relay.Models;
-using Unity.Services.Lobbies;
-using Unity.Services.Lobbies.Models;
-using Unity.Networking.Transport.Relay;
-using TMPro;
-using System;
-using System.Collections.Generic;
+using Utp;
 using System.Threading.Tasks;
 
 public struct PlayerTypeMessage : NetworkMessage
@@ -17,147 +12,224 @@ public struct PlayerTypeMessage : NetworkMessage
     public string playerType;
 }
 
-public class CustomNetworkManager : NetworkManager
+
+namespace Network
 {
-    public GameObject runnerPrefab;
-    public GameObject chaserPrefab;
-    public Transform runnerTransform;
-    public Transform chaserTransform;
-
-    public TextMeshProUGUI visibleLobbyId;
-    private Lobby currentLobby;
-
-    public override void OnStartServer()
+    public class CustomNetworkManager : RelayNetworkManager
     {
-        NetworkServer.RegisterHandler<PlayerTypeMessage>(OnCreatePlayer);
-    }
+        public GameObject runnerPrefab;
+        public GameObject chaserPrefab;
+        public Transform runnerTransform;
+        public Transform chaserTransform;
 
-    public override void OnClientConnect()
-    {
-        base.OnClientConnect();
-        Debug.Log("OnClientConnect called");
+        public Player localPlayer;
+        private string m_SessionId = "";
+        private string m_Username;
+        private string m_UserId;
 
-        string playerType = PlayerPrefs.GetString("PlayerType");
-        var msg = new PlayerTypeMessage { playerType = playerType };
-        NetworkClient.Send(msg);
-    }
+        public bool isLoggedIn = false;
+        private List<Player> m_Players;
 
-    private void OnCreatePlayer(NetworkConnectionToClient conn, PlayerTypeMessage msg)
-    {
-        Transform start = (msg.playerType == "Runner") ? runnerTransform : chaserTransform;
-        if (start == null)
+        public override void Awake()
         {
-            start = new GameObject("DefaultStart").transform;
-            start.position = Vector3.zero;
-            start.rotation = Quaternion.identity;
+            base.Awake();
+            m_Players = new List<Player>();
+            m_Username = SystemInfo.deviceName;
+
+            utpTransport.OnClientConnected = OnClientConnected;
+            utpTransport.OnClientDataReceived = OnClientDataReceived;
+            utpTransport.OnClientDisconnected = OnClientDisconnected;
         }
 
-        GameObject player = (msg.playerType == "Runner") ? Instantiate(runnerPrefab, start.position, start.rotation) : Instantiate(chaserPrefab, start.position, start.rotation);
-        NetworkServer.AddPlayerForConnection(conn, player);
-        Debug.Log("Player created and added to connection");
-    }
-
-    public async void StartHostWithRelayAndLobby(string playerType)
-    {
-        try
+        public override void OnStartServer()
         {
-            await UnityServices.InitializeAsync();
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            base.OnStartServer();
+            NetworkServer.RegisterHandler<PlayerTypeMessage>(OnPlayerTypeReceived);
 
-            // Crear asignación de Relay
-            Allocation allocation = await RelayService.Instance.CreateAllocationAsync(4);
-            string joinCode = await RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
-
-            Debug.Log("Join code creado: " + joinCode); // Debug para verificar el joinCode
-
-            var relayServerData = new RelayServerData(allocation, "dtls");
-
-            // Crear lobby
-            var lobbyOptions = new CreateLobbyOptions
+            // Manually create and add a player for the host
+            NetworkConnectionToClient conn = NetworkServer.localConnection;
+            if (conn != null)
             {
-                IsPrivate = false,
-                Data = new Dictionary<string, DataObject>
-                {
-                    { "playerType", new DataObject(DataObject.VisibilityOptions.Public, playerType) },
-                    { "joinCode", new DataObject(DataObject.VisibilityOptions.Member, joinCode) }
-                }
-            };
-
-            currentLobby = await LobbyService.Instance.CreateLobbyAsync("LobbyName", 4, lobbyOptions);
-            Debug.Log("Lobby creado: " + currentLobby.Id);
-
-            // Mostrar el ID del lobby en la UI
-            if (visibleLobbyId != null)
-            {
-                visibleLobbyId.text = "Lobby ID: " + currentLobby.Id;
+                AddPlayerForConnection(conn, PlayerPrefs.GetString("PlayerType", "Runner"));
             }
-
-            NetworkManager.singleton.transport = GetComponent<Mirror.SimpleWeb.SimpleWebTransport>();
-            NetworkManager.singleton.StartHost();
-            Debug.Log("Host started");
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("Error in StartHostWithRelayAndLobby: " + e.Message);
-        }
-    }
-
-    public async void ListLobbiesAndJoin()
-    {
-        try
-        {
-            await UnityServices.InitializeAsync();
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
-
-            var queryResponse = await LobbyService.Instance.QueryLobbiesAsync();
-            foreach (var lobby in queryResponse.Results)
+            else
             {
-                // Aquí puedes mostrar una lista de lobbies disponibles en la UI
-                // Por simplicidad, uniremos al primer lobby encontrado
-                if (lobby.Data["playerType"].Value == "Runner" && PlayerPrefs.GetString("PlayerType") == "Chaser" ||
-                    lobby.Data["playerType"].Value == "Chaser" && PlayerPrefs.GetString("PlayerType") == "Runner")
-                {
-                    Debug.Log("Lobby encontrado: " + lobby.Id); // Debug para verificar el lobby encontrado
-                    await JoinLobbyAndRelay(lobby.Id);
-                    break;
-                }
+                Debug.LogError("Host connection not found!");
             }
         }
-        catch (Exception e)
+
+        private void AddPlayerForConnection(NetworkConnectionToClient conn, string playerType)
         {
-            Debug.LogError("Error in ListLobbiesAndJoin: " + e.Message);
+            GameObject playerPrefab = playerType == "Runner" ? runnerPrefab : chaserPrefab;
+            Transform spawnTransform = playerType == "Runner" ? runnerTransform : chaserTransform;
+
+            GameObject player = Instantiate(playerPrefab, spawnTransform.position, Quaternion.identity);
+            NetworkServer.AddPlayerForConnection(conn, player);
+
+            Player comp = player.GetComponent<Player>();
+            if (comp != null)
+            {
+                comp.sessionId = m_SessionId;
+                comp.playerType = playerType;
+                m_Players.Add(comp);
+                Debug.Log($"Player added to the list: {comp.playerType}");
+            }
+            else
+            {
+                Debug.LogError("The instantiated player prefab does not have a Player component!");
+            }
         }
-    }
 
-    public async Task JoinLobbyAndRelay(string lobbyId)
-    {
-        try
+
+        public override void OnStartClient()
         {
-            currentLobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobbyId);
-            string joinCode = currentLobby.Data["joinCode"].Value;
-
-            Debug.Log("Join code from lobby: " + joinCode);
-
-            JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
-            Debug.Log("JoinAllocation obtenido: " + joinAllocation.AllocationId); // Verificar joinAllocation
-
-            var relayServerData = new RelayServerData(joinAllocation, "dtls");
-
-            NetworkManager.singleton.transport = GetComponent<Mirror.SimpleWeb.SimpleWebTransport>();
-            NetworkManager.singleton.StartClient();
-            Debug.Log("Client started and trying to connect");
+            base.OnStartClient();
+            
         }
-        catch (RelayServiceException e)
+
+
+        private void OnPlayerTypeReceived(NetworkConnectionToClient conn, PlayerTypeMessage message)
         {
-            Debug.LogError("RelayServiceException in JoinLobbyAndRelay: " + e.Message);
+            string playerType = message.playerType;
+            if (!CanAddPlayerOfType(playerType))
+            {
+                Debug.LogError("Cannot add more players, game is full or both player types are selected.");
+                conn.Disconnect();
+                return;
+            }
+
+            GameObject playerPrefab = playerType == "Runner" ? runnerPrefab : chaserPrefab;
+            Transform spawnTransform = playerType == "Runner" ? runnerTransform : chaserTransform;
+
+            GameObject player = Instantiate(playerPrefab, spawnTransform.position, Quaternion.identity);
+            NetworkServer.AddPlayerForConnection(conn, player);
+
+            Player comp = player.GetComponent<Player>();
+            if (comp != null)
+            {
+                comp.sessionId = m_SessionId;
+                comp.playerType = playerType;
+                m_Players.Add(comp);
+                Debug.Log($"Player added to the list: {comp.playerType}");
+            }
+            else
+            {
+                Debug.LogError("The instantiated player prefab does not have a Player component!");
+            }
         }
-        catch (AuthenticationException e)
+
+
+
+
+        private async void OnClientConnected()
         {
-            Debug.LogError("AuthenticationException in JoinLobbyAndRelay: " + e.Message);
+            Debug.Log("Client connected successfully.");
+            await Task.Delay(1000);
+            string playerType = PlayerPrefs.GetString("PlayerType", "Runner");
+            PlayerTypeMessage message = new PlayerTypeMessage { playerType = playerType };
+            NetworkClient.Send(message);
         }
-        catch (Exception e)
+
+
+
+        private void OnClientDataReceived(ArraySegment<byte> data, int channelId)
         {
-            Debug.LogError("Error in JoinLobbyAndRelay: " + e.Message);
+            Debug.Log("Data received from server.");
+            // Here you can process the data received, such as updating player states, handling game events, etc.
+        }
+
+        private void OnClientDisconnected()
+        {
+            Debug.Log("Client disconnected from server.");
+            // Cleanup any client-specific data, remove the player from the list, and handle UI updates
+            if (localPlayer != null)
+            {
+                m_Players.Remove(localPlayer);
+                localPlayer = null;
+            }
+            // Optionally, trigger a reconnect or go back to the main menu
+        }
+
+        public async void UnityLogin()
+        {
+            try
+            {
+                await UnityServices.InitializeAsync();
+                await AuthenticationService.Instance.SignInAnonymouslyAsync();
+                Debug.Log("Logged into Unity, player ID: " + AuthenticationService.Instance.PlayerId);
+                isLoggedIn = true;
+            }
+            catch (Exception e)
+            {
+                isLoggedIn = false;
+                Debug.Log(e);
+            }
+        }
+
+        public async void StartHostWithRelay()
+        {
+            Debug.Log("Starting host with Relay...");
+            if (UnityServices.State != ServicesInitializationState.Initialized)
+            {
+                await UnityServices.InitializeAsync();
+            }
+
+            if (!AuthenticationService.Instance.IsSignedIn)
+            {
+                await AuthenticationService.Instance.SignInAnonymouslyAsync();
+                Debug.Log("Logged into Unity, player ID: " + AuthenticationService.Instance.PlayerId);
+                isLoggedIn = true;
+            }
+            StartRelayHost(2, null);
+        }
+
+        public async void JoinRelay(string joinCode)
+        {
+            if (UnityServices.State != ServicesInitializationState.Initialized)
+            {
+                await UnityServices.InitializeAsync();
+            }
+
+            if (!AuthenticationService.Instance.IsSignedIn)
+            {
+                await AuthenticationService.Instance.SignInAnonymouslyAsync();
+                Debug.Log("Logged into Unity, player ID: " + AuthenticationService.Instance.PlayerId);
+                isLoggedIn = true;
+            }
+            JoinRelayServer(joinCode);
+            
+        }
+
+        public override void OnServerAddPlayer(NetworkConnectionToClient conn)
+        {
+            string playerType = PlayerPrefs.GetString("PlayerType", "Runner"); // Default to Runner if not set
+            Debug.Log($"OnServerAddPlayer called. PlayerType: {playerType}");
+
+            if (!CanAddPlayerOfType(playerType))
+            {
+                Debug.LogError("Cannot add more players, game is full or both player types are selected.");
+                conn.Disconnect();
+                return;
+            }
+
+            AddPlayerForConnection(conn, playerType);
+        }
+
+        private bool CanAddPlayerOfType(string playerType)
+        {
+            int runnerCount = 0;
+            int chaserCount = 0;
+
+            foreach (var player in m_Players)
+            {
+                if (player.playerType == "Runner") runnerCount++;
+                if (player.playerType == "Chaser") chaserCount++;
+            }
+
+            if (playerType == "Runner" && runnerCount >= 1) return false;
+            if (playerType == "Chaser" && chaserCount >= 1) return false;
+
+            return true;
         }
     }
 }
