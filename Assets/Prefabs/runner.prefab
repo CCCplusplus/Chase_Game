@@ -10435,6 +10435,10 @@ PrefabInstance:
       value: 0.19999969
       objectReference: {fileID: 0}
     - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: InitialModule.rotation3D
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
       propertyPath: ShapeModule.radius.value
       value: 1.0526657
       objectReference: {fileID: 0}
