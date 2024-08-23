@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using Mirror;
 
 public class PlayerController : NetworkBehaviour
@@ -55,6 +56,13 @@ public class PlayerController : NetworkBehaviour
     [SerializeField]
     private GunScript gunScript;
 
+    //------------------------------------------------(Marco Antonio)
+    [SerializeField] private ParticleSystem dashParticles;
+
+    //private ParticleSystem dashParticlesRight;
+    //private ParticleSystem dashParticlesRight;
+    //------------------------------------------------
+
     [SerializeField]
     private AudioClip runnerJumpSound;
     [SerializeField]
@@ -71,7 +79,6 @@ public class PlayerController : NetworkBehaviour
     [SerializeField]
     private GameObject jumpvfxHolder;
     private ParticleSystem jumpvfx;
-
 
     [SerializeField]
     private PhysicsMaterial2D materialWithFriction;  // Material con fricción
@@ -110,7 +117,18 @@ public class PlayerController : NetworkBehaviour
         audioSource = GetComponent<AudioSource>();
         originalGravityScale = rb.gravityScale;
         pausa.SetActive(false);
+        //bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
+        //bulletHit = bulletHitG.GetComponent<bulletScript>();
+
+        //------------------------------------------------(Marco Antonio)
+        if(dashParticles != null)
+        {
+            dashParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
+        //------------------------------------------------
         jumpvfx = jumpvfxHolder.GetComponent<ParticleSystem>();
+    }
+
     }
 
     private void Start()
@@ -275,7 +293,34 @@ public class PlayerController : NetworkBehaviour
     {
         AudioSource.PlayClipAtPoint(dashSound, transform.position);
         isDashing = true;
+
+        //------------------------------------------------(Marco Antonio)
+        //Iniciar las particulas del dash
+        if(dashParticles != null)
+        {
+            dashParticles.gameObject.SetActive(true);
+            dashParticles.Play();
+        }
+        //------------------------------------------------
+
         yield return new WaitForSeconds(duration);
+
+        //------------------------------------------------(Marco Antonio)
+        //Detener la emision de particulas, pero permitir que el sistema termine su animacion
+        if(dashParticles != null)
+        {
+            dashParticles.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        }
+
+        //Esperar hasta que las particulas se descanezcan completamente
+        if(dashParticles != null)
+        {
+            //Esperar hasta que todas las particulas terminen su vida
+            yield return new WaitForSeconds(dashParticles.main.startLifetime.constantMax);
+            dashParticles.gameObject.SetActive(false);
+        }
+        //------------------------------------------------
+
         isDashing = false;
     }
 
