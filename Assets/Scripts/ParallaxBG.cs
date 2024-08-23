@@ -25,15 +25,15 @@ public class ParallaxBG : MonoBehaviour
 ;        transform.Translate(new Vector3 (deltaX, 0, 0));
         previousCameraPos = cameraTransform.position;
 
-        if(moveAmount > startPos + spriteWidth)
-        {
-            transform.Translate(new Vector3(spriteWidth, 0, 0));
-            startPos += spriteWidth;
-        }
-        else if(moveAmount < startPos - spriteWidth)
-        {
-            transform.Translate(new Vector3(-spriteWidth, 0, 0));
-            startPos -= spriteWidth;
-        }
+        //if(moveAmount > startPos + spriteWidth)
+        //{
+            //transform.Translate(new Vector3(spriteWidth, 0, 0));
+            //startPos += spriteWidth;
+        //}
+        //else if(moveAmount < startPos - spriteWidth)
+        //{
+            //transform.Translate(new Vector3(-spriteWidth, 0, 0));
+            //startPos -= spriteWidth;
+        //}
     }
 }
