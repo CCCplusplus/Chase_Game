@@ -908,9 +908,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5984793837039396227, guid: 08d4c1f2f8307ed47b5a85cb6e63f4e8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5984793837634966148, guid: 08d4c1f2f8307ed47b5a85cb6e63f4e8, type: 3}
       propertyPath: m_Name
       value: LoadLevelScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984793837634966148, guid: 08d4c1f2f8307ed47b5a85cb6e63f4e8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5984793837634966392, guid: 08d4c1f2f8307ed47b5a85cb6e63f4e8, type: 3}
       propertyPath: m_Pivot.x
@@ -998,6 +1006,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08d4c1f2f8307ed47b5a85cb6e63f4e8, type: 3}
+--- !u!1 &1138803156 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5984793837634966148, guid: 08d4c1f2f8307ed47b5a85cb6e63f4e8, type: 3}
+  m_PrefabInstance: {fileID: 1138803155}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1138803157 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5984793837466225064, guid: 08d4c1f2f8307ed47b5a85cb6e63f4e8, type: 3}
+  m_PrefabInstance: {fileID: 1138803155}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1287416485
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1053,6 +1077,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: ASyncManager
       objectReference: {fileID: 0}
+    - target: {fileID: 179559563834870493, guid: 9fc2606bfb0878d438eb7b8a6daeee07, type: 3}
+      propertyPath: mainMenu
+      value: 
+      objectReference: {fileID: 67948860}
+    - target: {fileID: 179559563834870493, guid: 9fc2606bfb0878d438eb7b8a6daeee07, type: 3}
+      propertyPath: cSettings
+      value: 
+      objectReference: {fileID: 2038271275}
+    - target: {fileID: 179559563834870493, guid: 9fc2606bfb0878d438eb7b8a6daeee07, type: 3}
+      propertyPath: loadingScreen
+      value: 
+      objectReference: {fileID: 1138803156}
+    - target: {fileID: 179559563834870493, guid: 9fc2606bfb0878d438eb7b8a6daeee07, type: 3}
+      propertyPath: loadingSlider
+      value: 
+      objectReference: {fileID: 1138803157}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9fc2606bfb0878d438eb7b8a6daeee07, type: 3}
 --- !u!114 &1612893766 stripped
@@ -1548,7 +1588,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 802164d2b2a4797468e28f07ea187557, type: 3}
     - target: {fileID: 3755637483027526996, guid: 4b229e26d1843874b95fbaa0dd67bd01, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3755637483027526996, guid: 4b229e26d1843874b95fbaa0dd67bd01, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1628,7 +1668,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 9a443e0b85b8f4c4195cd6c576de33cd, type: 3}
     - target: {fileID: 3755637483406519172, guid: 4b229e26d1843874b95fbaa0dd67bd01, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3755637483406519172, guid: 4b229e26d1843874b95fbaa0dd67bd01, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1872,7 +1912,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5832006443731896638, guid: 4b229e26d1843874b95fbaa0dd67bd01, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6579703446887996445, guid: 4b229e26d1843874b95fbaa0dd67bd01, type: 3}
       propertyPath: m_IsActive
