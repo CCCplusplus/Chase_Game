@@ -9,16 +9,31 @@ public class ParallaxBG : MonoBehaviour
 
     private Transform cameraTransform;
     private Vector3 previousCameraPos;
+    private float spriteWidth, startPos;
 
     void Start()
     {
         cameraTransform = Camera.main.transform;
         previousCameraPos = cameraTransform.position;
+        spriteWidth = GetComponent<SpriteRenderer>().bounds.size.x;
+        startPos = transform.position.x;
     }
     void Update()
     {
         float deltaX = (cameraTransform.position.x - previousCameraPos.x) * parallaxMultiplier;
-        transform.Translate(new Vector3 (deltaX, 0, 0));
+        float moveAmount = cameraTransform.position.x * (1 - parallaxMultiplier)
+;        transform.Translate(new Vector3 (deltaX, 0, 0));
         previousCameraPos = cameraTransform.position;
+
+        if(moveAmount > startPos + spriteWidth)
+        {
+            transform.Translate(new Vector3(spriteWidth, 0, 0));
+            startPos += spriteWidth;
+        }
+        else if(moveAmount < startPos - spriteWidth)
+        {
+            transform.Translate(new Vector3(-spriteWidth, 0, 0));
+            startPos -= spriteWidth;
+        }
     }
 }
