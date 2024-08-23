@@ -117,8 +117,6 @@ public class PlayerController : NetworkBehaviour
         audioSource = GetComponent<AudioSource>();
         originalGravityScale = rb.gravityScale;
         pausa.SetActive(false);
-        //bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
-        //bulletHit = bulletHitG.GetComponent<bulletScript>();
 
         //------------------------------------------------(Marco Antonio)
         if(dashParticles != null)
@@ -127,8 +125,6 @@ public class PlayerController : NetworkBehaviour
         }
         //------------------------------------------------
         jumpvfx = jumpvfxHolder.GetComponent<ParticleSystem>();
-    }
-
     }
 
     private void Start()
