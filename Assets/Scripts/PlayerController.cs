@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using Mirror;
 
 public class PlayerController : NetworkBehaviour
@@ -48,10 +49,19 @@ public class PlayerController : NetworkBehaviour
     private GameObject carditemG;
     [SerializeField]
     private CardItem carditem;
-    //[SerializeField]
-    //private GameObject bulletHitG;
-    //[SerializeField] 
-    //private bulletScript bulletHit;
+    [SerializeField]
+    private GameObject bulletHitG;
+    [SerializeField] 
+    private bulletScript bulletHit;
+    [SerializeField]
+    private GunScript gunScript;
+
+    //------------------------------------------------(Marco Antonio)
+    [SerializeField] private ParticleSystem dashParticles;
+
+    //private ParticleSystem dashParticlesRight;
+    //private ParticleSystem dashParticlesRight;
+    //------------------------------------------------
 
     [SerializeField]
     private AudioClip runnerJumpSound;
@@ -63,7 +73,12 @@ public class PlayerController : NetworkBehaviour
     private float proximityThreshold = 5f; // Umbral de proximidad para oír sonidos de otros jugadores
 
     private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip dashSound;
 
+    [SerializeField]
+    private GameObject jumpvfxHolder;
+    private ParticleSystem jumpvfx;
 
     [SerializeField]
     private PhysicsMaterial2D materialWithFriction;  // Material con fricción
@@ -102,14 +117,22 @@ public class PlayerController : NetworkBehaviour
         audioSource = GetComponent<AudioSource>();
         originalGravityScale = rb.gravityScale;
         pausa.SetActive(false);
-        //bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
-        //bulletHit = bulletHitG.GetComponent<bulletScript>();
+
+        //------------------------------------------------(Marco Antonio)
+        if(dashParticles != null)
+        {
+            dashParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
+        //------------------------------------------------
+        jumpvfx = jumpvfxHolder.GetComponent<ParticleSystem>();
     }
 
     private void Start()
     {
         carditemG = GameObject.FindGameObjectWithTag("Card");
         carditem = carditemG.GetComponent<CardItem>();
+        //bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
+        bulletHit = null;
     }
 
     public override void OnStartLocalPlayer()
@@ -217,11 +240,15 @@ public class PlayerController : NetworkBehaviour
     [ClientRpc]
     private void RpcJump(float currentJumpVelocity)
     {
+        PlayJumpVfx();
         if (!isLocalPlayer)
         {
             rb.velocity = new Vector2(rb.velocity.x, currentJumpVelocity);
             if (IsPlayerNearby())
-                PlayJumpSound(); 
+            {    
+                PlayJumpSound();
+                PlayJumpVfx();
+            }
         }
     }
 
@@ -260,8 +287,36 @@ public class PlayerController : NetworkBehaviour
 
     private IEnumerator Dash(float duration)
     {
+        AudioSource.PlayClipAtPoint(dashSound, transform.position);
         isDashing = true;
+
+        //------------------------------------------------(Marco Antonio)
+        //Iniciar las particulas del dash
+        if(dashParticles != null)
+        {
+            dashParticles.gameObject.SetActive(true);
+            dashParticles.Play();
+        }
+        //------------------------------------------------
+
         yield return new WaitForSeconds(duration);
+
+        //------------------------------------------------(Marco Antonio)
+        //Detener la emision de particulas, pero permitir que el sistema termine su animacion
+        if(dashParticles != null)
+        {
+            dashParticles.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        }
+
+        //Esperar hasta que las particulas se descanezcan completamente
+        if(dashParticles != null)
+        {
+            //Esperar hasta que todas las particulas terminen su vida
+            yield return new WaitForSeconds(dashParticles.main.startLifetime.constantMax);
+            dashParticles.gameObject.SetActive(false);
+        }
+        //------------------------------------------------
+
         isDashing = false;
     }
 
@@ -300,6 +355,11 @@ public class PlayerController : NetworkBehaviour
         {
             audioSource.PlayOneShot(chaserJumpSound);
         }
+    }
+
+    private void PlayJumpVfx()
+    {
+        jumpvfx.Play();
     }
 
     private void PlayDoubleJumpSound()
@@ -358,6 +418,16 @@ public class PlayerController : NetworkBehaviour
         {
             boxCollider.sharedMaterial = materialNoFriction;  // Desactivar fricción cuando está en el aire
         }
+
+        if(gunScript.isShooting == false)
+        {
+            return;
+        }
+        else
+        {
+            bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
+            bulletHit = bulletHitG.GetComponent<bulletScript>();
+        }
     }
 
     private bool IsHittingCeiling()
@@ -386,6 +456,28 @@ public class PlayerController : NetworkBehaviour
                     rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed * 2, rb.velocity.y);
             }
         }
+
+        if (bulletHit == false)
+        {
+            return;
+        }
+        else
+        {
+            if (playerType == PlayerType.Runner)
+            {
+                if (bulletHit.ammotype.currentAmmoType == GunScript.AmmoType.Ice)
+                {
+                    moveSpeed = 2f;
+                    rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+                }
+                else if (bulletHit.ammotype.currentAmmoType == GunScript.AmmoType.Fire)
+                {
+                    moveSpeed = 7f;
+                    rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+                }
+            }
+        }
+
     }
 
     private bool IsGrounded()
