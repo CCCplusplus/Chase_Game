@@ -119,10 +119,11 @@ public class PlayerController : NetworkBehaviour
         pausa.SetActive(false);
 
         //------------------------------------------------(Marco Antonio)
-        if(dashParticles != null)
-        {
-            dashParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-        }
+        //Apague el Awake de el Particle System  esta lina no es necesaría (Carlos)
+        //if(dashParticles != null)
+        //{
+        //    dashParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        //}
         //------------------------------------------------
         jumpvfx = jumpvfxHolder.GetComponent<ParticleSystem>();
     }

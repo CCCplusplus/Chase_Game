@@ -10394,6 +10394,82 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameObject
       objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: lengthInSec
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: ShapeModule.type
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: TrailModule.mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: ShapeModule.arc.mode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: ShapeModule.arc.value
+      value: 90.00018
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: TrailModule.shadowBias
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: ShapeModule.donutRadius
+      value: 0.19999969
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 1.0526657
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: ShapeModule.radiusThickness
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: InheritVelocityModule.m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: TrailModule.sizeAffectsWidth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: TrailModule.inheritParticleColor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: TrailModule.widthOverTrail.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: InheritVelocityModule.m_Curve.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3712202594980899637, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
+      propertyPath: TrailModule.attachRibbonsToTransform
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5973978028015155130, guid: 68d74d7a32083f04eab5d88068fb3f6a, type: 3}
       propertyPath: m_RootOrder
       value: 6
