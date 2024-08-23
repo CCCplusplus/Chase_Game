@@ -19,14 +19,14 @@ public class MainMenu : MonoBehaviour
     {
         PlayerPrefs.SetString("PlayerType", "Runner");
         SetConnectionType();
-        SceneManager.LoadSceneAsync("Game");
+        //SceneManager.LoadSceneAsync("Game");
     }
 
     public void PlayAsChaser()
     {
         PlayerPrefs.SetString("PlayerType", "Chaser");
         SetConnectionType();
-        SceneManager.LoadSceneAsync("Game");
+        //SceneManager.LoadSceneAsync("Game");
     }
 
     public void QuitGame()
