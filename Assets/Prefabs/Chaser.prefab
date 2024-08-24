@@ -4948,7 +4948,6 @@ GameObject:
   - component: {fileID: -6129973816458940266}
   - component: {fileID: 5198898741890583374}
   - component: {fileID: 752755754450785027}
-  - component: {fileID: 756602310865868841}
   - component: {fileID: 8333154481225634088}
   - component: {fileID: 5744411929810016264}
   - component: {fileID: 5458603093625218210}
@@ -4980,6 +4979,7 @@ Transform:
   - {fileID: 6432723433608761969}
   - {fileID: 3184431073885259249}
   - {fileID: 3120060622832425533}
+  - {fileID: 2191641291845662349}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5122,6 +5122,7 @@ MonoBehaviour:
   bulletHitG: {fileID: 0}
   bulletHit: {fileID: 0}
   gunScript: {fileID: 5979391046807551347}
+  dashParticles: {fileID: 0}
   runnerJumpSound: {fileID: 8300000, guid: 1589e1eef58383a498afb224647926bb, type: 3}
   chaserJumpSound: {fileID: 8300000, guid: 70344bcb043045f48a5b99ac384e1653, type: 3}
   chaserDoubleJumpSound: {fileID: 8300000, guid: e5f10c7460df0cb4bb4392f45aa24f1b, type: 3}
@@ -5294,32 +5295,6 @@ MonoBehaviour:
   positionSensitivity: 0.01
   rotationSensitivity: 0.01
   scaleSensitivity: 0.01
---- !u!61 &756602310865868841
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5340496883371629233}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!114 &8333154481225634088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5475,6 +5450,104 @@ MonoBehaviour:
   iceSound: {fileID: 0}
   fireSound: {fileID: 0}
   isShooting: 0
+--- !u!1 &7516127552348087921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2191641291845662349}
+  - component: {fileID: 7092322953755184613}
+  - component: {fileID: 4965399765226985798}
+  - component: {fileID: 6726140882714057245}
+  m_Layer: 0
+  m_Name: Capture
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &2191641291845662349
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7516127552348087921}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 788159748628684926}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7092322953755184613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7516127552348087921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fa71068d4adbd244903f4171bf5981a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  chaserWinsPanel: {fileID: 123259175669848780}
+  runnerLosesPanel: {fileID: 4425112292316063399}
+--- !u!61 &4965399765226985798
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7516127552348087921}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!50 &6726140882714057245
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7516127552348087921}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &8629017051602629400
 GameObject:
   m_ObjectHideFlags: 0
@@ -5520,6 +5593,26 @@ PrefabInstance:
     - target: {fileID: 82316016688169954, guid: a88eeb3e96aa7ba439e609c1754d6103, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5159650421920110083, guid: a88eeb3e96aa7ba439e609c1754d6103, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5159650421920110083, guid: a88eeb3e96aa7ba439e609c1754d6103, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
+      value: e4cc1def-7276-4871-8e94-654af5add364
+      objectReference: {fileID: 0}
+    - target: {fileID: 5159650421920110083, guid: a88eeb3e96aa7ba439e609c1754d6103, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: d8b1028c-2a70-495b-bc42-7d1e8b1759cf
+      objectReference: {fileID: 0}
+    - target: {fileID: 5159650421920110083, guid: a88eeb3e96aa7ba439e609c1754d6103, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
+      value: Player/Use-Item[/Keyboard/e]
+      objectReference: {fileID: 0}
+    - target: {fileID: 5159650421920110083, guid: a88eeb3e96aa7ba439e609c1754d6103, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: Canon/New action[/Keyboard/e]
       objectReference: {fileID: 0}
     - target: {fileID: 6583598086136588153, guid: a88eeb3e96aa7ba439e609c1754d6103, type: 3}
       propertyPath: m_Pivot.x
@@ -5724,6 +5817,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3271849774987152621, guid: 01d174d392a357d43b14639b679b5b1c, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3271849774987152621, guid: 01d174d392a357d43b14639b679b5b1c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
+      value: e4cc1def-7276-4871-8e94-654af5add364
+      objectReference: {fileID: 0}
+    - target: {fileID: 3271849774987152621, guid: 01d174d392a357d43b14639b679b5b1c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: d8b1028c-2a70-495b-bc42-7d1e8b1759cf
+      objectReference: {fileID: 0}
+    - target: {fileID: 3271849774987152621, guid: 01d174d392a357d43b14639b679b5b1c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
+      value: Player/Use-Item[/Keyboard/e]
+      objectReference: {fileID: 0}
+    - target: {fileID: 3271849774987152621, guid: 01d174d392a357d43b14639b679b5b1c, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: Canon/New action[/Keyboard/e]
+      objectReference: {fileID: 0}
     - target: {fileID: 5253864194856659665, guid: 01d174d392a357d43b14639b679b5b1c, type: 3}
       propertyPath: pausaCanvas
       value: 
@@ -5762,6 +5875,26 @@ PrefabInstance:
     - target: {fileID: 2702874069486999626, guid: ab3b62c84ab172447bbde84f4b09e9af, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6557946734568289483, guid: ab3b62c84ab172447bbde84f4b09e9af, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6557946734568289483, guid: ab3b62c84ab172447bbde84f4b09e9af, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
+      value: e4cc1def-7276-4871-8e94-654af5add364
+      objectReference: {fileID: 0}
+    - target: {fileID: 6557946734568289483, guid: ab3b62c84ab172447bbde84f4b09e9af, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: d8b1028c-2a70-495b-bc42-7d1e8b1759cf
+      objectReference: {fileID: 0}
+    - target: {fileID: 6557946734568289483, guid: ab3b62c84ab172447bbde84f4b09e9af, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
+      value: Player/Use-Item[/Keyboard/e]
+      objectReference: {fileID: 0}
+    - target: {fileID: 6557946734568289483, guid: ab3b62c84ab172447bbde84f4b09e9af, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: Canon/New action[/Keyboard/e]
       objectReference: {fileID: 0}
     - target: {fileID: 7089668986307807641, guid: ab3b62c84ab172447bbde84f4b09e9af, type: 3}
       propertyPath: m_Pivot.x
@@ -5886,6 +6019,26 @@ PrefabInstance:
       propertyPath: playerController
       value: 
       objectReference: {fileID: 6104265410598243931}
+    - target: {fileID: 4683263118971327367, guid: e905ad9d1060d97409fdcb1df858092f, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683263118971327367, guid: e905ad9d1060d97409fdcb1df858092f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
+      value: e4cc1def-7276-4871-8e94-654af5add364
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683263118971327367, guid: e905ad9d1060d97409fdcb1df858092f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: d8b1028c-2a70-495b-bc42-7d1e8b1759cf
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683263118971327367, guid: e905ad9d1060d97409fdcb1df858092f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
+      value: Player/Use-Item[/Keyboard/e]
+      objectReference: {fileID: 0}
+    - target: {fileID: 4683263118971327367, guid: e905ad9d1060d97409fdcb1df858092f, type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: Canon/New action[/Keyboard/e]
+      objectReference: {fileID: 0}
     - target: {fileID: 4741772006000898138, guid: e905ad9d1060d97409fdcb1df858092f, type: 3}
       propertyPath: pausaCanvas
       value: 

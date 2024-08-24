@@ -15,11 +15,12 @@ TagManager:
   - Card
   - Bullet
   - ElementalGun
+  - DashParticle
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Hitbox
   - Water
   - UI
   - Player
