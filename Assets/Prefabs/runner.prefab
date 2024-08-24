@@ -582,10 +582,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5183233365876143236}
   - component: {fileID: 2107978716168169827}
-  - component: {fileID: 922631817216732484}
+  - component: {fileID: 2710154700038061400}
   - component: {fileID: 2957657556043954373}
   - component: {fileID: 435617575803663150}
-  m_Layer: 6
+  - component: {fileID: 6333198635061341408}
+  m_Layer: 3
   m_Name: hitbox
   m_TagString: Hitbox
   m_Icon: {fileID: 0}
@@ -600,7 +601,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7026673395154625684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.29, y: 0, z: 0}
+  m_LocalPosition: {x: 1.18, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -617,10 +618,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.28303683}
+  m_Offset: {x: 0.31583852, y: 0.07895231}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -631,20 +632,29 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 4.019061}
+  m_Size: {x: 1.8498245, y: 3.641127}
   m_EdgeRadius: 0
---- !u!114 &922631817216732484
-MonoBehaviour:
+--- !u!50 &2710154700038061400
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7026673395154625684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9030cf5e8beaee44b53ea7f4b991553, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 20
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!198 &2957657556043954373
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -653,7 +663,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7026673395154625684}
   serializedVersion: 8
-  lengthInSec: 0.5
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -5482,6 +5492,28 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &6333198635061341408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7026673395154625684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9030cf5e8beaee44b53ea7f4b991553, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  shootSound: {fileID: 8300000, guid: ffb3d39b485e56345b73728805ba511e, type: 3}
+  shotgunHitbox: {fileID: 2107978716168169827}
+  muzzleFlash: {fileID: 2957657556043954373}
+  hasShotgun: 0
+  hitboxOrigin: {fileID: 5183233365876143236}
+  hitboxSpeed: 20
+  hitboxDistance: 5
 --- !u!1 &7481413492691905267
 GameObject:
   m_ObjectHideFlags: 0

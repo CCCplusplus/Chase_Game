@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using Mirror;
 
 public class PlayerController : NetworkBehaviour
@@ -12,7 +11,7 @@ public class PlayerController : NetworkBehaviour
     public PlayerType playerType;
 
     [SerializeField]
-    private float moveSpeed = 5f;
+    private float moveSpeed = 12f;
     [SerializeField]
     private float minJumpHeight = 4f;
     [SerializeField]
@@ -131,7 +130,9 @@ public class PlayerController : NetworkBehaviour
     private void Start()
     {
         carditemG = GameObject.FindGameObjectWithTag("Card");
-        carditem = carditemG.GetComponent<CardItem>();
+        if (carditemG != null) 
+            carditem = carditemG.GetComponent<CardItem>();
+
         //bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
         bulletHit = null;
     }
@@ -275,6 +276,7 @@ public class PlayerController : NetworkBehaviour
     private void CmdDash(float dashDuration)
     {
         RpcDash(dashDuration);
+        RpcActivateDashParticles();  // Activata para todos los jugadores.
     }
 
     [ClientRpc]
@@ -286,40 +288,37 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
+    [ClientRpc]
+    private void RpcActivateDashParticles()
+    {
+        if (dashParticles != null && !dashParticles.isPlaying)
+        {
+            dashParticles.gameObject.SetActive(true);
+            dashParticles.Play();
+        }
+    }
+
+    [ClientRpc]
+    private void RpcDeactivateDashParticles()
+    {
+        if (dashParticles != null && dashParticles.isPlaying)
+        {
+            dashParticles.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            dashParticles.gameObject.SetActive(false);
+        }
+    }
+
     private IEnumerator Dash(float duration)
     {
         AudioSource.PlayClipAtPoint(dashSound, transform.position);
         isDashing = true;
 
-        //------------------------------------------------(Marco Antonio)
-        //Iniciar las particulas del dash
-        if(dashParticles != null)
-        {
-            dashParticles.gameObject.SetActive(true);
-            dashParticles.Play();
-        }
-        //------------------------------------------------
-
         yield return new WaitForSeconds(duration);
 
-        //------------------------------------------------(Marco Antonio)
-        //Detener la emision de particulas, pero permitir que el sistema termine su animacion
-        if(dashParticles != null)
-        {
-            dashParticles.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-        }
-
-        //Esperar hasta que las particulas se descanezcan completamente
-        if(dashParticles != null)
-        {
-            //Esperar hasta que todas las particulas terminen su vida
-            yield return new WaitForSeconds(dashParticles.main.startLifetime.constantMax);
-            dashParticles.gameObject.SetActive(false);
-        }
-        //------------------------------------------------
-
         isDashing = false;
+        RpcDeactivateDashParticles();  // Desactiva para todos los jugadores
     }
+
 
     public void OnPause(InputAction.CallbackContext context)
     {
@@ -367,8 +366,6 @@ public class PlayerController : NetworkBehaviour
     {
         audioSource.PlayOneShot(chaserDoubleJumpSound);
     }
-
-
     private void Update()
     {
         if (!isLocalPlayer) return;
@@ -440,22 +437,32 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        if (carditem.hit == false)
+        if (carditem != null)
+        {
+            if (carditem.hit == false)
+            {
+                if (!isDashing)
+                    rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+                else
+                    rb.velocity = new Vector2(moveInput.x * moveSpeed * 2, rb.velocity.y);
+            }
+            else
+            {
+                if (playerType == PlayerType.Runner)
+                {
+                    if (!isDashing)
+                        rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed, rb.velocity.y);
+                    else
+                        rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed * 2, rb.velocity.y);
+                }
+            }
+        }
+        else
         {
             if (!isDashing)
                 rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
             else
                 rb.velocity = new Vector2(moveInput.x * moveSpeed * 2, rb.velocity.y);
-        }
-        else
-        {
-            if (playerType == PlayerType.Runner)
-            {
-                if (!isDashing)
-                    rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed, rb.velocity.y);
-                else
-                    rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed * 2, rb.velocity.y);
-            }
         }
 
         if (bulletHit == false)
@@ -501,10 +508,23 @@ public class PlayerController : NetworkBehaviour
 
     private IEnumerator Invencible()
     {
-        this.tag = "Invencible";
+        CmdSetTag("Invencible"); // Comando para cambiar la etiqueta en todos los clientes
         yield return new WaitForSeconds(dashDuration);
-        this.tag = "Runner";
+        CmdSetTag("Runner"); // Comando para volver a la etiqueta original en todos los clientes
     }
+
+    [Command]
+    private void CmdSetTag(string newTag)
+    {
+        RpcSetTag(newTag);
+    }
+
+    [ClientRpc]
+    private void RpcSetTag(string newTag)
+    {
+        this.tag = newTag;
+    }
+
 
     private IEnumerator ColorChange()
     {
@@ -519,12 +539,37 @@ public class PlayerController : NetworkBehaviour
                 newColorIndex = Random.Range(0, colores.Length);
             } while (newColorIndex == lastColorIndex);
 
-            this.renderer.color = colores[newColorIndex];
+            CmdChangeColor(newColorIndex);  // Comando para cambiar el color en todos los clientes
             lastColorIndex = newColorIndex;
 
             yield return new WaitForSeconds(0.1f);
         }
 
-        this.renderer.color = new Color(0.3143499f, 1.0f, 0.0f, 1.0f);
+        CmdChangeColorFinal(new Color(0.3143499f, 1.0f, 0.0f, 1.0f)); // Comando para establecer el color final
     }
+
+    [Command]
+    private void CmdChangeColor(int colorIndex)
+    {
+        RpcChangeColor(colorIndex);
+    }
+
+    [ClientRpc]
+    private void RpcChangeColor(int colorIndex)
+    {
+        this.renderer.color = colores[colorIndex];
+    }
+
+    [Command]
+    private void CmdChangeColorFinal(Color finalColor)
+    {
+        RpcChangeColorFinal(finalColor);
+    }
+
+    [ClientRpc]
+    private void RpcChangeColorFinal(Color finalColor)
+    {
+        this.renderer.color = finalColor;
+    }
+
 }
