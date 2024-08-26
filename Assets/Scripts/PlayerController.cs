@@ -149,33 +149,11 @@ public class PlayerController : NetworkBehaviour
     }
 
     //------------------------------------------------(Marco Antonio)
-    private void FlipCharacter(float moveInputX)
+    private void Flip()
     {
-        if (moveInputX > 0 && !isFacingRight || moveInputX < 0 && isFacingRight)
-        {
-            isFacingRight = !isFacingRight;
-
-            // Flip the local player
-            Vector3 theScale = transform.localScale;
-            theScale.x *= -1;
-            transform.localScale = theScale;
-
-            // Flip all child objects
-            foreach (Transform child in transform)
-            {
-                Vector3 childScale = child.localScale;
-                childScale.x *= -1;
-                child.localScale = childScale;
-            }
-
-            // Flip the associated GameObject
-            if (associatedObject != null)
-            {
-                Vector3 associatedScale = associatedObject.transform.localScale;
-                associatedScale.x *= -1;
-                associatedObject.transform.localScale = associatedScale;
-            }
-        }
+        isFacingRight = !isFacingRight;
+        transform.Rotate(0, 180f, 0f);
+       
     }
     //------------------------------------------------
     public override void OnStartLocalPlayer()
@@ -215,7 +193,15 @@ public class PlayerController : NetworkBehaviour
         //animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
 
         //----------------------------------(MarcoAntonio)
-        FlipCharacter(moveInput.x);
+        // Solo ejecutar flip si hay un cambio en la dirección
+        if (moveInput.x > 0 && !isFacingRight)
+        {
+            CmdFlipSprite(false);  // Flip hacia la derecha
+        }
+        else if (moveInput.x < 0 && isFacingRight)
+        {
+            CmdFlipSprite(true);   // Flip hacia la izquierda
+        }
         //----------------------------------
     }
 
@@ -418,16 +404,29 @@ public class PlayerController : NetworkBehaviour
         if (!isLocalPlayer) return;
 
         //------------------------------------------------(Marco Antonio)
-        //Flip del sprite basado en la direccion de movimiento
+        ////Flip del sprite basado en la direccion de movimiento
+        //float moveDirection = moveInput.x;
+        //if (moveDirection < 0)
+        //{
+        //    CmdFlipSprite(true); //Llama al comando para flip en red
+        //}
+        //else if (moveDirection > 0)
+        //{
+        //    CmdFlipSprite(false);
+        //}
+
         float moveDirection = moveInput.x;
-        if (moveDirection < 0)
+        if (moveDirection < 0 && isFacingRight)
         {
-            CmdFlipSprite(true); //Llama al comando para flip en red
+            Flip(); // Voltea a la izquierda.
+            //CmdFlipSprite(true); //Llama al comando para flip en red
         }
-        else if (moveDirection > 0)
+        else if (moveDirection > 0 && !isFacingRight)
         {
-            CmdFlipSprite(false);
+            Flip(); // Voltea a la derecha.
+            //CmdFlipSprite(false);
         }
+
         //------------------------------------------------
 
         if (isJumping && jumpButtonHeld)
@@ -498,6 +497,11 @@ public class PlayerController : NetworkBehaviour
     private void RpcFlipSprite(bool isFlipped)
     {
         spriteRd.flipX = isFlipped;
+
+        if (associatedObject != null)
+        {
+            associatedObject.transform.localScale = new Vector3(isFlipped ? -1 : 1, 1, 1);
+        }
     }
     //------------------------------------------------
     private bool IsHittingCeiling()
