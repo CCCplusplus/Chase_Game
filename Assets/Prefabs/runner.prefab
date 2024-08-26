@@ -227,6 +227,7 @@ MonoBehaviour:
   bulletHit: {fileID: 0}
   gunScript: {fileID: 6690779900131008168}
   dashParticles: {fileID: 4365289773304011126}
+  spriteFlipRenderer: {fileID: 5470323084119957431}
   runnerJumpSound: {fileID: 8300000, guid: 1589e1eef58383a498afb224647926bb, type: 3}
   chaserJumpSound: {fileID: 8300000, guid: 70344bcb043045f48a5b99ac384e1653, type: 3}
   chaserDoubleJumpSound: {fileID: 8300000, guid: e5f10c7460df0cb4bb4392f45aa24f1b, type: 3}

@@ -60,6 +60,8 @@ public class PlayerController : NetworkBehaviour
 
     //private ParticleSystem dashParticlesRight;
     //private ParticleSystem dashParticlesRight;
+
+    [SerializeField] private SpriteRenderer spriteRd;
     //------------------------------------------------
 
     [SerializeField]
@@ -122,11 +124,13 @@ public class PlayerController : NetworkBehaviour
         pausa.SetActive(false);
 
         //------------------------------------------------(Marco Antonio)
-        //Apague el Awake de el Particle System  esta lina no es necesaría (Carlos)
+        //Apague el Awake de el Particle System  esta linea no es necesaría (Carlos)
         //if(dashParticles != null)
         //{
         //    dashParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         //}
+
+        spriteRd = GetComponent<SpriteRenderer>();
         //------------------------------------------------
         jumpvfx = jumpvfxHolder.GetComponent<ParticleSystem>();
     }
@@ -377,6 +381,19 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
+        //------------------------------------------------(Marco Antonio)
+        //Flip del sprite basado en la direccion de movimiento
+        float moveDirection = moveInput.x;
+        if (moveDirection < 0)
+        {
+            CmdFlipSprite(true); //Llama al comando para flip en red
+        }
+        else if (moveDirection > 0)
+        {
+            CmdFlipSprite(false);
+        }
+        //------------------------------------------------
+
         if (isJumping && jumpButtonHeld)
         {
             float currentJumpTime = Time.time - jumpStartTime;
@@ -434,7 +451,19 @@ public class PlayerController : NetworkBehaviour
             bulletHit = bulletHitG.GetComponent<bulletScript>();
         }
     }
+    //------------------------------------------------(MarcoAntonio)
+    [Command]
+    private void CmdFlipSprite(bool isFlipped)
+    {
+        RpcFlipSprite(isFlipped);
+    }
 
+    [ClientRpc]
+    private void RpcFlipSprite(bool isFlipped)
+    {
+        spriteRd.flipX = isFlipped;
+    }
+    //------------------------------------------------
     private bool IsHittingCeiling()
     {
         return Physics2D.OverlapCircle(ceilingCheck.position, groundCheckRadius, groundLayer);
@@ -444,6 +473,10 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
+        //--------------------------------------------(MarcoAntonio)
+        //Manejo del movimiento
+        rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+        //--------------------------------------------
         if (carditem != null)
         {
             if (carditem.hit == false)
@@ -578,5 +611,4 @@ public class PlayerController : NetworkBehaviour
     {
         this.renderer.color = finalColor;
     }
-
 }
