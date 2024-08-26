@@ -62,6 +62,8 @@ public class PlayerController : NetworkBehaviour
     //private ParticleSystem dashParticlesRight;
 
     [SerializeField] private SpriteRenderer spriteRd;
+    [SerializeField] private GameObject associatedObject;
+    private bool isFacingRight = true;
     //------------------------------------------------
 
     [SerializeField]
@@ -146,6 +148,36 @@ public class PlayerController : NetworkBehaviour
         bulletHit = null;
     }
 
+    //------------------------------------------------(Marco Antonio)
+    private void FlipCharacter(float moveInputX)
+    {
+        if (moveInputX > 0 && !isFacingRight || moveInputX < 0 && isFacingRight)
+        {
+            isFacingRight = !isFacingRight;
+
+            // Flip the local player
+            Vector3 theScale = transform.localScale;
+            theScale.x *= -1;
+            transform.localScale = theScale;
+
+            // Flip all child objects
+            foreach (Transform child in transform)
+            {
+                Vector3 childScale = child.localScale;
+                childScale.x *= -1;
+                child.localScale = childScale;
+            }
+
+            // Flip the associated GameObject
+            if (associatedObject != null)
+            {
+                Vector3 associatedScale = associatedObject.transform.localScale;
+                associatedScale.x *= -1;
+                associatedObject.transform.localScale = associatedScale;
+            }
+        }
+    }
+    //------------------------------------------------
     public override void OnStartLocalPlayer()
     {
         Camera.main.GetComponent<CameraFollow>().target = transform;
@@ -181,6 +213,10 @@ public class PlayerController : NetworkBehaviour
             rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
         }
         //animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
+
+        //----------------------------------(MarcoAntonio)
+        FlipCharacter(moveInput.x);
+        //----------------------------------
     }
 
     public void OnJump(InputAction.CallbackContext context)
