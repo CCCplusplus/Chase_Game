@@ -21,7 +21,7 @@ public class GoalTrigger : NetworkBehaviour
 
     private void Update()
     {
-        if (goTime) { return; }
+        if (!goTime) { return; }
 
         PlayerController playerController = NetworkClient.localPlayer.GetComponent<PlayerController>();
 
