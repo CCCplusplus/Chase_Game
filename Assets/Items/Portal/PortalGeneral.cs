@@ -9,30 +9,29 @@ public class PortalGeneral : MonoBehaviour
     [SerializeField] private Transform destination; // El destino al que se teletransportan los objetos
     [SerializeField] private AudioSource portalSound; //Referencia al componente de Audio
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Si el objeto ya ha sido teletransportado, no hacer nada
-        if (portalObjects.Contains(collision.gameObject))
-        {
-            return;
-        }
+    private void OnTriggerEnter2D(Collider2D collision) {
+        //Verifica si el objeto tiene la etiqueta "runner" o "chaser"
+        if (collision.CompareTag("Runner") || collision.CompareTag("Chaser")) {
+            //Si el objeto ya ha sido teletransportado, no hacer nada
+            if (portalObjects.Contains(collision.gameObject)) {
+                return;
+            }
 
-        // Añadir el objeto a la lista de objetos teletransportados
-        portalObjects.Add(collision.gameObject);
+            //Agregar el objeto a la lista de objetos teletransportados
+            portalObjects.Add(collision.gameObject);
 
-        // Si el portal de destino tiene un script de Portal, añadir el objeto a su lista
-        if (destination.TryGetComponent(out PortalGeneral destinationPortal))
-        {
-            destinationPortal.portalObjects.Add(collision.gameObject);
-        }
+            //Si el portal de destino tiene un script de Portal, agregar el objeto su lista
+            if(destination.TryGetComponent(out PortalGeneral destinationPortal)) {
+                destinationPortal.portalObjects.Add(collision.gameObject);
+            }
 
-        // Teletransportar el objeto al destino
-        collision.transform.position = destination.position;
+            //Teletransportar el objeto al destino
+            collision.transform.position = destination.position;
 
-        //Reproduri sonido del portal
-        if(portalSound != null)
-        {
-            portalSound.Play();
+            //Reproducir sonido del portal
+            if(portalSound != null) {
+                portalSound.Play();
+            }
         }
     }
 

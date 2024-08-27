@@ -44,13 +44,9 @@ public class MenuNavigation : MonoBehaviour
         else
         {
             if (navigation.y > 0)
-            {
                 activeDropdown.value = Mathf.Max(activeDropdown.value - 1, 0);
-            }
             else if (navigation.y < 0)
-            {
                 activeDropdown.value = Mathf.Min(activeDropdown.value + 1, activeDropdown.options.Count - 1);
-            }
             activeDropdown.RefreshShownValue();
         }
     }
@@ -63,9 +59,7 @@ public class MenuNavigation : MonoBehaviour
             Selectable currentSelectable = selectables[currentIndex];
 
             if (currentSelectable is Button)
-            {
                 ((Button)currentSelectable).onClick.Invoke();
-            }
             else if (currentSelectable is TMP_Dropdown)
             {
                 TMP_Dropdown dropdown = (TMP_Dropdown)currentSelectable;
@@ -112,8 +106,6 @@ public class MenuNavigation : MonoBehaviour
     {
         // Check if dropdown is collapsed to reset its state
         if (activeDropdown != null && activeDropdown.transform.Find("Dropdown List") == null)
-        {
             activeDropdown = null;
-        }
     }
 }

@@ -60,6 +60,10 @@ public class PlayerController : NetworkBehaviour
 
     //private ParticleSystem dashParticlesRight;
     //private ParticleSystem dashParticlesRight;
+
+    [SerializeField] private SpriteRenderer spriteRd;
+    [SerializeField] private GameObject associatedObject;
+    private bool isFacingRight = true;
     //------------------------------------------------
 
     [SerializeField]
@@ -122,11 +126,13 @@ public class PlayerController : NetworkBehaviour
         pausa.SetActive(false);
 
         //------------------------------------------------(Marco Antonio)
-        //Apague el Awake de el Particle System  esta lina no es necesaría (Carlos)
+        //Apague el Awake de el Particle System  esta linea no es necesaría (Carlos)
         //if(dashParticles != null)
         //{
         //    dashParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         //}
+
+        spriteRd = GetComponent<SpriteRenderer>();
         //------------------------------------------------
         jumpvfx = jumpvfxHolder.GetComponent<ParticleSystem>();
     }
@@ -142,6 +148,14 @@ public class PlayerController : NetworkBehaviour
         bulletHit = null;
     }
 
+    //------------------------------------------------(Marco Antonio)
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        transform.Rotate(0, 180f, 0f);
+       
+    }
+    //------------------------------------------------
     public override void OnStartLocalPlayer()
     {
         Camera.main.GetComponent<CameraFollow>().target = transform;
@@ -195,10 +209,10 @@ public class PlayerController : NetworkBehaviour
     {
 
         if (!isLocalPlayer)
-        {
             rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
             animator.SetBool("Moving", moveInput.x != 0);
         }
+
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -327,9 +341,7 @@ public class PlayerController : NetworkBehaviour
     private void RpcDash(float dashDuration)
     {
         if (isLocalPlayer)
-        {
             StartCoroutine(Dash(dashDuration));
-        }
     }
 
     [ClientRpc]
@@ -392,13 +404,9 @@ public class PlayerController : NetworkBehaviour
     private void PlayJumpSound()
     {
         if (playerType == PlayerType.Runner)
-        {
             audioSource.PlayOneShot(runnerJumpSound);
-        }
         else if (playerType == PlayerType.Chaser)
-        {
             audioSource.PlayOneShot(chaserJumpSound);
-        }
     }
 
     private void PlayJumpVfx()
@@ -414,6 +422,32 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
+        //------------------------------------------------(Marco Antonio)
+        ////Flip del sprite basado en la direccion de movimiento
+        //float moveDirection = moveInput.x;
+        //if (moveDirection < 0)
+        //{
+        //    CmdFlipSprite(true); //Llama al comando para flip en red
+        //}
+        //else if (moveDirection > 0)
+        //{
+        //    CmdFlipSprite(false);
+        //}
+
+        float moveDirection = moveInput.x;
+        if (moveDirection < 0 && isFacingRight)
+        {
+            Flip(); // Voltea a la izquierda.
+            //CmdFlipSprite(true); //Llama al comando para flip en red
+        }
+        else if (moveDirection > 0 && !isFacingRight)
+        {
+            Flip(); // Voltea a la derecha.
+            //CmdFlipSprite(false);
+        }
+
+        //------------------------------------------------
+
         UpdateAnimation();
 
         if (isJumping && jumpButtonHeld)
@@ -425,19 +459,13 @@ public class PlayerController : NetworkBehaviour
             currentHeight = transform.position.y - initialYPosition;
 
             if (currentHeight < maxJumpHeight * 0.8f && !IsHittingCeiling())
-            {
                 ApplyJumpForce(desiredJumpHeight);
-            }
             else
-            {
                 StartFalling();
-            }
         }
 
         if (isFalling && rb.velocity.y > 0)
-        {
             rb.gravityScale = gravityMultiplierDescend;
-        }
 
         if (!IsGrounded() && !isJumping && !isFalling && rb.velocity.y < 0)
         {
@@ -446,9 +474,7 @@ public class PlayerController : NetworkBehaviour
         }
 
         if (isDashing && Time.time >= dashEndTime)
-        {
             isDashing = false;
-        }
 
         if(gunScript.isShooting == false)
         {
@@ -472,7 +498,7 @@ public class PlayerController : NetworkBehaviour
             CmdSetJumpingAnimation(true);
         }
     }
-
+ 
     private bool IsHittingCeiling()
     {
         return Physics2D.OverlapCircle(ceilingCheck.position, groundCheckRadius, groundLayer);

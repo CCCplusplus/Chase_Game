@@ -5124,6 +5124,8 @@ MonoBehaviour:
   bulletHit: {fileID: 0}
   gunScript: {fileID: 5979391046807551347}
   dashParticles: {fileID: 0}
+  spriteRd: {fileID: 0}
+  associatedObject: {fileID: 0}
   runnerJumpSound: {fileID: 8300000, guid: 1589e1eef58383a498afb224647926bb, type: 3}
   chaserJumpSound: {fileID: 8300000, guid: 70344bcb043045f48a5b99ac384e1653, type: 3}
   chaserDoubleJumpSound: {fileID: 8300000, guid: e5f10c7460df0cb4bb4392f45aa24f1b, type: 3}
@@ -5491,7 +5493,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2191641291845662349
 Transform:
   m_ObjectHideFlags: 0
@@ -5617,6 +5619,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 867739137396177403, guid: a88eeb3e96aa7ba439e609c1754d6103, type: 3}
+      propertyPath: m_CullTransparentMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1263025399509212068, guid: a88eeb3e96aa7ba439e609c1754d6103, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5159650421920110083, guid: a88eeb3e96aa7ba439e609c1754d6103, type: 3}
       propertyPath: m_ActionEvents.Array.size
       value: 8
@@ -5636,6 +5646,10 @@ PrefabInstance:
     - target: {fileID: 5159650421920110083, guid: a88eeb3e96aa7ba439e609c1754d6103, type: 3}
       propertyPath: m_ActionEvents.Array.data[7].m_ActionName
       value: Canon/New action[/Keyboard/e]
+      objectReference: {fileID: 0}
+    - target: {fileID: 6239169560996146059, guid: a88eeb3e96aa7ba439e609c1754d6103, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6583598086136588153, guid: a88eeb3e96aa7ba439e609c1754d6103, type: 3}
       propertyPath: m_Pivot.x
@@ -5720,6 +5734,10 @@ PrefabInstance:
     - target: {fileID: 6583598086136588153, guid: a88eeb3e96aa7ba439e609c1754d6103, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7774627888131807800, guid: a88eeb3e96aa7ba439e609c1754d6103, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a88eeb3e96aa7ba439e609c1754d6103, type: 3}
@@ -6002,6 +6020,10 @@ PrefabInstance:
     - target: {fileID: 7089668986307807641, guid: ab3b62c84ab172447bbde84f4b09e9af, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7927861887871256736, guid: ab3b62c84ab172447bbde84f4b09e9af, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab3b62c84ab172447bbde84f4b09e9af, type: 3}
