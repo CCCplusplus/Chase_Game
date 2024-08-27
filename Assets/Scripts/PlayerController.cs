@@ -85,8 +85,8 @@ public class PlayerController : NetworkBehaviour
     private PhysicsMaterial2D materialNoFriction;    // Material sin fricción
 
     //Animacion
-    //[SerializeField]
-    //public Animator animator;
+    [SerializeField]
+    public Animator animator;
 
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
@@ -133,7 +133,7 @@ public class PlayerController : NetworkBehaviour
 
     private void Start()
     {
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         carditemG = GameObject.FindGameObjectWithTag("Card");
         if (carditemG != null) 
             carditem = carditemG.GetComponent<CardItem>();
@@ -165,6 +165,7 @@ public class PlayerController : NetworkBehaviour
     [Command]
     private void CmdMove(Vector2 moveInput)
     {
+        animator.SetFloat("Movement", 1);
         RpcMove(moveInput);
     }
 
@@ -176,7 +177,6 @@ public class PlayerController : NetworkBehaviour
         {
             rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
         }
-        //animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
     }
 
     public void OnJump(InputAction.CallbackContext context)
