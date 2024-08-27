@@ -159,13 +159,34 @@ public class PlayerController : NetworkBehaviour
         if (!isLocalPlayer) return;
 
         moveInput = context.ReadValue<Vector2>();
+
+        if (moveInput.x != 0)
+        {
+            CmdSetMoving(true);
+        }
+        else
+        {
+            CmdSetMoving(false);
+        }
+
         CmdMove(moveInput);
+    }
+
+    [Command]
+    private void CmdSetMoving(bool isMoving)
+    {
+        RpcSetMoving(isMoving);
+    }
+
+    [ClientRpc]
+    private void RpcSetMoving(bool isMoving)
+    {
+        animator.SetBool("Moving", isMoving);
     }
 
     [Command]
     private void CmdMove(Vector2 moveInput)
     {
-        animator.SetFloat("Movement", 1);
         RpcMove(moveInput);
     }
 
@@ -176,6 +197,7 @@ public class PlayerController : NetworkBehaviour
         if (!isLocalPlayer)
         {
             rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+            animator.SetBool("Moving", moveInput.x != 0);
         }
     }
 
@@ -203,6 +225,7 @@ public class PlayerController : NetworkBehaviour
                 {
                     canDoubleJump = true;
                 }
+                //CmdSetJumpingAnimation(true);
             }
             else if (playerType == PlayerType.Chaser && canDoubleJump)
             {
@@ -217,6 +240,7 @@ public class PlayerController : NetworkBehaviour
                 ApplyJumpForce(minJumpHeight * jumpForceMultiplier);
                 CmdJump(rb.velocity.y);
                 canDoubleJump = false;
+                //CmdSetJumpingAnimation(true);
             }
         }
         else if (context.canceled && isJumping)
@@ -224,8 +248,21 @@ public class PlayerController : NetworkBehaviour
             isJumping = false;
             jumpButtonHeld = false;
             StartFalling();
+            //CmdSetJumpingAnimation(false);
         }
     }
+
+    //[Command]
+    //private void CmdSetJumpingAnimation(bool isJumping)
+    //{
+    //    RpcSetJumpingAnimation(isJumping);
+    //}
+    //
+    //[ClientRpc]
+    //private void RpcSetJumpingAnimation(bool isJumping)
+    //{
+    //    animator.SetBool("Jumping", isJumping);
+    //}
 
     private void ApplyJumpForce(float height)
     {
@@ -444,6 +481,8 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
+        float moveDirection = moveInput.x;
+
         if (carditem != null)
         {
             if (carditem.hit == false)
@@ -492,6 +531,11 @@ public class PlayerController : NetworkBehaviour
                 }
             }
         }
+
+        //if (IsGrounded())
+        //{
+        //    CmdSetJumpingAnimation(false);
+        //}
 
     }
 
