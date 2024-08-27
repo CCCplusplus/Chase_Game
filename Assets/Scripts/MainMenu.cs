@@ -46,6 +46,11 @@ public class MainMenu : MonoBehaviour
         settingsCanvas.SetActive(false);
     }
 
+    public void Creditos()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
     private void SetConnectionType()
     {
         string connectionType = connectionTypeDropdown.options[connectionTypeDropdown.value].text;
