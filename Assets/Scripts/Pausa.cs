@@ -15,13 +15,9 @@ public class Pausa : MonoBehaviour
         if (NetworkManager.singleton.isNetworkActive)
         {
             if (NetworkServer.active && NetworkClient.isConnected)
-            {
                 NetworkManager.singleton.StopHost();
-            }
             else if (NetworkClient.isConnected)
-            {
                 NetworkManager.singleton.StopClient();
-            }
         }
         SceneManager.LoadSceneAsync("Main Menu");
     }

@@ -12,7 +12,7 @@ GameObject:
   m_Layer: 6
   m_Name: groundcheck
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5514,8 +5514,8 @@ MonoBehaviour:
   muzzleFlash: {fileID: 2957657556043954373}
   hasShotgun: 0
   hitboxOrigin: {fileID: 5183233365876143236}
-  hitboxSpeed: 20
-  hitboxDistance: 5
+  hitboxSpeed: 2
+  hitboxDistance: 1.5
 --- !u!1 &7481413492691905267
 GameObject:
   m_ObjectHideFlags: 0
@@ -10398,7 +10398,7 @@ GameObject:
   m_Layer: 6
   m_Name: cellingcheck
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

@@ -61,9 +61,7 @@ public class ScreenSettings : MonoBehaviour
         foreach (ScreenSettings screenSettings in FindObjectsOfType<ScreenSettings>())
         {
             if (screenSettings != this)
-            {
                 screenSettings.UpdateSettings(currentResolutionIndex, isFullscreen);
-            }
         }
     }
 
@@ -80,9 +78,7 @@ public class ScreenSettings : MonoBehaviour
         {
             if (Screen.resolutions[i].width == Screen.currentResolution.width &&
                 Screen.resolutions[i].height == Screen.currentResolution.height)
-            {
                 return i;
-            }
         }
         return 0;
     }

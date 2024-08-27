@@ -36,6 +36,7 @@ public class ShotgunHitbox : NetworkBehaviour
             if (inputActions["Use-Item"].triggered && !isShooting)
             {
                 CmdFire();
+                hasShotgun = false;
             }
         }
 

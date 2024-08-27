@@ -49,13 +49,9 @@ namespace Network
             // Manually create and add a player for the host
             NetworkConnectionToClient conn = NetworkServer.localConnection;
             if (conn != null)
-            {
                 AddPlayerForConnection(conn, PlayerPrefs.GetString("PlayerType", "Runner"));
-            }
             else
-            {
                 Debug.LogError("Host connection not found!");
-            }
         }
 
         private void AddPlayerForConnection(NetworkConnectionToClient conn, string playerType)
@@ -75,9 +71,7 @@ namespace Network
                 Debug.Log($"Player added to the list: {comp.playerType}");
             }
             else
-            {
                 Debug.LogError("The instantiated player prefab does not have a Player component!");
-            }
         }
 
 
@@ -170,9 +164,7 @@ namespace Network
         {
             Debug.Log("Starting host with Relay...");
             if (UnityServices.State != ServicesInitializationState.Initialized)
-            {
                 await UnityServices.InitializeAsync();
-            }
 
             if (!AuthenticationService.Instance.IsSignedIn)
             {
@@ -186,9 +178,7 @@ namespace Network
         public async void JoinRelay(string joinCode)
         {
             if (UnityServices.State != ServicesInitializationState.Initialized)
-            {
                 await UnityServices.InitializeAsync();
-            }
 
             if (!AuthenticationService.Instance.IsSignedIn)
             {

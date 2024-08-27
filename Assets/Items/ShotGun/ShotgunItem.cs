@@ -9,11 +9,9 @@ public class ShotgunItem : MonoBehaviour
             // Get the ShotgunHitbox component from the player
             ShotgunHitbox shotgunHitbox = other.GetComponentInChildren<ShotgunHitbox>();
 
+            // Enable the shotgun on the player
             if (shotgunHitbox != null)
-            {
-                // Enable the shotgun on the player
                 shotgunHitbox.hasShotgun = true;
-            }
 
             // Disable the shotgun item in the scene after it's picked up
             this.gameObject.GetComponent<SpriteRenderer>().enabled = false;

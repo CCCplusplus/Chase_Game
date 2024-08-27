@@ -187,22 +187,8 @@ public class PlayerController : NetworkBehaviour
     {
 
         if (!isLocalPlayer)
-        {
             rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
-        }
-        //animator.SetFloat("Movement", Mathf.Abs(rb.velocity.x));
 
-        //----------------------------------(MarcoAntonio)
-        // Solo ejecutar flip si hay un cambio en la dirección
-        if (moveInput.x > 0 && !isFacingRight)
-        {
-            CmdFlipSprite(false);  // Flip hacia la derecha
-        }
-        else if (moveInput.x < 0 && isFacingRight)
-        {
-            CmdFlipSprite(true);   // Flip hacia la izquierda
-        }
-        //----------------------------------
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -316,9 +302,7 @@ public class PlayerController : NetworkBehaviour
     private void RpcDash(float dashDuration)
     {
         if (isLocalPlayer)
-        {
             StartCoroutine(Dash(dashDuration));
-        }
     }
 
     [ClientRpc]
@@ -381,13 +365,9 @@ public class PlayerController : NetworkBehaviour
     private void PlayJumpSound()
     {
         if (playerType == PlayerType.Runner)
-        {
             audioSource.PlayOneShot(runnerJumpSound);
-        }
         else if (playerType == PlayerType.Chaser)
-        {
             audioSource.PlayOneShot(chaserJumpSound);
-        }
     }
 
     private void PlayJumpVfx()
@@ -438,19 +418,13 @@ public class PlayerController : NetworkBehaviour
             currentHeight = transform.position.y - initialYPosition;
 
             if (currentHeight < maxJumpHeight * 0.8f && !IsHittingCeiling())
-            {
                 ApplyJumpForce(desiredJumpHeight);
-            }
             else
-            {
                 StartFalling();
-            }
         }
 
         if (isFalling && rb.velocity.y > 0)
-        {
             rb.gravityScale = gravityMultiplierDescend;
-        }
 
         if (!IsGrounded() && !isJumping && !isFalling && rb.velocity.y < 0)
         {
@@ -459,9 +433,7 @@ public class PlayerController : NetworkBehaviour
         }
 
         if (isDashing && Time.time >= dashEndTime)
-        {
             isDashing = false;
-        }
 
         if (IsGrounded())
         {
@@ -486,24 +458,7 @@ public class PlayerController : NetworkBehaviour
             bulletHit = bulletHitG.GetComponent<bulletScript>();
         }
     }
-    //------------------------------------------------(MarcoAntonio)
-    [Command]
-    private void CmdFlipSprite(bool isFlipped)
-    {
-        RpcFlipSprite(isFlipped);
-    }
-
-    [ClientRpc]
-    private void RpcFlipSprite(bool isFlipped)
-    {
-        spriteRd.flipX = isFlipped;
-
-        if (associatedObject != null)
-        {
-            associatedObject.transform.localScale = new Vector3(isFlipped ? -1 : 1, 1, 1);
-        }
-    }
-    //------------------------------------------------
+ 
     private bool IsHittingCeiling()
     {
         return Physics2D.OverlapCircle(ceilingCheck.position, groundCheckRadius, groundLayer);
@@ -513,10 +468,7 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        //--------------------------------------------(MarcoAntonio)
-        //Manejo del movimiento
-        rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
-        //--------------------------------------------
+
         if (carditem != null)
         {
             if (carditem.hit == false)
@@ -625,7 +577,7 @@ public class PlayerController : NetworkBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
-        CmdChangeColorFinal(new Color(0.3143499f, 1.0f, 0.0f, 1.0f)); // Comando para establecer el color final
+        CmdChangeColorFinal(new Color(1.0f, 1.0f, 1.0f, 1.0f)); // Comando para establecer el color final
     }
 
     [Command]

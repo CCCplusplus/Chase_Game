@@ -34,25 +34,16 @@ public class GameManager : MonoBehaviour
             yield break;
         }
 
-        if (connectionType == "Host")
-        {
-            
+        if (connectionType == "Host") 
             customNetworkManager.StartHostWithRelay();
-        }
         else if (connectionType == "Client")
         {
             if (!string.IsNullOrEmpty(joinCode))
-            {
                 customNetworkManager.JoinRelay(joinCode);
-            }
             else
-            {
                 Debug.LogError("Join code is empty or null. Cannot join relay.");
-            }
         }
         else
-        {
             Debug.LogError("Unknown ConnectionType. Make sure ConnectionType is 'Host' or 'Client'.");
-        }
     }
 }

@@ -52,8 +52,6 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetString("ConnectionType", connectionType);
 
         if (!string.IsNullOrEmpty(inputField.text))
-        {
             PlayerPrefs.SetString("RelayJoinCode", inputField.text);
-        }
     }
 }
