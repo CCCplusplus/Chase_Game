@@ -225,7 +225,7 @@ public class PlayerController : NetworkBehaviour
                 {
                     canDoubleJump = true;
                 }
-                //CmdSetJumpingAnimation(true);
+                CmdSetJumpingAnimation(true);
             }
             else if (playerType == PlayerType.Chaser && canDoubleJump)
             {
@@ -240,7 +240,7 @@ public class PlayerController : NetworkBehaviour
                 ApplyJumpForce(minJumpHeight * jumpForceMultiplier);
                 CmdJump(rb.velocity.y);
                 canDoubleJump = false;
-                //CmdSetJumpingAnimation(true);
+                CmdSetJumpingAnimation(true);
             }
         }
         else if (context.canceled && isJumping)
@@ -248,21 +248,21 @@ public class PlayerController : NetworkBehaviour
             isJumping = false;
             jumpButtonHeld = false;
             StartFalling();
-            //CmdSetJumpingAnimation(false);
+            CmdSetJumpingAnimation(false);
         }
     }
 
-    //[Command]
-    //private void CmdSetJumpingAnimation(bool isJumping)
-    //{
-    //    RpcSetJumpingAnimation(isJumping);
-    //}
-    //
-    //[ClientRpc]
-    //private void RpcSetJumpingAnimation(bool isJumping)
-    //{
-    //    animator.SetBool("Jumping", isJumping);
-    //}
+    [Command]
+    private void CmdSetJumpingAnimation(bool isJumping)
+    {
+        RpcSetJumpingAnimation(isJumping);
+    }
+    
+    [ClientRpc]
+    private void RpcSetJumpingAnimation(bool isJumping)
+    {
+        animator.SetBool("Jumping", isJumping);
+    }
 
     private void ApplyJumpForce(float height)
     {
@@ -414,6 +414,8 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
+        UpdateAnimation();
+
         if (isJumping && jumpButtonHeld)
         {
             float currentJumpTime = Time.time - jumpStartTime;
@@ -448,19 +450,6 @@ public class PlayerController : NetworkBehaviour
             isDashing = false;
         }
 
-        if (IsGrounded())
-        {
-            lastGroundedTime = Time.time;
-            isFalling = false;
-            isFallingFree = false;
-            rb.gravityScale = originalGravityScale;
-            boxCollider.sharedMaterial = materialWithFriction;  // Activar fricción cuando está en el suelo
-        }
-        else
-        {
-            boxCollider.sharedMaterial = materialNoFriction;  // Desactivar fricción cuando está en el aire
-        }
-
         if(gunScript.isShooting == false)
         {
             return;
@@ -469,6 +458,18 @@ public class PlayerController : NetworkBehaviour
         {
             bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
             bulletHit = bulletHitG.GetComponent<bulletScript>();
+        }
+    }
+
+    private void UpdateAnimation()
+    {
+        if (IsGrounded())
+        {
+            CmdSetJumpingAnimation(false);
+        }
+        else if (isJumping)
+        {
+            CmdSetJumpingAnimation(true);
         }
     }
 
@@ -481,35 +482,21 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        float moveDirection = moveInput.x;
-
-        if (carditem != null)
+        if (IsGrounded())
         {
-            if (carditem.hit == false)
-            {
-                if (!isDashing)
-                    rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
-                else
-                    rb.velocity = new Vector2(moveInput.x * moveSpeed * 2, rb.velocity.y);
-            }
-            else
-            {
-                if (playerType == PlayerType.Runner)
-                {
-                    if (!isDashing)
-                        rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed, rb.velocity.y);
-                    else
-                        rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed * 2, rb.velocity.y);
-                }
-            }
+            lastGroundedTime = Time.time;
+            isFalling = false;
+            isFallingFree = false;
+            rb.gravityScale = originalGravityScale;
+            boxCollider.sharedMaterial = materialWithFriction;  // Activar fricción cuando está en el suelo
+            CmdSetJumpingAnimation(false);
         }
         else
         {
-            if (!isDashing)
-                rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
-            else
-                rb.velocity = new Vector2(moveInput.x * moveSpeed * 2, rb.velocity.y);
+            boxCollider.sharedMaterial = materialNoFriction;  // Desactivar fricción cuando está en el aire
         }
+
+        UpdateMovement();
 
         if (bulletHit == false)
         {
@@ -531,12 +518,6 @@ public class PlayerController : NetworkBehaviour
                 }
             }
         }
-
-        //if (IsGrounded())
-        //{
-        //    CmdSetJumpingAnimation(false);
-        //}
-
     }
 
     private bool IsGrounded()
@@ -596,7 +577,7 @@ public class PlayerController : NetworkBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
-        CmdChangeColorFinal(new Color(0.3143499f, 1.0f, 0.0f, 1.0f)); // Comando para establecer el color final
+        CmdChangeColorFinal(new Color(255f, 255f, 255f, 255f)); // Comando para establecer el color final
     }
 
     [Command]
@@ -621,6 +602,39 @@ public class PlayerController : NetworkBehaviour
     private void RpcChangeColorFinal(Color finalColor)
     {
         this.renderer.color = finalColor;
+    }
+
+    private void UpdateMovement()
+    {
+        float moveDirection = moveInput.x;
+
+        if (carditem != null)
+        {
+            if (carditem.hit == false)
+            {
+                if (!isDashing)
+                    rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+                else
+                    rb.velocity = new Vector2(moveInput.x * moveSpeed * 2, rb.velocity.y);
+            }
+            else
+            {
+                if (playerType == PlayerType.Runner)
+                {
+                    if (!isDashing)
+                        rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed, rb.velocity.y);
+                    else
+                        rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed * 2, rb.velocity.y);
+                }
+            }
+        }
+        else
+        {
+            if (!isDashing)
+                rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+            else
+                rb.velocity = new Vector2(moveInput.x * moveSpeed * 2, rb.velocity.y);
+        }
     }
 
 }
