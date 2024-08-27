@@ -209,6 +209,7 @@ public class PlayerController : NetworkBehaviour
     {
 
         if (!isLocalPlayer)
+        { 
             rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
             animator.SetBool("Moving", moveInput.x != 0);
         }
