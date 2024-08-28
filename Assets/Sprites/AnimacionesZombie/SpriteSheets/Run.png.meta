@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1c1f51820ed73af449129f8faef6aef1
+guid: e8c994d6fe339e748bdabfa1b505b662
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,7 +43,7 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 1
+  spriteExtrude: 0
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ZRuninig_Sheet_0
+      name: Run_0
       rect:
         serializedVersion: 2
-        x: 109
-        y: 54
-        width: 955
-        height: 1485
+        x: 110
+        y: 164
+        width: 957
+        height: 1493
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5da5c8134097794eab4e3ecebb7b654
-      internalID: -1221764713
+      spriteID: 3560930085ababc4595221bbd866858f
+      internalID: -587609037
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ZRuninig_Sheet_1
+      name: Run_1
       rect:
         serializedVersion: 2
-        x: 1168
-        y: 38
-        width: 972
-        height: 1501
+        x: 1470
+        y: 148
+        width: 973
+        height: 1513
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e01439e14986202448c341896f0aa45c
-      internalID: 106447568
+      spriteID: db87cd3e4bb13b742966bd8b752dd1f4
+      internalID: -883233336
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ZRuninig_Sheet_2
+      name: Run_2
       rect:
         serializedVersion: 2
-        x: 2211
-        y: 38
-        width: 1001
-        height: 1505
+        x: 2819
+        y: 148
+        width: 1005
+        height: 1514
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6e74051f6140f14397139f747b0319b
-      internalID: 2072332141
+      spriteID: c9e4364d997cb13499f2c155351c33cb
+      internalID: -1361815397
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ZRuninig_Sheet_3
+      name: Run_3
       rect:
         serializedVersion: 2
-        x: 3229
-        y: 63
-        width: 1055
-        height: 1480
+        x: 4136
+        y: 175
+        width: 1059
+        height: 1487
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,19 +182,61 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c24c46cfeae2feb4f9ba58a51fd6dc00
-      internalID: -793196800
+      spriteID: 94d6400f1fbdd7e4392077726d98e96b
+      internalID: -553685907
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ZRuninig_Sheet_4
+      name: Run_4
       rect:
         serializedVersion: 2
-        x: 4334
-        y: 71
-        width: 1026
+        x: 5544
+        y: 228
+        width: 1022
+        height: 1429
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72bdf2577773eea449eaa080c2b6b858
+      internalID: -318814396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Run_5
+      rect:
+        serializedVersion: 2
+        x: 6920
+        y: 185
+        width: 1032
+        height: 1477
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67a57e35fb623ec4383b7d569b5ff23e
+      internalID: 363419727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Run_6
+      rect:
+        serializedVersion: 2
+        x: 8312
+        y: 185
+        width: 1011
         height: 1472
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -203,20 +245,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 56e6f58e4c8ff164d8fe857e18ad00e9
-      internalID: 766679997
+      spriteID: e3f605ab364b9d24aaa4d1064b13f935
+      internalID: 376038555
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ZRuninig_Sheet_5
+      name: Run_7
       rect:
         serializedVersion: 2
-        x: 5402
-        y: 113
-        width: 1017
-        height: 1426
+        x: 9711
+        y: 158
+        width: 993
+        height: 1499
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,50 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bd936f1fa0e7c7d40a7e6f5538c006a8
-      internalID: 801173758
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ZRuninig_Sheet_6
-      rect:
-        serializedVersion: 2
-        x: 6491
-        y: 71
-        width: 1009
-        height: 1468
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6b0707c96c629f242a1f05321f840b44
-      internalID: 1769818627
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ZRuninig_Sheet_7
-      rect:
-        serializedVersion: 2
-        x: 7588
-        y: 42
-        width: 984
-        height: 1497
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 835d241792cbda84f970d1d6be98d933
-      internalID: 696541777
+      spriteID: 6aec7db1f0a4529409cc78dd5cc3a24a
+      internalID: 1113699228
       vertices: []
       indices: 
       edges: []
@@ -283,14 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ZRuninig_Sheet_0: -1221764713
-      ZRuninig_Sheet_1: 106447568
-      ZRuninig_Sheet_2: 2072332141
-      ZRuninig_Sheet_3: -793196800
-      ZRuninig_Sheet_4: 766679997
-      ZRuninig_Sheet_5: 801173758
-      ZRuninig_Sheet_6: 1769818627
-      ZRuninig_Sheet_7: 696541777
+      Run_0: -587609037
+      Run_1: -883233336
+      Run_2: -1361815397
+      Run_3: -553685907
+      Run_4: -318814396
+      Run_5: 363419727
+      Run_6: 376038555
+      Run_7: 1113699228
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

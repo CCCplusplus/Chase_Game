@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5c9b845e2c7c0f740a5bb69dfbff5c9c
+guid: 0e4b22ecb2db4b8469dc2c9929778938
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,13 +105,34 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ZJumping_Sheet_0
+      name: Idle_0
       rect:
         serializedVersion: 2
-        x: 3
+        x: 8
+        y: 175
+        width: 774
+        height: 1493
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfc793061ccb0a74194c6c1736ac8613
+      internalID: 131432694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Idle_1
+      rect:
+        serializedVersion: 2
+        x: 1384
         y: 165
-        width: 1346
-        height: 1372
+        width: 763
+        height: 1498
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 55ec27c49f64a1a4a8397209f36ffbc2
-      internalID: -1811368539
+      spriteID: dc0f2e9ba3ff8e24ca7b970249dc2262
+      internalID: -7867445
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ZJumping_Sheet_1
+      name: Idle_2
       rect:
         serializedVersion: 2
-        x: 1409
-        y: 143
-        width: 1352
-        height: 1394
+        x: 2765
+        y: 164
+        width: 753
+        height: 1496
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fcf5c3be25d0dc942a4dd72d4fef7b6d
-      internalID: 2030469447
+      spriteID: f50c1b8b54cb3254eb06bcee0918ac3b
+      internalID: 21190832
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ZJumping_Sheet_2
+      name: Idle_3
       rect:
         serializedVersion: 2
-        x: 2890
-        y: 110
-        width: 1190
-        height: 1432
+        x: 4136
+        y: 164
+        width: 763
+        height: 1498
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 267a4ddcf80b4dd4388b5ebcf1ec4644
-      internalID: 1441213525
+      spriteID: 4ec2f3e7549b57d45a214d93f97166f5
+      internalID: 732465351
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ZJumping_Sheet_3
+      name: Idle_4
       rect:
         serializedVersion: 2
-        x: 4280
-        y: 46
-        width: 1152
-        height: 1491
+        x: 5512
+        y: 165
+        width: 763
+        height: 1498
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,20 +203,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a84132cb528acbe4a9d5b3346494433c
-      internalID: -1995296085
+      spriteID: 72c10f05adba8dc4fb389319a865b5ec
+      internalID: -727960480
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ZJumping_Sheet_4
+      name: Idle_5
       rect:
         serializedVersion: 2
-        x: 5745
-        y: 14
-        width: 964
-        height: 1518
+        x: 6888
+        y: 169
+        width: 769
+        height: 1494
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,20 +224,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eebf40a454488e94ba8bc2bf0f07c7a4
-      internalID: -241080420
+      spriteID: 89f1a60c264826f4c9b0ccebc46ff5bf
+      internalID: 1439132026
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ZJumping_Sheet_5
+      name: Idle_6
       rect:
         serializedVersion: 2
-        x: 7167
-        y: 8
-        width: 797
-        height: 1513
+        x: 8264
+        y: 175
+        width: 769
+        height: 1493
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,20 +245,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa0100b053f60a842851fda5d47753b2
-      internalID: -377059752
+      spriteID: c9041f41cfd8f5741b449e89629b19b4
+      internalID: 1554665291
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ZJumping_Sheet_6
+      name: Idle_7
       rect:
         serializedVersion: 2
-        x: 8546
-        y: 8
-        width: 797
-        height: 1529
+        x: 9640
+        y: 175
+        width: 774
+        height: 1493
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,29 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f0fc425855084d46908875b158e4000
-      internalID: -1956839726
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ZJumping_Sheet_7
-      rect:
-        serializedVersion: 2
-        x: 9882
-        y: 46
-        width: 856
-        height: 1615
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e8f4718f44903854a999815b314b6588
-      internalID: -1651830013
+      spriteID: 38f70307998fa09479e0e1198f2dbc9b
+      internalID: 59600645
       vertices: []
       indices: 
       edges: []
@@ -283,14 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ZJumping_Sheet_0: -1811368539
-      ZJumping_Sheet_1: 2030469447
-      ZJumping_Sheet_2: 1441213525
-      ZJumping_Sheet_3: -1995296085
-      ZJumping_Sheet_4: -241080420
-      ZJumping_Sheet_5: -377059752
-      ZJumping_Sheet_6: -1956839726
-      ZJumping_Sheet_7: -1651830013
+      Idle_0: 131432694
+      Idle_1: -7867445
+      Idle_2: 21190832
+      Idle_3: 732465351
+      Idle_4: -727960480
+      Idle_5: 1439132026
+      Idle_6: 1554665291
+      Idle_7: 59600645
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
