@@ -15,15 +15,25 @@ public class PlayerCannon : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) 
+        if (other.CompareTag("Runner") ^ other.CompareTag("Chaser"))
         {
             player = other.gameObject;
-            playerInside = true;
-            player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            PlayerController playerController = player.GetComponent<PlayerController>();
+            playerController.interactwCanon = true;
         }
     }
 
-   public void OnFire(InputAction.CallbackContext context)
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Runner") ^ other.CompareTag("Chaser"))
+        {
+            player = other.gameObject;
+            PlayerController playerController = player.GetComponent<PlayerController>();
+            playerController.interactwCanon = false;
+        }
+    }
+
+    public void OnFire(InputAction.CallbackContext context)
     {
         if(playerInside && context.performed)
         {

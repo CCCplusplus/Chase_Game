@@ -100,6 +100,7 @@ public class PlayerController : NetworkBehaviour
     private bool canDoubleJump;
     private float nextDashTime;
     private float lastGroundedTime;
+    public bool interactwCanon = false;
     public bool isPaused = false;
     public Pausa pausita;
 
@@ -273,6 +274,33 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
+    public void EnterCanon()
+    {
+        var inputActions = GetComponentInParent<PlayerInput>().actions;
+
+        if (inputActions["Use-Item"].triggered && interactwCanon)
+        {
+            //desaparece
+            //entra al cañon (se cambia el default input de player a canon)
+            //sistema de apuntado
+            //disparar
+            //cambio de input a player de nuevo
+            CmdEnterCanon();
+        }
+    }
+
+    [Command]
+    private void CmdEnterCanon()
+    {
+        RpcCanon();
+    }
+
+    [ClientRpc]
+    private void RpcCanon()
+    {
+        if (!isLocalPlayer)
+            rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+    }
 
     public void OnDash(InputAction.CallbackContext context)
     {
@@ -468,6 +496,12 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
+        if(interactwCanon)
+        {
+            PlayerInput playerInput = GetComponent<PlayerInput>();
+            playerInput.defaultActionMap = "Canon";
+            interactwCanon = false;
+        }
 
         if (carditem != null)
         {
