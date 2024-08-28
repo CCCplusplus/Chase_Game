@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 8455772421537453856}
   - component: {fileID: 6690779900131008168}
   - component: {fileID: 8619794157559121576}
+  - component: {fileID: 7408203597967586536}
   m_Layer: 6
   m_Name: runner
   m_TagString: Runner
@@ -597,6 +598,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7408203597967586536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6376415447245733665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  clientAuthority: 0
+  animator: {fileID: 8619794157559121576}
 --- !u!1 &7026673395154625684
 GameObject:
   m_ObjectHideFlags: 0

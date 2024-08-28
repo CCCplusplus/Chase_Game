@@ -4953,6 +4953,7 @@ GameObject:
   - component: {fileID: 5458603093625218210}
   - component: {fileID: 5979391046807551347}
   - component: {fileID: -714833410775879035}
+  - component: {fileID: -2597882471076959621}
   m_Layer: 6
   m_Name: Chaser
   m_TagString: Chaser
@@ -5475,6 +5476,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-2597882471076959621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5340496883371629233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  clientAuthority: 0
+  animator: {fileID: -714833410775879035}
 --- !u!1 &7516127552348087921
 GameObject:
   m_ObjectHideFlags: 0
