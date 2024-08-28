@@ -523,7 +523,7 @@ public class PlayerController : NetworkBehaviour
             boxCollider.sharedMaterial = materialNoFriction;  // Desactivar fricción cuando está en el aire
         }
 
-        //UpdateMovement();
+        UpdateMovement();
 
         if (bulletHit == false)
         {
