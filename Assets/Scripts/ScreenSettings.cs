@@ -12,10 +12,14 @@ public class ScreenSettings : MonoBehaviour
     private static bool isFullscreen;
     private static int currentResolutionIndex;
 
+    private const string ResolutionPrefKey = "resolutionIndex";
+    private const string FullscreenPrefKey = "isFullscreen";
+
     void Awake()
     {
-        isFullscreen = Screen.fullScreen;
-        currentResolutionIndex = FindCurrentResolutionIndex();
+        // Load saved preferences, if any
+        isFullscreen = PlayerPrefs.GetInt(FullscreenPrefKey, Screen.fullScreen ? 1 : 0) == 1;
+        currentResolutionIndex = PlayerPrefs.GetInt(ResolutionPrefKey, FindCurrentResolutionIndex());
     }
 
     void Start()
@@ -24,11 +28,15 @@ public class ScreenSettings : MonoBehaviour
         resolutionDropdown.ClearOptions();
 
         List<string> options = new List<string>();
+        HashSet<string> uniqueResolutions = new HashSet<string>();
 
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + " x " + resolutions[i].height;
-            options.Add(option);
+            if (uniqueResolutions.Add(option)) // Only add unique resolutions
+            {
+                options.Add(option);
+            }
         }
 
         resolutionDropdown.AddOptions(options);
@@ -46,13 +54,24 @@ public class ScreenSettings : MonoBehaviour
         currentResolutionIndex = resolutionIndex;
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, isFullscreen);
-        SyncSettings();
+        SaveSettings();
     }
 
     public void SetFullscreen(bool isFullscreen)
     {
         ScreenSettings.isFullscreen = isFullscreen;
         Screen.fullScreen = isFullscreen;
+        SaveSettings();
+    }
+
+    private void SaveSettings()
+    {
+        // Save preferences
+        PlayerPrefs.SetInt(ResolutionPrefKey, currentResolutionIndex);
+        PlayerPrefs.SetInt(FullscreenPrefKey, isFullscreen ? 1 : 0);
+        PlayerPrefs.Save();
+
+        // Sync with other instances if needed
         SyncSettings();
     }
 
@@ -74,12 +93,13 @@ public class ScreenSettings : MonoBehaviour
 
     private int FindCurrentResolutionIndex()
     {
+        // Find the current resolution index in the available resolutions
         for (int i = 0; i < Screen.resolutions.Length; i++)
         {
             if (Screen.resolutions[i].width == Screen.currentResolution.width &&
                 Screen.resolutions[i].height == Screen.currentResolution.height)
                 return i;
         }
-        return 0;
+        return 0; // Default to the first resolution if not found
     }
 }
