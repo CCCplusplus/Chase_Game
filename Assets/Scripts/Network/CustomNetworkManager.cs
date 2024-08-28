@@ -39,6 +39,9 @@ namespace Network
             utpTransport.OnClientConnected = OnClientConnected;
             utpTransport.OnClientDataReceived = OnClientDataReceived;
             utpTransport.OnClientDisconnected = OnClientDisconnected;
+            utpTransport.OnServerConnected = OnServerConnected;
+            utpTransport.OnServerDataReceived = OnServerDataReceived;
+            utpTransport.OnServerDisconnected = OnServerDisconnected;
         }
 
         public override void OnStartServer()
@@ -135,7 +138,7 @@ namespace Network
         private void OnClientDisconnected()
         {
             Debug.Log("Client disconnected from server.");
-            // Cleanup any client-specific data, remove the player from the list, and handle UI updates
+            
             if (localPlayer != null)
             {
                 m_Players.Remove(localPlayer);
@@ -143,6 +146,25 @@ namespace Network
             }
             // Optionally, trigger a reconnect or go back to the main menu
         }
+
+        private void OnServerConnected(int connectionId)
+        {
+            Debug.Log($"Client connected with connectionId: {connectionId}");
+            // Aquí puedes añadir cualquier lógica que necesites cuando un cliente se conecta al servidor
+        }
+
+        private void OnServerDataReceived(int connectionId, ArraySegment<byte> data, int channelId)
+        {
+            Debug.Log($"Data received from client {connectionId} on channel {channelId}. Data length: {data.Count}");
+            // Aquí puedes añadir lógica para procesar los datos recibidos del cliente
+        }
+
+        private void OnServerDisconnected(int connectionId)
+        {
+            Debug.Log($"Client disconnected with connectionId: {connectionId}");
+            // Aquí puedes añadir lógica para manejar la desconexión del cliente, como limpiar datos asociados a la conexión
+        }
+
 
         public async void UnityLogin()
         {
