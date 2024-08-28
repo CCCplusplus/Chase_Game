@@ -90,7 +90,7 @@ public class PlayerController : NetworkBehaviour
 
     //Animacion
     [SerializeField]
-    //public Animator animator;
+    public Animator animator;
 
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
@@ -139,7 +139,7 @@ public class PlayerController : NetworkBehaviour
 
     private void Start()
     {
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         carditemG = GameObject.FindGameObjectWithTag("Card");
         if (carditemG != null) 
             carditem = carditemG.GetComponent<CardItem>();
@@ -423,6 +423,7 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
+
         //------------------------------------------------(Marco Antonio)
         ////Flip del sprite basado en la direccion de movimiento
         //float moveDirection = moveInput.x;
@@ -438,13 +439,31 @@ public class PlayerController : NetworkBehaviour
         float moveDirection = moveInput.x;
         if (moveDirection < 0 && isFacingRight)
         {
+            animator.SetBool("Moving", true);
             Flip(); // Voltea a la izquierda.
             //CmdFlipSprite(true); //Llama al comando para flip en red
         }
         else if (moveDirection > 0 && !isFacingRight)
         {
+            animator.SetBool("Moving", true);
             Flip(); // Voltea a la derecha.
             //CmdFlipSprite(false);
+        }else if (moveDirection == 0)
+        {
+            animator.SetBool("Moving", false);
+        }
+
+        if (isJumping)
+        {
+            animator.SetBool("Jumping", true);
+        }
+        else if (isFalling || !IsGrounded())
+        {
+            animator.SetBool("Jumping", false);
+        }
+        else
+        {
+            animator.SetBool("Jumping", false);
         }
 
         //------------------------------------------------
@@ -453,6 +472,8 @@ public class PlayerController : NetworkBehaviour
 
         if (isJumping && jumpButtonHeld)
         {
+            animator.SetBool("Jumping", true);
+
             float currentJumpTime = Time.time - jumpStartTime;
             float jumpProgress = currentJumpTime / maxJumpTime;
 
