@@ -90,7 +90,7 @@ public class PlayerController : NetworkBehaviour
 
     //Animacion
     [SerializeField]
-    public Animator animator;
+    //public Animator animator;
 
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
@@ -139,7 +139,7 @@ public class PlayerController : NetworkBehaviour
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         carditemG = GameObject.FindGameObjectWithTag("Card");
         if (carditemG != null) 
             carditem = carditemG.GetComponent<CardItem>();
@@ -174,29 +174,29 @@ public class PlayerController : NetworkBehaviour
 
         moveInput = context.ReadValue<Vector2>();
 
-        if (moveInput.x != 0)
-        {
-            CmdSetMoving(true);
-        }
-        else
-        {
-            CmdSetMoving(false);
-        }
+        //if (moveInput.x != 0)
+        //{
+        //    CmdSetMoving(true);
+        //}
+        //else
+        //{
+        //    CmdSetMoving(false);
+        //}
 
         CmdMove(moveInput);
     }
 
-    [Command]
-    private void CmdSetMoving(bool isMoving)
-    {
-        RpcSetMoving(isMoving);
-    }
-
-    [ClientRpc]
-    private void RpcSetMoving(bool isMoving)
-    {
-        animator.SetBool("Moving", isMoving);
-    }
+    //[Command]
+    //private void CmdSetMoving(bool isMoving)
+    //{
+    //    RpcSetMoving(isMoving);
+    //}
+    //
+    //[ClientRpc]
+    //private void RpcSetMoving(bool isMoving)
+    //{
+    //    animator.SetBool("Moving", isMoving);
+    //}
 
     [Command]
     private void CmdMove(Vector2 moveInput)
@@ -211,7 +211,7 @@ public class PlayerController : NetworkBehaviour
         if (!isLocalPlayer)
         { 
             rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
-            animator.SetBool("Moving", moveInput.x != 0);
+            //animator.SetBool("Moving", moveInput.x != 0);
         }
 
     }
@@ -240,7 +240,7 @@ public class PlayerController : NetworkBehaviour
                 {
                     canDoubleJump = true;
                 }
-                CmdSetJumpingAnimation(true);
+                //CmdSetJumpingAnimation(true);
             }
             else if (playerType == PlayerType.Chaser && canDoubleJump)
             {
@@ -255,7 +255,7 @@ public class PlayerController : NetworkBehaviour
                 ApplyJumpForce(minJumpHeight * jumpForceMultiplier);
                 CmdJump(rb.velocity.y);
                 canDoubleJump = false;
-                CmdSetJumpingAnimation(true);
+                //CmdSetJumpingAnimation(true);
             }
         }
         else if (context.canceled && isJumping)
@@ -263,21 +263,21 @@ public class PlayerController : NetworkBehaviour
             isJumping = false;
             jumpButtonHeld = false;
             StartFalling();
-            CmdSetJumpingAnimation(false);
+            //CmdSetJumpingAnimation(false);
         }
     }
 
-    [Command]
-    private void CmdSetJumpingAnimation(bool isJumping)
-    {
-        RpcSetJumpingAnimation(isJumping);
-    }
-    
-    [ClientRpc]
-    private void RpcSetJumpingAnimation(bool isJumping)
-    {
-        animator.SetBool("Jumping", isJumping);
-    }
+    //[Command]
+    //private void CmdSetJumpingAnimation(bool isJumping)
+    //{
+    //    RpcSetJumpingAnimation(isJumping);
+    //}
+    //
+    //[ClientRpc]
+    //private void RpcSetJumpingAnimation(bool isJumping)
+    //{
+    //    animator.SetBool("Jumping", isJumping);
+    //}
 
     private void ApplyJumpForce(float height)
     {
@@ -449,7 +449,7 @@ public class PlayerController : NetworkBehaviour
 
         //------------------------------------------------
 
-        UpdateAnimation();
+        //UpdateAnimation();
 
         if (isJumping && jumpButtonHeld)
         {
@@ -488,17 +488,17 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    private void UpdateAnimation()
-    {
-        if (IsGrounded())
-        {
-            CmdSetJumpingAnimation(false);
-        }
-        else if (isJumping)
-        {
-            CmdSetJumpingAnimation(true);
-        }
-    }
+    //private void UpdateAnimation()
+    //{
+    //    if (IsGrounded())
+    //    {
+    //        CmdSetJumpingAnimation(false);
+    //    }
+    //    else if (isJumping)
+    //    {
+    //        CmdSetJumpingAnimation(true);
+    //    }
+    //}
  
     private bool IsHittingCeiling()
     {
@@ -516,14 +516,14 @@ public class PlayerController : NetworkBehaviour
             isFallingFree = false;
             rb.gravityScale = originalGravityScale;
             boxCollider.sharedMaterial = materialWithFriction;  // Activar fricción cuando está en el suelo
-            CmdSetJumpingAnimation(false);
+            //CmdSetJumpingAnimation(false);
         }
         else
         {
             boxCollider.sharedMaterial = materialNoFriction;  // Desactivar fricción cuando está en el aire
         }
 
-        UpdateMovement();
+        //UpdateMovement();
 
         if (bulletHit == false)
         {
