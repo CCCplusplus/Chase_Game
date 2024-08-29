@@ -101,6 +101,18 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -108,10 +120,10 @@ TextureImporter:
       name: HIdle_Sheet_0
       rect:
         serializedVersion: 2
-        x: 12
-        y: 12
-        width: 952
-        height: 1532
+        x: 0
+        y: 0
+        width: 1003
+        height: 1548
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -129,10 +141,10 @@ TextureImporter:
       name: HIdle_Sheet_1
       rect:
         serializedVersion: 2
-        x: 1015
-        y: 35
-        width: 975
-        height: 1509
+        x: 1003
+        y: 0
+        width: 1003
+        height: 1548
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,10 +162,10 @@ TextureImporter:
       name: HIdle_Sheet_2
       rect:
         serializedVersion: 2
-        x: 2018
-        y: 43
-        width: 987
-        height: 1501
+        x: 2006
+        y: 0
+        width: 1003
+        height: 1548
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,10 +183,10 @@ TextureImporter:
       name: HIdle_Sheet_3
       rect:
         serializedVersion: 2
-        x: 3021
-        y: 39
-        width: 979
-        height: 1505
+        x: 3009
+        y: 0
+        width: 1003
+        height: 1548
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,10 +204,10 @@ TextureImporter:
       name: HIdle_Sheet_4
       rect:
         serializedVersion: 2
-        x: 4024
-        y: 35
-        width: 975
-        height: 1509
+        x: 4012
+        y: 0
+        width: 1003
+        height: 1548
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,10 +225,10 @@ TextureImporter:
       name: HIdle_Sheet_5
       rect:
         serializedVersion: 2
-        x: 5027
-        y: 27
-        width: 967
-        height: 1517
+        x: 5015
+        y: 0
+        width: 1003
+        height: 1548
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,10 +246,10 @@ TextureImporter:
       name: HIdle_Sheet_6
       rect:
         serializedVersion: 2
-        x: 6030
-        y: 24
-        width: 964
-        height: 1520
+        x: 6018
+        y: 0
+        width: 1003
+        height: 1548
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,10 +267,10 @@ TextureImporter:
       name: HIdle_Sheet_7
       rect:
         serializedVersion: 2
-        x: 7033
-        y: 16
-        width: 956
-        height: 1528
+        x: 7021
+        y: 0
+        width: 1003
+        height: 1548
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

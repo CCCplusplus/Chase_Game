@@ -120,10 +120,10 @@ TextureImporter:
       name: Jump_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 164
-        width: 1349
-        height: 1370
+        x: 0
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,10 +141,10 @@ TextureImporter:
       name: Jump_1
       rect:
         serializedVersion: 2
-        x: 1411
-        y: 142
-        width: 1344
-        height: 1392
+        x: 1376
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,10 +162,10 @@ TextureImporter:
       name: Jump_2
       rect:
         serializedVersion: 2
-        x: 2884
-        y: 105
-        width: 1193
-        height: 1429
+        x: 2752
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,10 +183,10 @@ TextureImporter:
       name: Jump_3
       rect:
         serializedVersion: 2
-        x: 4271
-        y: 40
-        width: 1150
-        height: 1494
+        x: 4128
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,10 +204,10 @@ TextureImporter:
       name: Jump_4
       rect:
         serializedVersion: 2
-        x: 5732
-        y: 13
-        width: 968
-        height: 1515
+        x: 5504
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,10 +225,10 @@ TextureImporter:
       name: Jump_5
       rect:
         serializedVersion: 2
-        x: 7152
-        y: 8
-        width: 795
-        height: 1509
+        x: 6880
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -246,10 +246,10 @@ TextureImporter:
       name: Jump_6
       rect:
         serializedVersion: 2
-        x: 8528
-        y: 3
-        width: 795
-        height: 1530
+        x: 8256
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -267,10 +267,10 @@ TextureImporter:
       name: Jump_7
       rect:
         serializedVersion: 2
-        x: 9862
-        y: 46
-        width: 858
-        height: 1611
+        x: 9632
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
