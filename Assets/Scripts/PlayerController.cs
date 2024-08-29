@@ -54,6 +54,14 @@ public class PlayerController : NetworkBehaviour
     private bulletScript bulletHit;
     [SerializeField]
     private GunScript gunScript;
+    [SerializeField]
+    private GameObject shotgunG;
+    [SerializeField]
+    private ShotgunItem shotgun;
+    [SerializeField]
+    private GameObject firingGO;
+    [SerializeField]
+    private ShotgunHitbox firing;
 
     //------------------------------------------------(Marco Antonio)
     [SerializeField] private ParticleSystem dashParticles;
@@ -141,11 +149,15 @@ public class PlayerController : NetworkBehaviour
     {
         animator = GetComponent<Animator>();
         carditemG = GameObject.FindGameObjectWithTag("Card");
-        if (carditemG != null) 
+        if (carditemG != null)
             carditem = carditemG.GetComponent<CardItem>();
 
         //bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
         bulletHit = null;
+        shotgunG = GameObject.FindGameObjectWithTag("Shotgun");
+        shotgun = shotgunG.GetComponent<ShotgunItem>();
+        firingGO = GameObject.FindGameObjectWithTag("Shotgun");
+        firing = firingGO.GetComponent<ShotgunHitbox>();
     }
 
     //------------------------------------------------(Marco Antonio)
@@ -232,6 +244,7 @@ public class PlayerController : NetworkBehaviour
                 ApplyJumpForce(minJumpHeight * jumpForceMultiplier);
                 CmdJump(rb.velocity.y);
                 canDoubleJump = false;
+
             }
         }
         else if (context.canceled && isJumping)
@@ -240,6 +253,7 @@ public class PlayerController : NetworkBehaviour
             jumpButtonHeld = false;
             StartFalling();
         }
+
     }
 
     private void ApplyJumpForce(float height)
@@ -386,54 +400,28 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-
-        //------------------------------------------------(Marco Antonio)
-        ////Flip del sprite basado en la direccion de movimiento
-        //float moveDirection = moveInput.x;
-        //if (moveDirection < 0)
-        //{
-        //    CmdFlipSprite(true); //Llama al comando para flip en red
-        //}
-        //else if (moveDirection > 0)
-        //{
-        //    CmdFlipSprite(false);
-        //}
-
         float moveDirection = moveInput.x;
         if (moveDirection < 0 && isFacingRight)
         {
-            animator.SetBool("Moving", true);
             Flip(); // Voltea a la izquierda.
-            //CmdFlipSprite(true); //Llama al comando para flip en red
         }
         else if (moveDirection > 0 && !isFacingRight)
         {
-            animator.SetBool("Moving", true);
             Flip(); // Voltea a la derecha.
-            //CmdFlipSprite(false);
-        }else if (moveDirection == 0)
-        {
-            animator.SetBool("Moving", false);
         }
 
-        if (isJumping)
-        {
-            animator.SetBool("Jumping", true);
-        }
-        else if (isFalling || !IsGrounded())
-        {
-            animator.SetBool("Jumping", false);
-        }
-        else
-        {
-            animator.SetBool("Jumping", false);
-        }
+        //Moving es true siempre que moveDirection sea diferente a cero
+        animator.SetBool("Moving", moveDirection != 0);
+
+        //Siempre que el jugador no este en el suelo, Jumping es true
+        bool isInAir = isJumping || isFalling || !IsGrounded();
+        animator.SetBool("Jumping", isInAir);
 
         //------------------------------------------------
 
         if (isJumping && jumpButtonHeld)
         {
-            animator.SetBool("Jumping", true);
+            //animator.SetBool("Jumping", true);
 
             float currentJumpTime = Time.time - jumpStartTime;
             float jumpProgress = currentJumpTime / maxJumpTime;
@@ -468,8 +456,32 @@ public class PlayerController : NetworkBehaviour
             bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
             bulletHit = bulletHitG.GetComponent<bulletScript>();
         }
+
+        if (shotgun.shotgunPicked != true)
+        { 
+            animator.SetBool("HasShotgun", true);
+            if (moveDirection != 0)
+            {
+                animator.SetBool("Moving", true);
+            }else
+                animator.SetBool("Moving", false);
+          
+        }
+        else if(shotgun.shotgunPicked == false)
+        {
+            animator.SetBool("HasShotgun", false);
+        }
+
+        if(firing.isFiring == true)
+        {
+            animator.SetBool("IsFiring", true);
+        }
+        else
+        {
+            animator.SetBool("IsFiring", false);
+        }
     }
- 
+
     private bool IsHittingCeiling()
     {
         return Physics2D.OverlapCircle(ceilingCheck.position, groundCheckRadius, groundLayer);

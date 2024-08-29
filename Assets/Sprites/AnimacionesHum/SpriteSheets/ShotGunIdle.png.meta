@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9481815323735ec46bcc8837835ed111
+guid: c3db5613834970f40ad63925e19f9dd6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HIdle_Sheet_0
+      name: ShotGunIdle_0
       rect:
         serializedVersion: 2
-        x: 12
-        y: 12
-        width: 952
-        height: 1532
+        x: 16
+        y: 226
+        width: 1349
+        height: 1423
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e547a0dc4aeed54b95becc7a9fc5ae8
-      internalID: 705802361
+      spriteID: 64f3caf916f2a41468aca412e82d6d13
+      internalID: 610898927
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HIdle_Sheet_1
+      name: ShotGunIdle_1
       rect:
         serializedVersion: 2
-        x: 1015
-        y: 35
-        width: 975
-        height: 1509
+        x: 1392
+        y: 215
+        width: 1365
+        height: 1434
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b8c115c668174e240a600cf6fd539283
-      internalID: 1452692750
+      spriteID: 1b37221d1960d7e4b989e313636eaea1
+      internalID: -1860247155
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HIdle_Sheet_2
+      name: ShotGunIdle_2
       rect:
         serializedVersion: 2
-        x: 2018
-        y: 43
-        width: 987
-        height: 1501
+        x: 2774
+        y: 215
+        width: 1359
+        height: 1434
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecfd63112b138c4459a82be67c3c1471
-      internalID: 896836010
+      spriteID: 141a4781bc3d9ab4c8e6e2ff547fe2a9
+      internalID: -1492245857
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HIdle_Sheet_3
+      name: ShotGunIdle_3
       rect:
         serializedVersion: 2
-        x: 3021
-        y: 39
-        width: 979
-        height: 1505
+        x: 4150
+        y: 215
+        width: 1359
+        height: 1434
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,20 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9046c44ca6bcb242895dc260f096f60
-      internalID: 2076444193
+      spriteID: 99b7c3c5f7fe72e45b529368c790131b
+      internalID: 1659307623
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HIdle_Sheet_4
+      name: ShotGunIdle_4
       rect:
         serializedVersion: 2
-        x: 4024
-        y: 35
-        width: 975
-        height: 1509
+        x: 5520
+        y: 215
+        width: 1365
+        height: 1434
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,20 +203,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 930fd15fab9a39a4d81062c337558ae5
-      internalID: 1182120373
+      spriteID: 20d0a6924680f6d42b6707cb2e305cc3
+      internalID: 650262054
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HIdle_Sheet_5
+      name: ShotGunIdle_5
       rect:
         serializedVersion: 2
-        x: 5027
-        y: 27
-        width: 967
-        height: 1517
+        x: 6896
+        y: 220
+        width: 1365
+        height: 1429
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,20 +224,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4820f189ed32ba40aadb60aa8d67a01
-      internalID: 111404375
+      spriteID: 9bfd6b65cf54d794d83df557645ac508
+      internalID: -839642642
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HIdle_Sheet_6
+      name: ShotGunIdle_6
       rect:
         serializedVersion: 2
-        x: 6030
-        y: 24
-        width: 964
-        height: 1520
+        x: 8272
+        y: 220
+        width: 1355
+        height: 1429
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,20 +245,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82100f28521cefd4198d9d7c679e033f
-      internalID: 785347086
+      spriteID: 293a3f350e1ecd14a92a55547d4bf700
+      internalID: 2004919151
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HIdle_Sheet_7
+      name: ShotGunIdle_7
       rect:
         serializedVersion: 2
-        x: 7033
-        y: 16
-        width: 956
-        height: 1528
+        x: 9648
+        y: 220
+        width: 1355
+        height: 1429
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,8 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 172b6c549236bb1408443a4749c9fda2
-      internalID: -1786404576
+      spriteID: 3355aca6fe2cf174f975adf1dc953ae1
+      internalID: 1167133206
       vertices: []
       indices: 
       edges: []
@@ -283,14 +283,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      HIdle_Sheet_0: 705802361
-      HIdle_Sheet_1: 1452692750
-      HIdle_Sheet_2: 896836010
-      HIdle_Sheet_3: 2076444193
-      HIdle_Sheet_4: 1182120373
-      HIdle_Sheet_5: 111404375
-      HIdle_Sheet_6: 785347086
-      HIdle_Sheet_7: -1786404576
+      ShotGunIdle_0: 610898927
+      ShotGunIdle_1: -1860247155
+      ShotGunIdle_2: -1492245857
+      ShotGunIdle_3: 1659307623
+      ShotGunIdle_4: 650262054
+      ShotGunIdle_5: -839642642
+      ShotGunIdle_6: 2004919151
+      ShotGunIdle_7: 1167133206
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -17,6 +17,7 @@ public class ShotgunHitbox : NetworkBehaviour
     [SerializeField] private float hitboxDistance = 5f; 
 
     private Vector2 originalPosition;
+    public bool isFiring = false;
 
     private void Start()
     {
@@ -35,9 +36,11 @@ public class ShotgunHitbox : NetworkBehaviour
 
             if (inputActions["Use-Item"].triggered && !isShooting)
             {
+                isFiring = true;
                 CmdFire();
                 hasShotgun = false;
             }
+            isFiring = false;
         }
 
         if (shotgunHitbox != null)
