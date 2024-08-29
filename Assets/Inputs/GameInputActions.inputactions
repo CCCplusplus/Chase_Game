@@ -42,9 +42,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Use-Item",
+                    "name": "UseItem",
                     "type": "Button",
                     "id": "e4cc1def-7276-4871-8e94-654af5add364",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "HideShow",
+                    "type": "Button",
+                    "id": "e41f5121-900e-4b41-817e-49febb683e97",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -235,7 +244,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Use-Item",
+                    "action": "UseItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -246,7 +255,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Use-Item",
+                    "action": "UseItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cedc248e-08c2-4b74-92e0-a1d255e154c5",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HideShow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be8107db-3101-40a3-89dd-a1496bdddf6a",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HideShow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

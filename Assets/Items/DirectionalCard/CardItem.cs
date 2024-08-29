@@ -31,7 +31,7 @@ public class CardItem : MonoBehaviour
         if (isHeld && player != null)
         {
             var inputActions = player.GetComponent<PlayerInput>().actions;
-            if (inputActions["Use-Item"].triggered)
+            if (inputActions["UseItem"].triggered)
                 ShootItem();
         }
     }
