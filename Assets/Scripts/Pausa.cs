@@ -1,6 +1,5 @@
 using Mirror;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,8 +18,14 @@ public class Pausa : MonoBehaviour
             else if (NetworkClient.isConnected)
                 NetworkManager.singleton.StopClient();
         }
+
+        
+        if (NetworkManager.singleton != null)
+            Destroy(NetworkManager.singleton.gameObject);
+        
         SceneManager.LoadSceneAsync("Main Menu");
     }
+
 
     public void unpause()
     {

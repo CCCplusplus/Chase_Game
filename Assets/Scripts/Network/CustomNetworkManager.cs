@@ -6,6 +6,7 @@ using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Utp;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public struct PlayerTypeMessage : NetworkMessage
 {
@@ -144,7 +145,11 @@ namespace Network
                 m_Players.Remove(localPlayer);
                 localPlayer = null;
             }
-            // Optionally, trigger a reconnect or go back to the main menu
+            if (NetworkServer.active)
+            {
+                PlayerPrefs.SetString("Error", "Connection With Player Lost");
+                LoadErrorScreen();
+            }
         }
 
         private void OnServerConnected(int connectionId)
@@ -159,10 +164,21 @@ namespace Network
             // Aquí puedes añadir lógica para procesar los datos recibidos del cliente
         }
 
-        private void OnServerDisconnected(int connectionId)
+        private async void OnServerDisconnected(int connectionId)
         {
             Debug.Log($"Client disconnected with connectionId: {connectionId}");
-            // Aquí puedes añadir lógica para manejar la desconexión del cliente, como limpiar datos asociados a la conexión
+
+            await Task.Delay(1000);
+            //Player disconnectedPlayer = m_Players.Find(p => p.connectionToClient.connectionId == connectionId);
+            //if (disconnectedPlayer != null)
+            //{
+            //    m_Players.Remove(disconnectedPlayer);
+            //}
+
+            // Send the remaining client to the ErrorScreen
+            //PlayerPrefs.SetString("Error", "Connection With Player Lost");
+            //LoadErrorScreen();
+            
         }
 
 
@@ -242,6 +258,10 @@ namespace Network
             if (playerType == "Chaser" && chaserCount >= 1) return false;
 
             return true;
+        }
+        private void LoadErrorScreen()
+        {
+            SceneManager.LoadSceneAsync("ErrorScreen");
         }
     }
 }
