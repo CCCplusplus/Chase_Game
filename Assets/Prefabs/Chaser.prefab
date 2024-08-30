@@ -5127,8 +5127,6 @@ MonoBehaviour:
   gunScript: {fileID: 5979391046807551347}
   shotgunG: {fileID: 0}
   shotgun: {fileID: 0}
-  firingGO: {fileID: 0}
-  firing: {fileID: 0}
   dashParticles: {fileID: 0}
   spriteRd: {fileID: 0}
   associatedObject: {fileID: 0}
@@ -5141,6 +5139,8 @@ MonoBehaviour:
   materialWithFriction: {fileID: 6200000, guid: 586897c529206384da556eeaa4e90487, type: 2}
   materialNoFriction: {fileID: 6200000, guid: 2fbf7d0d97c250246a3d7eead5a1ca87, type: 2}
   animator: {fileID: 0}
+  defaultController: {fileID: 9100000, guid: 72ed1473e4246a045a07ee28f6686060, type: 2}
+  shotgunController: {fileID: 0}
   isPaused: 0
   pausita: {fileID: 6827448231452345949}
 --- !u!114 &-6129973816458940266
