@@ -34,7 +34,7 @@ public class ShotgunHitbox : NetworkBehaviour
         {
             var inputActions = GetComponentInParent<PlayerInput>().actions;
 
-            if (inputActions["Use-Item"].triggered && !isShooting)
+            if (inputActions["UseItem"].triggered && !isShooting)
             {
                 isFiring = true;
                 CmdFire();

@@ -5,6 +5,7 @@ using Mirror;
 
 using UnityEngine;
 using Unity.Services.Relay.Models;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Utp
@@ -138,7 +139,9 @@ namespace Utp
 			() =>
 			{
 				UtpLog.Error($"Failed to join Relay server.");
-			});
+                PlayerPrefs.SetString("Error", "Failed to join Relay server. The Code Was Incorrect or Has Expired");
+                SceneManager.LoadSceneAsync("ErrorScreen");
+            });
 		}
 	}
 }
