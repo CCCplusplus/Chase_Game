@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375780531219712853}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.0695, z: 0}
+  m_LocalPosition: {x: -0.199, y: 0.484, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -57,8 +57,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2952675233096954562}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0063, y: -0.0666, z: -0.061966382}
-  m_LocalScale: {x: 0.4754993, y: 0.4754993, z: 0.4754993}
+  m_LocalPosition: {x: -0.226, y: -0.382, z: -0.061966382}
+  m_LocalScale: {x: 0.42338026, y: 0.42338026, z: 0.42338026}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 788159748628684926}
@@ -4925,7 +4925,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3764952772867063652}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.0708, z: 0}
+  m_LocalPosition: {x: -0.227, y: -0.39, z: 0}
   m_LocalScale: {x: 2.1875, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4953,6 +4953,7 @@ GameObject:
   - component: {fileID: 5458603093625218210}
   - component: {fileID: 5979391046807551347}
   - component: {fileID: -714833410775879035}
+  - component: {fileID: -6575151308691374476}
   m_Layer: 6
   m_Name: Chaser
   m_TagString: Chaser
@@ -4969,7 +4970,7 @@ Transform:
   m_GameObject: {fileID: 5340496883371629233}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 7.6399994, y: 14.850405, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1514685206909642364}
@@ -5026,12 +5027,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 90369836, guid: 0c5fee78d55210f4da31f6fd301dd2f5, type: 3}
+  m_Sprite: {fileID: 131432694, guid: 0e4b22ecb2db4b8469dc2c9929778938, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 0.14061841, y: 0.14061841}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -5050,18 +5051,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0013020989, y: -0.0065782852}
+  m_Offset: {x: -0.21936226, y: 0.037742883}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 7.6400003, y: 14.850406}
-    newSize: {x: 0.14061841, y: 0.14061841}
+    oldSize: {x: 13.76, y: 16.77}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.072172314, y: 0.12123596}
+  m_Size: {x: 0.22463715, y: 0.8126463}
   m_EdgeRadius: 0
 --- !u!50 &-8885802370139102442
 Rigidbody2D:
@@ -5124,6 +5125,8 @@ MonoBehaviour:
   bulletHitG: {fileID: 0}
   bulletHit: {fileID: 0}
   gunScript: {fileID: 5979391046807551347}
+  shotgunG: {fileID: 0}
+  shotgun: {fileID: 0}
   dashParticles: {fileID: 0}
   spriteRd: {fileID: 0}
   associatedObject: {fileID: 0}
@@ -5135,6 +5138,9 @@ MonoBehaviour:
   jumpvfxHolder: {fileID: 2952675233096954562}
   materialWithFriction: {fileID: 6200000, guid: 586897c529206384da556eeaa4e90487, type: 2}
   materialNoFriction: {fileID: 6200000, guid: 2fbf7d0d97c250246a3d7eead5a1ca87, type: 2}
+  animator: {fileID: 0}
+  defaultController: {fileID: 9100000, guid: 72ed1473e4246a045a07ee28f6686060, type: 2}
+  shotgunController: {fileID: 0}
   isPaused: 0
   pausita: {fileID: 6827448231452345949}
 --- !u!114 &-6129973816458940266
@@ -5466,7 +5472,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5340496883371629233}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 72ed1473e4246a045a07ee28f6686060, type: 2}
   m_CullingMode: 0
@@ -5479,6 +5485,23 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-6575151308691374476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5340496883371629233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f6f3bf89aa97405989c802ba270f815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 1
+  syncMode: 0
+  syncInterval: 0
+  clientAuthority: 1
+  animator: {fileID: -714833410775879035}
 --- !u!1 &7068085679893186402
 GameObject:
   m_ObjectHideFlags: 0
@@ -5505,8 +5528,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7068085679893186402}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.135, y: -0.003, z: 0}
-  m_LocalScale: {x: 0.003959503, y: 0.003959503, z: 0.003959503}
+  m_LocalPosition: {x: 0.17, y: -0.003, z: 0}
+  m_LocalScale: {x: 0.009300772, y: 0.009300772, z: 0.009300772}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 788159748628684926}
@@ -5646,7 +5669,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0019579045, y: -0.0068492405}
+  m_Offset: {x: -0.22001809, y: 0.030380502}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5657,7 +5680,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.07244686, y: 0.11786599}
+  m_Size: {x: 0.21072894, y: 0.80927646}
   m_EdgeRadius: 0
 --- !u!50 &6726140882714057245
 Rigidbody2D:
@@ -5704,7 +5727,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8629017051602629400}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0576, y: -0.0053, z: -0.021429377}
+  m_LocalPosition: {x: 0.043, y: -0.0053, z: -0.021429377}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

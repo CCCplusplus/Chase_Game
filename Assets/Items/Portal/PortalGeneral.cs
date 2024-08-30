@@ -5,15 +5,18 @@ using UnityEngine;
 public class PortalGeneral : MonoBehaviour
 {
     private HashSet<GameObject> portalObjects = new HashSet<GameObject>();
+    private Dictionary<GameObject, bool> teleportCooldowns = new Dictionary<GameObject, bool>();
 
     [SerializeField] private Transform destination; // El destino al que se teletransportan los objetos
     [SerializeField] private AudioSource portalSound; //Referencia al componente de Audio
+    [SerializeField] private float cooldownTime = 1.5f; 
 
     private void OnTriggerEnter2D(Collider2D collision) {
         //Verifica si el objeto tiene la etiqueta "runner" o "chaser"
         if (collision.CompareTag("Runner") || collision.CompareTag("Chaser")) {
-            //Si el objeto ya ha sido teletransportado, no hacer nada
-            if (portalObjects.Contains(collision.gameObject)) {
+            // Si el objeto está en cooldown, no hacer nada
+            if (teleportCooldowns.ContainsKey(collision.gameObject) && teleportCooldowns[collision.gameObject])
+            {
                 return;
             }
 
@@ -32,6 +35,10 @@ public class PortalGeneral : MonoBehaviour
             if(portalSound != null) {
                 portalSound.Play();
             }
+
+            //Iniciar el cooldown para este objeto
+            StartCoroutine(TeleportCooldown(collision.gameObject));
+
         }
     }
 
@@ -39,5 +46,24 @@ public class PortalGeneral : MonoBehaviour
     {
         // Cuando el objeto sale del portal, eliminarlo de la lista
         portalObjects.Remove(collision.gameObject);
+    }
+
+    private IEnumerator TeleportCooldown(GameObject teleportedObject)
+    {
+        //Iniciar el cooldon
+        if (!teleportCooldowns.ContainsKey(teleportedObject))
+        {
+            teleportCooldowns.Add(teleportedObject, true);
+        }
+        else
+        {
+            teleportCooldowns[teleportedObject] = true;
+        }
+
+        //Esperar el tiempo de cooldown
+        yield return new WaitForSeconds(cooldownTime);
+
+        //Finalizar el cooldown
+        teleportCooldowns[teleportedObject] = false;
     }
 }

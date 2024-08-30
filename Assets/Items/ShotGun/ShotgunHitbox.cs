@@ -17,9 +17,14 @@ public class ShotgunHitbox : NetworkBehaviour
     [SerializeField] private float hitboxDistance = 5f; 
 
     private Vector2 originalPosition;
+    private GameObject shotgunG;
+    private ShotgunItem shotgun;
 
     private void Start()
     {
+        shotgunG = GameObject.FindGameObjectWithTag("Shotgun");
+        shotgun = shotgunG.GetComponent<ShotgunItem>();
+
         if (shotgunHitbox != null)
         {
             shotgunHitbox.enabled = false;
@@ -37,6 +42,7 @@ public class ShotgunHitbox : NetworkBehaviour
             {
                 CmdFire();
                 hasShotgun = false;
+                StartCoroutine(DisableShotgun());
             }
         }
 
@@ -95,5 +101,10 @@ public class ShotgunHitbox : NetworkBehaviour
         shotgunHitbox.transform.localPosition = originalPosition;
 
         isShooting = false;
+    }
+    private IEnumerator DisableShotgun()
+    {
+        yield return new WaitForSeconds(0.5f);
+        shotgun.shotgunPicked = false;
     }
 }
