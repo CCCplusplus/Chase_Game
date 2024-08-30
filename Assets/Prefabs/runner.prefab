@@ -245,6 +245,8 @@ MonoBehaviour:
   materialWithFriction: {fileID: 6200000, guid: 586897c529206384da556eeaa4e90487, type: 2}
   materialNoFriction: {fileID: 6200000, guid: 2fbf7d0d97c250246a3d7eead5a1ca87, type: 2}
   animator: {fileID: 0}
+  defaultController: {fileID: 9100000, guid: cfa84ec8960ef8c4ab64403beec7f625, type: 2}
+  shotgunController: {fileID: 9100000, guid: 49fc6340cdbaa554f9a49d5dd7669567, type: 2}
   isPaused: 0
   pausita: {fileID: 5391481826383929527}
 --- !u!114 &-4525787995646508784

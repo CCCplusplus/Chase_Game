@@ -58,10 +58,6 @@ public class PlayerController : NetworkBehaviour
     private GameObject shotgunG;
     [SerializeField]
     private ShotgunItem shotgun;
-    [SerializeField]
-    private GameObject firingGO;
-    [SerializeField]
-    private ShotgunHitbox firing;
 
     //------------------------------------------------(Marco Antonio)
     [SerializeField] private ParticleSystem dashParticles;
@@ -99,6 +95,10 @@ public class PlayerController : NetworkBehaviour
     //Animacion
     [SerializeField]
     public Animator animator;
+    [SerializeField]
+    public RuntimeAnimatorController defaultController;
+    [SerializeField]
+    public RuntimeAnimatorController shotgunController;
 
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
@@ -156,8 +156,6 @@ public class PlayerController : NetworkBehaviour
         bulletHit = null;
         shotgunG = GameObject.FindGameObjectWithTag("Shotgun");
         shotgun = shotgunG.GetComponent<ShotgunItem>();
-        firingGO = GameObject.FindGameObjectWithTag("Shotgun");
-        firing = firingGO.GetComponent<ShotgunHitbox>();
     }
 
     //------------------------------------------------(Marco Antonio)
@@ -400,23 +398,25 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        float moveDirection = moveInput.x;
-        if (moveDirection < 0 && isFacingRight)
+        if (shotgun.shotgunPicked)
         {
-            Flip(); // Voltea a la izquierda.
+            if (animator.runtimeAnimatorController != shotgunController)
+            {
+                animator.runtimeAnimatorController = shotgunController;
+            }
         }
-        else if (moveDirection > 0 && !isFacingRight)
+        else
         {
-            Flip(); // Voltea a la derecha.
+            if (animator.runtimeAnimatorController != defaultController)
+            {
+                animator.runtimeAnimatorController = defaultController;
+            }
         }
 
-        //Moving es true siempre que moveDirection sea diferente a cero
-        animator.SetBool("Moving", moveDirection != 0);
+        HandleMovementAnimations();
 
-        //Siempre que el jugador no este en el suelo, Jumping es true
-        bool isInAir = isJumping || isFalling || !IsGrounded();
-        animator.SetBool("Jumping", isInAir);
-
+        if(shotgun.shotgunPicked)
+            HandleShotgunAnimations();
         //------------------------------------------------
 
         if (isJumping && jumpButtonHeld)
@@ -447,7 +447,7 @@ public class PlayerController : NetworkBehaviour
         if (isDashing && Time.time >= dashEndTime)
             isDashing = false;
 
-        if(gunScript.isShooting == false)
+        if (gunScript.isShooting == false)
         {
             return;
         }
@@ -457,28 +457,41 @@ public class PlayerController : NetworkBehaviour
             bulletHit = bulletHitG.GetComponent<bulletScript>();
         }
 
-        if (shotgun.shotgunPicked != true)
-        { 
-            animator.SetBool("HasShotgun", true);
-            if (moveDirection != 0)
-            {
-                animator.SetBool("Moving", true);
-            }else
-                animator.SetBool("Moving", false);
-          
-        }
-        else if(shotgun.shotgunPicked == false)
+
+    }
+
+    private void HandleMovementAnimations()
+    {
+        float moveDirection = moveInput.x;
+
+        if (moveDirection < 0 && isFacingRight)
         {
-            animator.SetBool("HasShotgun", false);
+            Flip(); // Voltea a la izquierda.
+        }
+        else if (moveDirection > 0 && !isFacingRight)
+        {
+            Flip(); // Voltea a la derecha.
         }
 
-        if(firing.isFiring == true)
+        //Moving es true siempre que moveDirection sea diferente a cero
+        animator.SetBool("Moving", moveDirection != 0);
+
+        //Siempre que el jugador no este en el suelo, Jumping es true
+        bool isInAir = isJumping || isFalling || !IsGrounded();
+        animator.SetBool("Jumping", isInAir);
+    }
+
+    void HandleShotgunAnimations()
+    {
+        var inputActions = GetComponentInParent<PlayerInput>().actions;
+
+        if (inputActions["UseItem"].triggered)
         {
-            animator.SetBool("IsFiring", true);
+            animator.SetBool("Shooting", true);
         }
-        else
-        {
-            animator.SetBool("IsFiring", false);
+        else 
+        { 
+            animator.SetBool("Shooting", false);
         }
     }
 
