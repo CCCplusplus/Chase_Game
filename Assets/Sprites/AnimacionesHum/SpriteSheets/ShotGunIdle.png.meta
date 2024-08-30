@@ -120,10 +120,10 @@ TextureImporter:
       name: ShotGunIdle_0
       rect:
         serializedVersion: 2
-        x: 16
-        y: 226
-        width: 1349
-        height: 1423
+        x: 0
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,10 +141,10 @@ TextureImporter:
       name: ShotGunIdle_1
       rect:
         serializedVersion: 2
-        x: 1392
-        y: 215
-        width: 1365
-        height: 1434
+        x: 1376
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -162,10 +162,10 @@ TextureImporter:
       name: ShotGunIdle_2
       rect:
         serializedVersion: 2
-        x: 2774
-        y: 215
-        width: 1359
-        height: 1434
+        x: 2752
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -183,10 +183,10 @@ TextureImporter:
       name: ShotGunIdle_3
       rect:
         serializedVersion: 2
-        x: 4150
-        y: 215
-        width: 1359
-        height: 1434
+        x: 4128
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,10 +204,10 @@ TextureImporter:
       name: ShotGunIdle_4
       rect:
         serializedVersion: 2
-        x: 5520
-        y: 215
-        width: 1365
-        height: 1434
+        x: 5504
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,10 +225,10 @@ TextureImporter:
       name: ShotGunIdle_5
       rect:
         serializedVersion: 2
-        x: 6896
-        y: 220
-        width: 1365
-        height: 1429
+        x: 6880
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -246,10 +246,10 @@ TextureImporter:
       name: ShotGunIdle_6
       rect:
         serializedVersion: 2
-        x: 8272
-        y: 220
-        width: 1355
-        height: 1429
+        x: 8256
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -267,10 +267,10 @@ TextureImporter:
       name: ShotGunIdle_7
       rect:
         serializedVersion: 2
-        x: 9648
-        y: 220
-        width: 1355
-        height: 1429
+        x: 9632
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -109,9 +109,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 134
-        width: 1290
-        height: 1456
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -129,10 +129,10 @@ TextureImporter:
       name: Fire_1
       rect:
         serializedVersion: 2
-        x: 1371
-        y: 113
-        width: 1370
-        height: 1445
+        x: 1376
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,10 +150,10 @@ TextureImporter:
       name: Fire_2
       rect:
         serializedVersion: 2
-        x: 2747
-        y: 75
-        width: 1343
-        height: 1440
+        x: 2752
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,10 +171,10 @@ TextureImporter:
       name: Fire_3
       rect:
         serializedVersion: 2
-        x: 4123
-        y: 145
-        width: 1372
-        height: 1450
+        x: 4128
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,10 +192,10 @@ TextureImporter:
       name: Fire_4
       rect:
         serializedVersion: 2
-        x: 6875
-        y: 140
-        width: 1349
-        height: 1434
+        x: 5504
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,10 +213,10 @@ TextureImporter:
       name: Fire_5
       rect:
         serializedVersion: 2
-        x: 8251
-        y: 97
-        width: 1300
-        height: 1445
+        x: 6880
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,10 +234,10 @@ TextureImporter:
       name: Fire_6
       rect:
         serializedVersion: 2
-        x: 9627
-        y: 145
-        width: 1295
-        height: 1450
+        x: 8256
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,10 +255,10 @@ TextureImporter:
       name: Fire_7
       rect:
         serializedVersion: 2
-        x: 5497
-        y: 139
-        width: 1377
-        height: 1454
+        x: 9632
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -109,9 +109,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 97
-        width: 1381
-        height: 1343
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -129,10 +129,10 @@ TextureImporter:
       name: ShotGunHumano_1
       rect:
         serializedVersion: 2
-        x: 1371
-        y: 5
+        x: 1376
+        y: 0
         width: 1376
-        height: 1467
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,10 +150,10 @@ TextureImporter:
       name: ShotGunHumano_2
       rect:
         serializedVersion: 2
-        x: 2747
-        y: 32
+        x: 2752
+        y: 0
         width: 1376
-        height: 1440
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,10 +171,10 @@ TextureImporter:
       name: ShotGunHumano_3
       rect:
         serializedVersion: 2
-        x: 4123
-        y: 70
-        width: 1386
-        height: 1332
+        x: 4128
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,10 +192,10 @@ TextureImporter:
       name: ShotGunHumano_4
       rect:
         serializedVersion: 2
-        x: 5520
-        y: 59
-        width: 1339
-        height: 1440
+        x: 5504
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,10 +213,10 @@ TextureImporter:
       name: ShotGunHumano_5
       rect:
         serializedVersion: 2
-        x: 6934
-        y: 59
-        width: 1284
-        height: 1461
+        x: 6880
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -234,10 +234,10 @@ TextureImporter:
       name: ShotGunHumano_6
       rect:
         serializedVersion: 2
-        x: 8251
-        y: 91
-        width: 1386
-        height: 1451
+        x: 8256
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -255,10 +255,10 @@ TextureImporter:
       name: ShotGunHumano_7
       rect:
         serializedVersion: 2
-        x: 9654
-        y: 70
-        width: 1333
-        height: 1348
+        x: 9632
+        y: 0
+        width: 1376
+        height: 1676
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
