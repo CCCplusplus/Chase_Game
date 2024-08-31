@@ -147,8 +147,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  runnerTransform: {fileID: 0}
-  chaserTransform: {fileID: 0}
+  runnerTransform: {fileID: 4573329763581803320, guid: 1c14826ee2cc6ee4eaffeac0851482fb, type: 3}
+  chaserTransform: {fileID: 788159748628684926, guid: 13df6115919731f4886eb958038f5353, type: 3}
   speed: 0.6
   range: 9
   checkDelay: 1

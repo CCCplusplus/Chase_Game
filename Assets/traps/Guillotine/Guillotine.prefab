@@ -102,6 +102,8 @@ MonoBehaviour:
   riseSpeed: 2
   waitTime: 2
   cycleTime: 5
+  runnerTransform: {fileID: 4573329763581803320, guid: 1c14826ee2cc6ee4eaffeac0851482fb, type: 3}
+  chaserTransform: {fileID: 788159748628684926, guid: 13df6115919731f4886eb958038f5353, type: 3}
 --- !u!60 &6194178626321145276
 PolygonCollider2D:
   m_ObjectHideFlags: 0
