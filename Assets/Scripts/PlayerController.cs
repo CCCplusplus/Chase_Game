@@ -54,6 +54,10 @@ public class PlayerController : NetworkBehaviour
     private bulletScript bulletHit;
     [SerializeField]
     private GunScript gunScript;
+    [SerializeField]
+    private GameObject shotgunG;
+    [SerializeField]
+    private ShotgunItem shotgun;
 
     //------------------------------------------------(Marco Antonio)
     [SerializeField] private ParticleSystem dashParticles;
@@ -89,8 +93,12 @@ public class PlayerController : NetworkBehaviour
     private PhysicsMaterial2D materialNoFriction;    // Material sin fricción
 
     //Animacion
-    //[SerializeField]
-    //public Animator animator;
+    [SerializeField]
+    public Animator animator;
+    [SerializeField]
+    public RuntimeAnimatorController defaultController;
+    [SerializeField]
+    public RuntimeAnimatorController shotgunController;
 
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
@@ -100,7 +108,6 @@ public class PlayerController : NetworkBehaviour
     private bool canDoubleJump;
     private float nextDashTime;
     private float lastGroundedTime;
-    public bool interactwCanon = false;
     public bool isPaused = false;
     public Pausa pausita;
 
@@ -140,13 +147,15 @@ public class PlayerController : NetworkBehaviour
 
     private void Start()
     {
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         carditemG = GameObject.FindGameObjectWithTag("Card");
-        if (carditemG != null) 
+        if (carditemG != null)
             carditem = carditemG.GetComponent<CardItem>();
 
         //bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
         bulletHit = null;
+        shotgunG = GameObject.FindGameObjectWithTag("Shotgun");
+        shotgun = shotgunG.GetComponent<ShotgunItem>();
     }
 
     //------------------------------------------------(Marco Antonio)
@@ -174,6 +183,7 @@ public class PlayerController : NetworkBehaviour
         if (!isLocalPlayer) return;
 
         moveInput = context.ReadValue<Vector2>();
+
         CmdMove(moveInput);
     }
 
@@ -188,7 +198,9 @@ public class PlayerController : NetworkBehaviour
     {
 
         if (!isLocalPlayer)
+        { 
             rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+        }
 
     }
 
@@ -230,6 +242,7 @@ public class PlayerController : NetworkBehaviour
                 ApplyJumpForce(minJumpHeight * jumpForceMultiplier);
                 CmdJump(rb.velocity.y);
                 canDoubleJump = false;
+
             }
         }
         else if (context.canceled && isJumping)
@@ -238,6 +251,7 @@ public class PlayerController : NetworkBehaviour
             jumpButtonHeld = false;
             StartFalling();
         }
+
     }
 
     private void ApplyJumpForce(float height)
@@ -274,33 +288,6 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    public void EnterCanon()
-    {
-        var inputActions = GetComponentInParent<PlayerInput>().actions;
-
-        if (inputActions["Use-Item"].triggered && interactwCanon)
-        {
-            //desaparece
-            //entra al cañon (se cambia el default input de player a canon)
-            //sistema de apuntado
-            //disparar
-            //cambio de input a player de nuevo
-            CmdEnterCanon();
-        }
-    }
-
-    [Command]
-    private void CmdEnterCanon()
-    {
-        RpcCanon();
-    }
-
-    [ClientRpc]
-    private void RpcCanon()
-    {
-        if (!isLocalPlayer)
-            rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
-    }
 
     public void OnDash(InputAction.CallbackContext context)
     {
@@ -411,34 +398,31 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        //------------------------------------------------(Marco Antonio)
-        ////Flip del sprite basado en la direccion de movimiento
-        //float moveDirection = moveInput.x;
-        //if (moveDirection < 0)
-        //{
-        //    CmdFlipSprite(true); //Llama al comando para flip en red
-        //}
-        //else if (moveDirection > 0)
-        //{
-        //    CmdFlipSprite(false);
-        //}
-
-        float moveDirection = moveInput.x;
-        if (moveDirection < 0 && isFacingRight)
+        if (shotgun.shotgunPicked)
         {
-            Flip(); // Voltea a la izquierda.
-            //CmdFlipSprite(true); //Llama al comando para flip en red
+            if (animator.runtimeAnimatorController != shotgunController)
+            {
+                animator.runtimeAnimatorController = shotgunController;
+            }
         }
-        else if (moveDirection > 0 && !isFacingRight)
+        else
         {
-            Flip(); // Voltea a la derecha.
-            //CmdFlipSprite(false);
+            if (animator.runtimeAnimatorController != defaultController)
+            {
+                animator.runtimeAnimatorController = defaultController;
+            }
         }
 
+        HandleMovementAnimations();
+
+        if(shotgun.shotgunPicked)
+            HandleShotgunAnimations();
         //------------------------------------------------
 
         if (isJumping && jumpButtonHeld)
         {
+            //animator.SetBool("Jumping", true);
+
             float currentJumpTime = Time.time - jumpStartTime;
             float jumpProgress = currentJumpTime / maxJumpTime;
 
@@ -463,6 +447,63 @@ public class PlayerController : NetworkBehaviour
         if (isDashing && Time.time >= dashEndTime)
             isDashing = false;
 
+        if (gunScript.isShooting == false)
+        {
+            return;
+        }
+        else
+        {
+            bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
+            bulletHit = bulletHitG.GetComponent<bulletScript>();
+        }
+
+
+    }
+
+    private void HandleMovementAnimations()
+    {
+        float moveDirection = moveInput.x;
+
+        if (moveDirection < 0 && isFacingRight)
+        {
+            Flip(); // Voltea a la izquierda.
+        }
+        else if (moveDirection > 0 && !isFacingRight)
+        {
+            Flip(); // Voltea a la derecha.
+        }
+
+        //Moving es true siempre que moveDirection sea diferente a cero
+        animator.SetBool("Moving", moveDirection != 0);
+
+        //Siempre que el jugador no este en el suelo, Jumping es true
+        bool isInAir = isJumping || isFalling || !IsGrounded();
+        animator.SetBool("Jumping", isInAir);
+    }
+
+    void HandleShotgunAnimations()
+    {
+        var inputActions = GetComponentInParent<PlayerInput>().actions;
+
+        if (inputActions["UseItem"].triggered)
+        {
+            animator.SetBool("Shooting", true);
+        }
+        else 
+        { 
+            animator.SetBool("Shooting", false);
+        }
+    }
+
+    private bool IsHittingCeiling()
+    {
+        return Physics2D.OverlapCircle(ceilingCheck.position, groundCheckRadius, groundLayer);
+    }
+
+    private void FixedUpdate()
+    {
+        if (!isLocalPlayer) return;
+
         if (IsGrounded())
         {
             lastGroundedTime = Time.time;
@@ -476,60 +517,7 @@ public class PlayerController : NetworkBehaviour
             boxCollider.sharedMaterial = materialNoFriction;  // Desactivar fricción cuando está en el aire
         }
 
-        if(gunScript.isShooting == false)
-        {
-            return;
-        }
-        else
-        {
-            bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
-            bulletHit = bulletHitG.GetComponent<bulletScript>();
-        }
-    }
- 
-    private bool IsHittingCeiling()
-    {
-        return Physics2D.OverlapCircle(ceilingCheck.position, groundCheckRadius, groundLayer);
-    }
-
-    private void FixedUpdate()
-    {
-        if (!isLocalPlayer) return;
-
-        if(interactwCanon)
-        {
-            PlayerInput playerInput = GetComponent<PlayerInput>();
-            playerInput.defaultActionMap = "Canon";
-            interactwCanon = false;
-        }
-
-        if (carditem != null)
-        {
-            if (carditem.hit == false)
-            {
-                if (!isDashing)
-                    rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
-                else
-                    rb.velocity = new Vector2(moveInput.x * moveSpeed * 2, rb.velocity.y);
-            }
-            else
-            {
-                if (playerType == PlayerType.Runner)
-                {
-                    if (!isDashing)
-                        rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed, rb.velocity.y);
-                    else
-                        rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed * 2, rb.velocity.y);
-                }
-            }
-        }
-        else
-        {
-            if (!isDashing)
-                rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
-            else
-                rb.velocity = new Vector2(moveInput.x * moveSpeed * 2, rb.velocity.y);
-        }
+        UpdateMovement();
 
         if (bulletHit == false)
         {
@@ -551,7 +539,6 @@ public class PlayerController : NetworkBehaviour
                 }
             }
         }
-
     }
 
     private bool IsGrounded()
@@ -611,7 +598,7 @@ public class PlayerController : NetworkBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
-        CmdChangeColorFinal(new Color(1.0f, 1.0f, 1.0f, 1.0f)); // Comando para establecer el color final
+        CmdChangeColorFinal(new Color(255f, 255f, 255f, 255f)); // Comando para establecer el color final
     }
 
     [Command]
@@ -637,4 +624,38 @@ public class PlayerController : NetworkBehaviour
     {
         this.renderer.color = finalColor;
     }
+
+    private void UpdateMovement()
+    {
+        float moveDirection = moveInput.x;
+
+        if (carditem != null)
+        {
+            if (carditem.hit == false)
+            {
+                if (!isDashing)
+                    rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+                else
+                    rb.velocity = new Vector2(moveInput.x * moveSpeed * 2, rb.velocity.y);
+            }
+            else
+            {
+                if (playerType == PlayerType.Runner)
+                {
+                    if (!isDashing)
+                        rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed, rb.velocity.y);
+                    else
+                        rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed * 2, rb.velocity.y);
+                }
+            }
+        }
+        else
+        {
+            if (!isDashing)
+                rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
+            else
+                rb.velocity = new Vector2(moveInput.x * moveSpeed * 2, rb.velocity.y);
+        }
+    }
+
 }

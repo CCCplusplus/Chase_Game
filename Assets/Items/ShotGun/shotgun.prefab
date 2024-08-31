@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4957663260456341237}
   m_Layer: 0
   m_Name: shotgun
-  m_TagString: Untagged
+  m_TagString: Shotgun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,10 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e38cae2c03a1f4e8a4d94874cd0601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  shootSound: {fileID: 8300000, guid: ffb3d39b485e56345b73728805ba511e, type: 3}
 --- !u!114 &4957663260456341237
 MonoBehaviour:
   m_ObjectHideFlags: 0

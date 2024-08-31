@@ -1,11 +1,14 @@
+using System.Net.Sockets;
 using UnityEngine;
 
 public class ShotgunItem : MonoBehaviour
 {
+    public bool shotgunPicked = false;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Runner"))
         {
+            shotgunPicked = true;
             // Get the ShotgunHitbox component from the player
             ShotgunHitbox shotgunHitbox = other.GetComponentInChildren<ShotgunHitbox>();
 
