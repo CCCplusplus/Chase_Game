@@ -231,8 +231,6 @@ MonoBehaviour:
   gunScript: {fileID: 6690779900131008168}
   shotgunG: {fileID: 0}
   shotgun: {fileID: 0}
-  firingGO: {fileID: 0}
-  firing: {fileID: 0}
   dashParticles: {fileID: 4365289773304011126}
   spriteRd: {fileID: 5470323084119957431}
   associatedObject: {fileID: 6376415447245733665}
@@ -652,8 +650,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6744174599891562369}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.411, y: 0.0127, z: 0}
-  m_LocalScale: {x: 0.0113439765, y: 0.0113439765, z: 0.0113439765}
+  m_LocalPosition: {x: 0.453, y: 0.0127, z: 0}
+  m_LocalScale: {x: 0.020067494, y: 0.020067494, z: 0.020067494}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4573329763581803320}
@@ -758,7 +756,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7026673395154625684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.124, y: 0, z: 0}
+  m_LocalPosition: {x: 0.259, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -778,7 +776,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.13974771, y: 0.0689919}
+  m_Offset: {x: 0.13974771, y: 0.029101372}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -789,7 +787,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.29917723, y: 1.0078946}
+  m_Size: {x: 0.29917723, y: 1.6671371}
   m_EdgeRadius: 0
 --- !u!50 &2710154700038061400
 Rigidbody2D:
@@ -5669,9 +5667,8 @@ MonoBehaviour:
   muzzleFlash: {fileID: 2957657556043954373}
   hasShotgun: 0
   hitboxOrigin: {fileID: 5183233365876143236}
-  hitboxSpeed: 2
-  hitboxDistance: 1.5
-  isFiring: 0
+  hitboxSpeed: 6
+  hitboxDistance: 5
 --- !u!1 &7481413492691905267
 GameObject:
   m_ObjectHideFlags: 0
