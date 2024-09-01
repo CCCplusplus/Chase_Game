@@ -85,6 +85,17 @@
                 },
                 {
                     "name": "",
+                    "id": "d96e356a-18ef-46d0-bb67-173c2a9afc87",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "5ffa60fd-8cc5-4292-a355-43b624a1073d",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
@@ -98,6 +109,17 @@
                     "name": "",
                     "id": "eb558461-523f-4170-80d4-92235d4d0216",
                     "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "823fedfb-1a40-4354-a326-1aaf2d634175",
+                    "path": "<Touchscreen>/touch0/press",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -216,6 +238,61 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "2D Vector",
+                    "id": "bc38f2b3-bf7f-4a45-b72f-f9c0c3c7ab13",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "5bf915c2-c458-42a1-9041-29f780ec2fbd",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "4ef4ffa2-9184-4602-ba62-a28844a75b05",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "d59643d5-c32d-48b0-8ddf-879a1d5c163c",
+                    "path": "<Touchscreen>/primaryTouch/delta/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "4b64c5b5-4639-406a-ab2d-88f63ddb11e9",
+                    "path": "<Touchscreen>/primaryTouch/delta/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "ae36815d-d24b-47a2-8c57-0b5643c78577",
                     "path": "<Keyboard>/escape",
@@ -230,6 +307,17 @@
                     "name": "",
                     "id": "955ef656-6e43-4d89-8152-f01111c0103a",
                     "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bfe6afbb-084b-45da-a8fd-98cec2b6e114",
+                    "path": "<Touchscreen>/touch1/tap",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -261,6 +349,17 @@
                 },
                 {
                     "name": "",
+                    "id": "1b3ab5b5-cf4c-40e0-9ea5-299a96c51db0",
+                    "path": "<Touchscreen>/touch2/indirectTouch",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "cedc248e-08c2-4b74-92e0-a1d255e154c5",
                     "path": "<Keyboard>/q",
                     "interactions": "",
@@ -274,6 +373,17 @@
                     "name": "",
                     "id": "be8107db-3101-40a3-89dd-a1496bdddf6a",
                     "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HideShow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d0524883-91b0-49b9-a07b-c7025f207b86",
+                    "path": "<Touchscreen>/touch2/press",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

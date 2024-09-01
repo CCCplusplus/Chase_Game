@@ -2284,6 +2284,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4810513026145134915, guid: 4b229e26d1843874b95fbaa0dd67bd01, type: 3}
+      propertyPath: selectables.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4810513026145134915, guid: 4b229e26d1843874b95fbaa0dd67bd01, type: 3}
+      propertyPath: selectables.Array.data[5]
+      value: 
+      objectReference: {fileID: 1971572061}
+    - target: {fileID: 4810513026145134915, guid: 4b229e26d1843874b95fbaa0dd67bd01, type: 3}
+      propertyPath: selectables.Array.data[6]
+      value: 
+      objectReference: {fileID: 335325084}
     - target: {fileID: 5295494003751945261, guid: 4b229e26d1843874b95fbaa0dd67bd01, type: 3}
       propertyPath: m_RootOrder
       value: 6
