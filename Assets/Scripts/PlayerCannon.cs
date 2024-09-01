@@ -19,7 +19,7 @@ public class PlayerCannon : MonoBehaviour
         {
             player = other.gameObject;
             PlayerController playerController = player.GetComponent<PlayerController>();
-            playerController.interactwCanon = true;
+            //playerController.interactwCanon = true;
         }
     }
 
@@ -29,7 +29,7 @@ public class PlayerCannon : MonoBehaviour
         {
             player = other.gameObject;
             PlayerController playerController = player.GetComponent<PlayerController>();
-            playerController.interactwCanon = false;
+            //playerController.interactwCanon = false;
         }
     }
 
