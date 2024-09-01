@@ -49,12 +49,6 @@ public class PlayerController : NetworkBehaviour
     [SerializeField]
     private CardItem carditem;
     [SerializeField]
-    private GameObject bulletHitG;
-    [SerializeField] 
-    private bulletScript bulletHit;
-    [SerializeField]
-    private GunScript gunScript;
-    [SerializeField]
     private GameObject shotgunG;
     [SerializeField]
     private ShotgunItem shotgun;
@@ -148,12 +142,11 @@ public class PlayerController : NetworkBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+
         carditemG = GameObject.FindGameObjectWithTag("Card");
         if (carditemG != null)
             carditem = carditemG.GetComponent<CardItem>();
 
-        //bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
-        bulletHit = null;
         shotgunG = GameObject.FindGameObjectWithTag("Shotgun");
         shotgun = shotgunG.GetComponent<ShotgunItem>();
     }
@@ -446,18 +439,6 @@ public class PlayerController : NetworkBehaviour
 
         if (isDashing && Time.time >= dashEndTime)
             isDashing = false;
-
-        if (gunScript.isShooting == false)
-        {
-            return;
-        }
-        else
-        {
-            bulletHitG = GameObject.FindGameObjectWithTag("Bullet");
-            bulletHit = bulletHitG.GetComponent<bulletScript>();
-        }
-
-
     }
 
     private void HandleMovementAnimations()
@@ -518,27 +499,6 @@ public class PlayerController : NetworkBehaviour
         }
 
         UpdateMovement();
-
-        if (bulletHit == false)
-        {
-            return;
-        }
-        else
-        {
-            if (playerType == PlayerType.Runner)
-            {
-                if (bulletHit.ammotype.currentAmmoType == GunScript.AmmoType.Ice)
-                {
-                    moveSpeed = 2f;
-                    rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
-                }
-                else if (bulletHit.ammotype.currentAmmoType == GunScript.AmmoType.Fire)
-                {
-                    moveSpeed = 7f;
-                    rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
-                }
-            }
-        }
     }
 
     private bool IsGrounded()
