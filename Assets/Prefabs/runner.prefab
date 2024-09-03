@@ -50,7 +50,6 @@ GameObject:
   - component: {fileID: -5854964458723310282}
   - component: {fileID: 128292316459456101}
   - component: {fileID: 8455772421537453856}
-  - component: {fileID: 6690779900131008168}
   - component: {fileID: 6006183614791014110}
   - component: {fileID: 7839994771791025880}
   m_Layer: 6
@@ -226,9 +225,6 @@ MonoBehaviour:
   jumpForceMultiplier: 1.5
   carditemG: {fileID: 0}
   carditem: {fileID: 0}
-  bulletHitG: {fileID: 0}
-  bulletHit: {fileID: 0}
-  gunScript: {fileID: 6690779900131008168}
   shotgunG: {fileID: 0}
   shotgun: {fileID: 0}
   dashParticles: {fileID: 4365289773304011126}
@@ -561,31 +557,6 @@ MonoBehaviour:
   syncInterval: 0
   sessionId: 
   playerType: 
---- !u!114 &6690779900131008168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6376415447245733665}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88bc1ba7f0a49014d998c73ccaeaddff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentAmmoType: 0
-  weaponSpriteRenderer: {fileID: 0}
-  iceColor: {r: 0, g: 0, b: 1, a: 1}
-  fireColor: {r: 1, g: 0, b: 0, a: 1}
-  iceBulletPrefab: {fileID: 0}
-  fireBulletPrefab: {fileID: 0}
-  bulletPool: []
-  poolSize: 3
-  bulletSpawnPoint: {fileID: 0}
-  bulletSpeed: 10
-  iceSound: {fileID: 0}
-  fireSound: {fileID: 0}
-  isShooting: 0
 --- !u!95 &6006183614791014110
 Animator:
   serializedVersion: 5

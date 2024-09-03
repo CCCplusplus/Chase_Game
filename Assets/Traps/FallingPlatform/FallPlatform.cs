@@ -18,7 +18,7 @@ public class FallPlatform : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Runner"))
+        if (other.gameObject.CompareTag("Runner") || other.gameObject.CompareTag("Chaser"))
         {
             if (!runnerEncima)
             {
@@ -30,7 +30,7 @@ public class FallPlatform : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Runner"))
+        if (other.gameObject.CompareTag("Runner") || other.gameObject.CompareTag("Chaser"))
         {
             runnerEncima = false;
         }

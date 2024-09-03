@@ -12,6 +12,12 @@ public class ShotgunItem : MonoBehaviour
             // Get the ShotgunHitbox component from the player
             ShotgunHitbox shotgunHitbox = other.GetComponentInChildren<ShotgunHitbox>();
 
+            PlayerController activate = other.GetComponentInChildren<PlayerController>();
+
+            activate.shotgun = this;
+
+            shotgunHitbox.shotgun = this;
+
             // Enable the shotgun on the player
             if (shotgunHitbox != null)
                 shotgunHitbox.hasShotgun = true;

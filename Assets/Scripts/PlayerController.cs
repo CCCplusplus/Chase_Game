@@ -48,10 +48,10 @@ public class PlayerController : NetworkBehaviour
     private GameObject carditemG;
     [SerializeField]
     private CardItem carditem;
-    [SerializeField]
-    private GameObject shotgunG;
-    [SerializeField]
-    private ShotgunItem shotgun;
+
+
+    
+    public ShotgunItem shotgun;
 
     //------------------------------------------------(Marco Antonio)
     [SerializeField] private ParticleSystem dashParticles;
@@ -147,8 +147,6 @@ public class PlayerController : NetworkBehaviour
         if (carditemG != null)
             carditem = carditemG.GetComponent<CardItem>();
 
-        shotgunG = GameObject.FindGameObjectWithTag("Shotgun");
-        shotgun = shotgunG.GetComponent<ShotgunItem>();
     }
 
     //------------------------------------------------(Marco Antonio)
@@ -391,25 +389,31 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        if (shotgun.shotgunPicked)
+        if (shotgun != null)
         {
-            if (animator.runtimeAnimatorController != shotgunController)
+            if (shotgun.shotgunPicked)
             {
-                animator.runtimeAnimatorController = shotgunController;
+                if (animator.runtimeAnimatorController != shotgunController)
+                {
+                    animator.runtimeAnimatorController = shotgunController;
+                }
             }
-        }
-        else
-        {
-            if (animator.runtimeAnimatorController != defaultController)
+            else
             {
-                animator.runtimeAnimatorController = defaultController;
+                if (animator.runtimeAnimatorController != defaultController)
+                {
+                    animator.runtimeAnimatorController = defaultController;
+                }
             }
         }
 
         HandleMovementAnimations();
 
-        if(shotgun.shotgunPicked)
-            HandleShotgunAnimations();
+        if (shotgun != null)
+        {
+            if (shotgun.shotgunPicked)
+                HandleShotgunAnimations();
+        }
         //------------------------------------------------
 
         if (isJumping && jumpButtonHeld)

@@ -6,7 +6,12 @@ public class GoalTrigger : NetworkBehaviour
 {
     public GameObject runnerWinsPanel;
     public GameObject chaserLosesPanel;
+    public GameObject chaserWinsPanel;
+    public GameObject runnerLosesPanel;
     private bool goTime = false;
+    private bool runnerWon = false;
+
+    public bool chaserCanTrigger = false;
     private void Start()
     {
         runnerWinsPanel.SetActive(false);
@@ -15,8 +20,18 @@ public class GoalTrigger : NetworkBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Runner") ^ collision.CompareTag("Invencible"))
-            ShowGameOverScreen();
+        if (!chaserCanTrigger)
+        {
+            if (collision.CompareTag("Runner") ^ collision.CompareTag("Invencible"))
+                ShowGameOverScreen();
+        }
+        else
+        {
+            if (collision.CompareTag("Runner") ^ collision.CompareTag("Invencible"))
+                ShowGameOverScreen();
+            else if (collision.CompareTag("Chaser"))
+                ShowGameOverScreenChaserWin();
+        }
     }
 
     private void Update()
@@ -25,10 +40,20 @@ public class GoalTrigger : NetworkBehaviour
 
         PlayerController playerController = NetworkClient.localPlayer.GetComponent<PlayerController>();
 
-        if (playerController.playerType == PlayerController.PlayerType.Runner)
-            runnerWinsPanel.SetActive(true);
+        if (runnerWon)
+        {
+            if (playerController.playerType == PlayerController.PlayerType.Runner)
+                runnerWinsPanel.SetActive(true);
+            else
+                chaserLosesPanel.SetActive(true);
+        }
         else
-            chaserLosesPanel.SetActive(true);
+        {
+            if (playerController.playerType == PlayerController.PlayerType.Runner)
+                runnerLosesPanel.SetActive(true);
+            else
+                chaserWinsPanel.SetActive(true);
+        }
 
     }
 
@@ -45,6 +70,27 @@ public class GoalTrigger : NetworkBehaviour
 
         goTime = true;
 
+        runnerWon = true;
+
+        // Detener el juego
+        //Time.timeScale = 0f;
+    }
+
+    [ClientRpc]
+    private void RpcShowGameOverScreenChaserWin()
+    {
+        PlayerController playerController = NetworkClient.localPlayer.GetComponent<PlayerController>();
+
+        if (playerController.playerType == PlayerController.PlayerType.Runner)
+            chaserWinsPanel.SetActive(true);
+
+        else
+            runnerLosesPanel.SetActive(true);
+
+        goTime = true;
+
+        runnerWon = false;
+
         // Detener el juego
         //Time.timeScale = 0f;
     }
@@ -52,5 +98,10 @@ public class GoalTrigger : NetworkBehaviour
     private void ShowGameOverScreen()
     {
         RpcShowGameOverScreen();
+    }
+
+    private void ShowGameOverScreenChaserWin()
+    {
+        RpcShowGameOverScreenChaserWin();
     }
 }

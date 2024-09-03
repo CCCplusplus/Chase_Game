@@ -17,14 +17,10 @@ public class ShotgunHitbox : NetworkBehaviour
     [SerializeField] private float hitboxDistance = 5f; 
 
     private Vector2 originalPosition;
-    private GameObject shotgunG;
-    private ShotgunItem shotgun;
+    public ShotgunItem shotgun;
 
     private void Start()
     {
-        shotgunG = GameObject.FindGameObjectWithTag("Shotgun");
-        shotgun = shotgunG.GetComponent<ShotgunItem>();
-
         if (shotgunHitbox != null)
         {
             shotgunHitbox.enabled = false;

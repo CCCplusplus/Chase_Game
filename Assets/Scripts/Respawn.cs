@@ -8,7 +8,7 @@ public class Respawn : MonoBehaviour
     {
         if (collision.gameObject.tag == "Runner" || collision.gameObject.tag == "Invencible")
             collision.gameObject.transform.position = runnerTransform.position;
-        else
+        else if (collision.gameObject.tag == "Chaser")
             collision.gameObject.transform.position = chaserTransform.position;
     }
 }

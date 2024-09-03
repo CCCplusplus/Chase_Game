@@ -13,7 +13,6 @@ public struct PlayerTypeMessage : NetworkMessage
     public string playerType;
 }
 
-
 namespace Network
 {
     public class CustomNetworkManager : RelayNetworkManager
@@ -30,6 +29,10 @@ namespace Network
 
         public bool isLoggedIn = false;
         private List<Player> m_Players;
+        private int connectedPlayers = 0;  // Track the number of connected players
+
+        [SerializeField]
+        PlayManager m_PlayManager;
 
         public override void Awake()
         {
@@ -72,19 +75,24 @@ namespace Network
                 comp.sessionId = m_SessionId;
                 comp.playerType = playerType;
                 m_Players.Add(comp);
+                connectedPlayers++; // Increment the connected player count
                 Debug.Log($"Player added to the list: {comp.playerType}");
+
+                // Check if both players are connected
+                if (connectedPlayers == 2)
+                {
+                    // Both players are connected, start the sequence
+                    m_PlayManager.StartSequence();
+                }
             }
             else
                 Debug.LogError("The instantiated player prefab does not have a Player component!");
         }
 
-
         public override void OnStartClient()
         {
             base.OnStartClient();
-            
         }
-
 
         private void OnPlayerTypeReceived(NetworkConnectionToClient conn, PlayerTypeMessage message)
         {
@@ -108,16 +116,21 @@ namespace Network
                 comp.sessionId = m_SessionId;
                 comp.playerType = playerType;
                 m_Players.Add(comp);
+                connectedPlayers++; // Increment the connected player count
                 Debug.Log($"Player added to the list: {comp.playerType}");
+
+                // Check if both players are connected
+                if (connectedPlayers == 2)
+                {
+                    // Both players are connected, start the sequence
+                    m_PlayManager.StartSequence();
+                }
             }
             else
             {
                 Debug.LogError("The instantiated player prefab does not have a Player component!");
             }
         }
-
-
-
 
         private async void OnClientConnected()
         {
@@ -128,18 +141,14 @@ namespace Network
             NetworkClient.Send(message);
         }
 
-
-
         private void OnClientDataReceived(ArraySegment<byte> data, int channelId)
         {
-            Debug.Log("Data received from server.");
-            // Here you can process the data received, such as updating player states, handling game events, etc.
         }
 
         private void OnClientDisconnected()
         {
             Debug.Log("Client disconnected from server.");
-            
+
             if (localPlayer != null)
             {
                 m_Players.Remove(localPlayer);
@@ -155,13 +164,10 @@ namespace Network
         private void OnServerConnected(int connectionId)
         {
             Debug.Log($"Client connected with connectionId: {connectionId}");
-            // Aquí puedes añadir cualquier lógica que necesites cuando un cliente se conecta al servidor
         }
 
         private void OnServerDataReceived(int connectionId, ArraySegment<byte> data, int channelId)
         {
-            Debug.Log($"Data received from client {connectionId} on channel {channelId}. Data length: {data.Count}");
-            // Aquí puedes añadir lógica para procesar los datos recibidos del cliente
         }
 
         private async void OnServerDisconnected(int connectionId)
@@ -169,18 +175,11 @@ namespace Network
             Debug.Log($"Client disconnected with connectionId: {connectionId}");
 
             await Task.Delay(1000);
-            //Player disconnectedPlayer = m_Players.Find(p => p.connectionToClient.connectionId == connectionId);
-            //if (disconnectedPlayer != null)
-            //{
-            //    m_Players.Remove(disconnectedPlayer);
-            //}
 
-            // Send the remaining client to the ErrorScreen
-            //PlayerPrefs.SetString("Error", "Connection With Player Lost");
-            //LoadErrorScreen();
-            
+            //Send the remaining client to the ErrorScreen
+            PlayerPrefs.SetString("Error", "Connection With Player Lost");
+            LoadErrorScreen();
         }
-
 
         public async void UnityLogin()
         {
@@ -225,7 +224,6 @@ namespace Network
                 isLoggedIn = true;
             }
             JoinRelayServer(joinCode);
-            
         }
 
         public override void OnServerAddPlayer(NetworkConnectionToClient conn)
@@ -259,6 +257,7 @@ namespace Network
 
             return true;
         }
+
         private void LoadErrorScreen()
         {
             SceneManager.LoadSceneAsync("ErrorScreen");

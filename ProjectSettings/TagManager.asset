@@ -17,6 +17,7 @@ TagManager:
   - ElementalGun
   - DashParticle
   - Shotgun
+  - Level
   layers:
   - Default
   - TransparentFX
