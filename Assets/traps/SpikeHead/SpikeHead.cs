@@ -1,20 +1,29 @@
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
+using Mirror;
 
-public class SpikeHead : EnemyDamage
+public class SpikeHead : NetworkBehaviour
 {
     [Header("SpikeHead Attributes")]
     [SerializeField] float speed;
     [SerializeField] float range;
     [SerializeField] float checkDelay;
     [SerializeField] LayerMask playerLayer;
+    public Transform runnerTransform;
+    public Transform chaserTransform;
     private Vector3[] directions = new Vector3[4];
     private Vector3 destination;
+    private Vector3 startingPosition;
     private float checkTimer;
     private bool attacking;
 
+
+    //private void Start()
+    //{
+    //    startingPosition = transform.position;
+    //}
     private void OnEnable()
     {
+        startingPosition = transform.position;
         Stop();
     }
     private void Update()
@@ -29,7 +38,18 @@ public class SpikeHead : EnemyDamage
                 CheckForPlayer();
         }
     }
+    
     private void CheckForPlayer()
+    {
+        CheckForPlayerRPC();
+    }
+    //[Command]
+    private void CheckForPlayerCMD()
+    {
+        CheckForPlayerRPC();
+    }
+    [Client]
+    private void CheckForPlayerRPC()
     {
         CalculateDirections();
 
@@ -49,6 +69,16 @@ public class SpikeHead : EnemyDamage
     }
     private void CalculateDirections()
     {
+        CalculateDirectionsRPC();
+    }
+    //[Command]
+    //private void CalculateDirectionsCMD()
+    //{
+    //    CalculateDirectionsRPC();
+    //}
+    [Client]
+    private void CalculateDirectionsRPC()
+    {
         directions[0] = transform.right * range; //Right direction
         directions[1] = -transform.right * range; //Left direction
         directions[2] = transform.up * range; //Up direction
@@ -56,7 +86,21 @@ public class SpikeHead : EnemyDamage
     }
     private void Stop()
     {
-        destination = transform.position; //Set destination as current position so it doesn't move
+        StopRPC();
+    }
+
+    //[Command]
+
+    //private void StopCMD()
+    //{
+    //    StopRPC();
+    //}
+
+    [Client]
+
+    private void StopRPC()
+    {
+        transform.position = startingPosition; 
         attacking = false;
     }
 

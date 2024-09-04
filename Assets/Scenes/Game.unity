@@ -7921,7 +7921,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpikeHeadTrap
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5666690688643475744, guid: 376eca7769d9b5444a8fc0fee375421d, type: 3}
+      propertyPath: sceneId
+      value: 561439833
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5666690688643475744, guid: 376eca7769d9b5444a8fc0fee375421d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 376eca7769d9b5444a8fc0fee375421d, type: 3}
 --- !u!1 &1070978509
 GameObject:
