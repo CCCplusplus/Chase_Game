@@ -51,6 +51,13 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Credits");
     }
 
+    //---------------------------------------------------(MarcoAntonio)
+    public void GoToTutorialRunner()
+    {
+        SceneManager.LoadScene("TutorialRunner");
+    }
+    //---------------------------------------------------
+
     private void SetConnectionType()
     {
         string connectionType = connectionTypeDropdown.options[connectionTypeDropdown.value].text;
