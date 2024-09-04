@@ -51,6 +51,20 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Credits");
     }
 
+    public void RunnerTutorial()
+    {
+        PlayerPrefs.SetString("ConnectionType", "Host");
+        PlayerPrefs.SetString("PlayerType", "Runner");
+        SceneManager.LoadScene("Tutorial Runner");
+    }
+
+    public void ChaserTutorial()
+    {
+        PlayerPrefs.SetString("ConnectionType", "Host");
+        PlayerPrefs.SetString("PlayerType", "Chaser");
+        SceneManager.LoadScene("Tutorial Chaser");
+    }
+
     private void SetConnectionType()
     {
         string connectionType = connectionTypeDropdown.options[connectionTypeDropdown.value].text;
