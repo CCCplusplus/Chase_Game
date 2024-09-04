@@ -54,7 +54,7 @@ public class MainMenu : MonoBehaviour
     //---------------------------------------------------(MarcoAntonio)
     public void GoToTutorialRunner()
     {
-        SceneManager.LoadScene("TutorialRunner");
+        SceneManager.LoadScene("Tutorial Runner");
     }
     //---------------------------------------------------
 
