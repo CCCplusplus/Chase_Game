@@ -40,6 +40,8 @@ public class MainMenu : MonoBehaviour
         settingsCanvas.SetActive(true);
     }
 
+    
+
     public void BackToMainMenu()
     {
         mainMenuCanvas.SetActive(true);
@@ -55,6 +57,11 @@ public class MainMenu : MonoBehaviour
     public void GoToTutorialRunner()
     {
         SceneManager.LoadScene("Tutorial Runner");
+    }
+    
+    public void GoToTutorialChaser()
+    {
+        SceneManager.LoadScene("Tutorial Chaser");
     }
     //---------------------------------------------------
 
