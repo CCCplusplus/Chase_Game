@@ -8,7 +8,7 @@ public class FallPlatform : MonoBehaviour
     [SerializeField] private float tiempoReaparicion = 2f;
     private Collider2D col2D;
     private Renderer platformRd;
-    private bool runnerEncima = false;
+    //private bool runnerEncima = false;
 
     private void Start()
     {
@@ -20,39 +20,21 @@ public class FallPlatform : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Runner") || other.gameObject.CompareTag("Chaser"))
         {
-            if (!runnerEncima)
-            {
-                runnerEncima = true;
-                StartCoroutine(Desaparece());
-            }
+            StartCoroutine(DesapareceYReaparece());
         }
     }
 
-    private void OnCollisionExit2D(Collision2D other)
+    private IEnumerator DesapareceYReaparece()
     {
-        if (other.gameObject.CompareTag("Runner") || other.gameObject.CompareTag("Chaser"))
-        {
-            runnerEncima = false;
-        }
-    }
-
-    private IEnumerator Desaparece()
-    {
+        //Espera antes de que la plataforma desaparezca
         yield return new WaitForSeconds(tiempoEspera);
-
-        if (runnerEncima)
-        {
-            // Desactiva la plataforma (desaparece)
-            col2D.enabled = false;
-            platformRd.enabled = false;
-
-            // Espera un tiempo antes de reaparecer la plataforma
-            yield return new WaitForSeconds(tiempoReaparicion);
-
-            // Reactiva la plataforma (reaparece)
-            col2D.enabled = true;
-            platformRd.enabled = true;
-            runnerEncima = false;
-        }
+        //Desactiva la plataforma
+        col2D.enabled = false;
+        platformRd.enabled = false;
+        //Espera un tiempo antes de reaparecer la plataforma
+        yield return new WaitForSeconds(tiempoReaparicion);
+        //Reactiva la plataforma
+        col2D.enabled = true;
+        platformRd.enabled = true;
     }
 }

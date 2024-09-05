@@ -15,8 +15,7 @@ public class PortalGeneral : MonoBehaviour
         //Verifica si el objeto tiene la etiqueta "runner" o "chaser"
         if (collision.CompareTag("Runner") || collision.CompareTag("Chaser")) {
             // Si el objeto está en cooldown, no hacer nada
-            if (teleportCooldowns.ContainsKey(collision.gameObject) && teleportCooldowns[collision.gameObject])
-            {
+            if (teleportCooldowns.ContainsKey(collision.gameObject) && teleportCooldowns[collision.gameObject]) {
                 return;
             }
 
@@ -24,8 +23,8 @@ public class PortalGeneral : MonoBehaviour
             portalObjects.Add(collision.gameObject);
 
             //Si el portal de destino tiene un script de Portal, agregar el objeto su lista
-            if(destination.TryGetComponent(out PortalGeneral destinationPortal)) {
-                destinationPortal.portalObjects.Add(collision.gameObject);
+            if (destination.TryGetComponent(out PortalGeneral destinationPortal)) {
+                destinationPortal.StartCoroutine(destinationPortal.TeleportCooldown(collision.gameObject));
             }
 
             //Teletransportar el objeto al destino

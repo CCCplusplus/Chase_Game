@@ -30,9 +30,11 @@ public class PortalChaser : MonoBehaviour
                 portalSound.Play();
             }
 
+            // Si el portal de destino tiene un script de PortalChaser, agregar el objeto a su lista y comenzar el cooldown
             if (destination.TryGetComponent(out PortalChaser destinationPortal))
             {
                 destinationPortal.portalObjects.Add(collision.gameObject);
+                destinationPortal.StartCoroutine(destinationPortal.TeleportCooldown(collision.gameObject));
             }
             //Teletransportar el objeto al destino
             collision.transform.position = destination.position;

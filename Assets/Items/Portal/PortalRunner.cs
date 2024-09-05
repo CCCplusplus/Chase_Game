@@ -13,7 +13,8 @@ public class PortalRunner : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (teleportCooldowns.ContainsKey(collision.gameObject)&&teleportCooldowns[collision.gameObject])
+        // Verificar si el objeto está en cooldown
+        if (teleportCooldowns.ContainsKey(collision.gameObject) && teleportCooldowns[collision.gameObject])
         {
             return;
         }
@@ -28,9 +29,11 @@ public class PortalRunner : MonoBehaviour
                 portalSound.Play();
             }
 
+            // Si el portal de destino tiene un script de PortalRunner, agregar el objeto a su lista y comenzar el cooldown
             if (destination.TryGetComponent(out PortalRunner destinationPortal))
             {
                 destinationPortal.portalObjects.Add(collision.gameObject);
+                destinationPortal.StartCoroutine(destinationPortal.TeleportCooldown(collision.gameObject));
             }
             //Teletransportar el objeto al destino
             collision.transform.position = destination.position;
