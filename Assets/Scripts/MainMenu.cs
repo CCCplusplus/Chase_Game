@@ -51,12 +51,19 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("Credits");
     }
 
-    //---------------------------------------------------(MarcoAntonio)
-    public void GoToTutorialRunner()
+    public void RunnerTutorial()
     {
-        SceneManager.LoadScene("TutorialRunner");
+        PlayerPrefs.SetString("ConnectionType", "Host");
+        PlayerPrefs.SetString("PlayerType", "Runner");
+        SceneManager.LoadScene("Tutorial Runner");
     }
-    //---------------------------------------------------
+
+    public void ChaserTutorial()
+    {
+        PlayerPrefs.SetString("ConnectionType", "Host");
+        PlayerPrefs.SetString("PlayerType", "Chaser");
+        SceneManager.LoadScene("Tutorial Chaser");
+    }
 
     private void SetConnectionType()
     {

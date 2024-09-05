@@ -1,27 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    private bool triggered = false;
-
     public Transform runnerTransform;
     public Transform chaserTransform;
 
+    private Transform own;
+
+    private void Awake()
+    {
+        own = this.transform;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (triggered) return;
 
         if (collision.gameObject.tag == "Runner")
         {
-            runnerTransform = this.transform;
-            triggered = true;
+            Debug.Log("passed");
+            runnerTransform.position = own.position;
+            runnerTransform = own;
         }
         else if (collision.gameObject.tag == "Chaser")
         {
-            chaserTransform = this.transform;
-            triggered = true;
+            chaserTransform.position = own.position;
+            chaserTransform = own;
         }
             
     }
