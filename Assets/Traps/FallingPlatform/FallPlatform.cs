@@ -30,22 +30,29 @@ public class FallPlatform : NetworkBehaviour
         }
     }
 
-    private void Update()
-    {
-        //Iniciar el parpadeo si se activa la señal de desaparecer
-        if (esDesaparecer)
-        {
-            StartCoroutine(DesapareceYReaparece());
-            esDesaparecer = false;
-        }
-    }
+    //public override void OnStartServer()
+    //{
+    //    base.OnStartServer();
+    //    // Aquí puedes configurar el objeto para que el servidor tenga autoridad
+    //    GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+    //}
+
+    //private void Update()
+    //{
+    //    //Iniciar el parpadeo si se activa la señal de desaparecer
+    //    if (esDesaparecer)
+    //    {
+    //        StartCoroutine(DesapareceYReaparece());
+    //        esDesaparecer = false;
+    //    }
+    //}
 
     private void OnCollisionStay2D(Collision2D other)
     {
         if ((other.gameObject.CompareTag("Runner") || other.gameObject.CompareTag("Chaser")) 
             && NetworkClient.active && isServer)
         {
-            CmdStartDesaparecer();
+            RpcDesapareceYReaparece();
         }
 
         //if (other.gameObject.CompareTag("Runner") || other.gameObject.CompareTag("Chaser"))
@@ -55,12 +62,6 @@ public class FallPlatform : NetworkBehaviour
         //        CmdStartDesaparecer();
         //    }
         //}
-    }
-
-    [Command]
-    private void CmdStartDesaparecer()
-    {
-        RpcDesapareceYReaparece();
     }
 
     [ClientRpc]
