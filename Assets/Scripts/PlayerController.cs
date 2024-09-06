@@ -44,13 +44,9 @@ public class PlayerController : NetworkBehaviour
     private float gravityMultiplierFall = 3.5f;
     [SerializeField]
     private float jumpForceMultiplier = 3f;
-    [SerializeField]
-    private GameObject carditemG;
-    [SerializeField]
-    private CardItem carditem;
 
 
-    
+    public CardItem carditem;
     public ShotgunItem shotgun;
 
     //------------------------------------------------(Marco Antonio)
@@ -142,10 +138,6 @@ public class PlayerController : NetworkBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-
-        carditemG = GameObject.FindGameObjectWithTag("Card");
-        if (carditemG != null)
-            carditem = carditemG.GetComponent<CardItem>();
 
     }
 
@@ -307,6 +299,7 @@ public class PlayerController : NetworkBehaviour
     [ClientRpc]
     private void RpcDash(float dashDuration)
     {
+        audioSource.PlayOneShot(dashSound);
         if (isLocalPlayer)
             StartCoroutine(Dash(dashDuration));
     }
@@ -333,7 +326,6 @@ public class PlayerController : NetworkBehaviour
 
     private IEnumerator Dash(float duration)
     {
-        AudioSource.PlayClipAtPoint(dashSound, transform.position);
         isDashing = true;
 
         yield return new WaitForSeconds(duration);

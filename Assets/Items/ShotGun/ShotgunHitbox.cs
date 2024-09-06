@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Mirror;
+using UnityEngine.UIElements;
 
 public class ShotgunHitbox : NetworkBehaviour
 {
@@ -11,6 +12,10 @@ public class ShotgunHitbox : NetworkBehaviour
 
     [SyncVar] public bool hasShotgun = false;
     private bool isShooting = false;
+
+    private AudioSource audioSource;
+
+    Vector2 pos;
 
     [SerializeField] private Transform hitboxOrigin;
     [SerializeField] private float hitboxSpeed = 20f;
@@ -26,10 +31,13 @@ public class ShotgunHitbox : NetworkBehaviour
             shotgunHitbox.enabled = false;
             originalPosition = shotgunHitbox.transform.localPosition;
         }
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
+        pos = this.transform.position;
         if (hasShotgun && isLocalPlayer)
         {
             var inputActions = GetComponentInParent<PlayerInput>().actions;
@@ -58,7 +66,7 @@ public class ShotgunHitbox : NetworkBehaviour
     private void RpcFire()
     {
         if (shootSound != null)
-            AudioSource.PlayClipAtPoint(shootSound, transform.position);
+            audioSource.PlayOneShot(shootSound);
 
         if (muzzleFlash != null)
             muzzleFlash.Play();
@@ -85,6 +93,7 @@ public class ShotgunHitbox : NetworkBehaviour
         // Wait for a short duration to simulate impact
         yield return new WaitForSeconds(0.2f);
 
+        isShooting = false;
         // Move the hitbox back to its original position
         elapsedTime = 0f;
         while (elapsedTime < hitboxDistance / hitboxSpeed)
@@ -95,8 +104,6 @@ public class ShotgunHitbox : NetworkBehaviour
         }
 
         shotgunHitbox.transform.localPosition = originalPosition;
-
-        isShooting = false;
     }
     private IEnumerator DisableShotgun()
     {
