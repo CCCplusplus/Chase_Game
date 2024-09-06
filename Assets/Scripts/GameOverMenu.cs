@@ -27,6 +27,9 @@ public class GameOverMenu : MonoBehaviour
                 NetworkManager.singleton.StopHost();
             else if (NetworkClient.isConnected)
                 NetworkManager.singleton.StopClient();
+
+            if (NetworkManager.singleton != null)
+                Destroy(NetworkManager.singleton.gameObject);
         }
         SceneManager.LoadSceneAsync("Main Menu");
     }

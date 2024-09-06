@@ -12,6 +12,8 @@ public class GoalTrigger : NetworkBehaviour
     private bool runnerWon = false;
 
     public bool chaserCanTrigger = false;
+
+    public bool isover = false;
     private void Start()
     {
         runnerWinsPanel.SetActive(false);
@@ -70,6 +72,8 @@ public class GoalTrigger : NetworkBehaviour
 
         goTime = true;
 
+        isover = true;
+
         runnerWon = true;
 
         // Detener el juego
@@ -88,6 +92,8 @@ public class GoalTrigger : NetworkBehaviour
             runnerLosesPanel.SetActive(true);
 
         goTime = true;
+
+        isover = true;
 
         runnerWon = false;
 

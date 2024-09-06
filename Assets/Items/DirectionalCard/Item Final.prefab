@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3839e27c99db1314b94b0b3f4c307c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardSound: {fileID: 8300000, guid: 913c67d9a9bdea54db6ef837235e9a4d, type: 3}
+  cardSound: {fileID: 8300000, guid: 8be08b7712253bd448bf065641e8d46f, type: 3}
   hit: 0
 --- !u!82 &-2532671787079786686
 AudioSource:
@@ -112,8 +112,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 8be08b7712253bd448bf065641e8d46f, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
