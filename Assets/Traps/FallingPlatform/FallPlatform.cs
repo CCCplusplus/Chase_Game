@@ -5,10 +5,11 @@ using Mirror;
 
 public class FallPlatform : NetworkBehaviour
 {
-    [SerializeField] private float tiempoEspera = 1f;
+    [SerializeField] private float tiempoEspera = 5f;
     [SerializeField] private float tiempoReaparicion = 2f;
-    [SerializeField] private int numeroParpadeos = 3;
-    [SerializeField] private float duracionParpadeo = 0.2f;
+    [SerializeField] private int numeroParpadeos = 10;
+    [SerializeField] private float duracionParpadeoInicial = 5.0f;
+    [SerializeField] private float duracionParpadeoFinal = 2.0f;
 
     private Collider2D col2D;
     private Renderer platformRd;
@@ -43,9 +44,14 @@ public class FallPlatform : NetworkBehaviour
         for (int i = 0; i < numeroParpadeos; i++)
         {
             platformRd.enabled = false;
-            yield return new WaitForSeconds(duracionParpadeo);
+            //Usamos SmoothStep para suavizar la transicion del parpadeo
+            float t = (float)i / (numeroParpadeos - 1);
+            //Calcular la duracion del parpadeo en funcion de la iteracion
+            float duracionActualParpadeo = Mathf.Lerp(duracionParpadeoInicial, duracionParpadeoFinal, t);
+
+            yield return new WaitForSeconds(duracionActualParpadeo);
             platformRd.enabled = true;
-            yield return new WaitForSeconds(duracionParpadeo);
+            yield return new WaitForSeconds(duracionActualParpadeo);
         }
 
         // Espera antes de que la plataforma desaparezca

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3101304361583871073}
   - component: {fileID: 3101304361583871074}
   - component: {fileID: 3101304361583871075}
-  - component: {fileID: 7117794341325033988}
+  - component: {fileID: 5726343511060809291}
   m_Layer: 7
   m_Name: FallingPlatform
   m_TagString: Untagged
@@ -150,11 +150,12 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  tiempoEspera: 2
-  tiempoReaparicion: 4
-  numeroParpadeos: 3
-  duracionParpadeo: 0.3
---- !u!114 &7117794341325033988
+  tiempoEspera: 5
+  tiempoReaparicion: 3
+  numeroParpadeos: 6
+  duracionParpadeoInicial: 0.8
+  duracionParpadeoFinal: 0.2
+--- !u!114 &5726343511060809291
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,5 +170,5 @@ MonoBehaviour:
   sceneId: 0
   _assetId: 3690374669
   serverOnly: 0
-  visibility: 2
+  visibility: 0
   hasSpawned: 0
