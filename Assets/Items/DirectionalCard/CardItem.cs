@@ -23,6 +23,8 @@ public class CardItem : MonoBehaviour
     {
         if (collision.CompareTag("Runner"))
         {
+            PlayerController playerController = collision.GetComponent<PlayerController>();
+            playerController.carditem = this;
             InvertPlayerControls(collision.gameObject);
             selfCollider.enabled = false;
             selfSprite.enabled = false;
@@ -32,6 +34,7 @@ public class CardItem : MonoBehaviour
     void InvertPlayerControls(GameObject hitPlayer)
     {
         hit = true;
+        audioSource.Play();
         StartCoroutine(TurnBack());
     }
 

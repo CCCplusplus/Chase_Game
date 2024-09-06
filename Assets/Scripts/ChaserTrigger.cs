@@ -6,6 +6,8 @@ public class ChaserTrigger : NetworkBehaviour
     public GameObject chaserWinsPanel;
     public GameObject runnerLosesPanel;
     private bool goTime = false;
+
+    public bool isover = false;
     private void Start()
     {
         chaserWinsPanel.SetActive(false);
@@ -42,6 +44,8 @@ public class ChaserTrigger : NetworkBehaviour
         else
             runnerLosesPanel.SetActive(true);
         goTime = true;
+
+        isover = true;
     }
 
     private void ShowGameOverScreen()
