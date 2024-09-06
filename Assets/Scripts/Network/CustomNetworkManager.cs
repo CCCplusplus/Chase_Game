@@ -154,11 +154,12 @@ namespace Network
                 m_Players.Remove(localPlayer);
                 localPlayer = null;
             }
-            if (NetworkServer.active)
+            if (PlayerPrefs.GetString("ConnectionType") == "Client")
             {
-                PlayerPrefs.SetString("Error", "Connection With Player Lost");
+                PlayerPrefs.SetString("Error", "Connection With Host Lost");
                 LoadErrorScreen();
             }
+
         }
 
         private void OnServerConnected(int connectionId)
