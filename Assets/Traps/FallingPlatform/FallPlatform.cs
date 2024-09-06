@@ -42,13 +42,25 @@ public class FallPlatform : NetworkBehaviour
 
     private void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Runner") || other.gameObject.CompareTag("Chaser"))
+        if ((other.gameObject.CompareTag("Runner") || other.gameObject.CompareTag("Chaser")) 
+            && NetworkClient.active && isServer)
         {
-            if (NetworkClient.active && isServer)
-            {
-                esDesaparecer = true;
-            }
+            CmdStartDesaparecer();
         }
+
+        //if (other.gameObject.CompareTag("Runner") || other.gameObject.CompareTag("Chaser"))
+        //{
+        //    if (NetworkClient.active && isServer)
+        //    {
+        //        CmdStartDesaparecer();
+        //    }
+        //}
+    }
+
+    [Command]
+    private void CmdStartDesaparecer()
+    {
+        RpcDesapareceYReaparece();
     }
 
     [ClientRpc]
