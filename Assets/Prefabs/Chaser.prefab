@@ -4925,8 +4925,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3764952772867063652}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.227, y: -0.39, z: 0}
-  m_LocalScale: {x: 2.1875, y: 1, z: 1}
+  m_LocalPosition: {x: -0.227, y: -0.378, z: 0}
+  m_LocalScale: {x: 0.7373843, y: 0.33709, z: 0.33709}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 788159748628684926}
@@ -5049,7 +5049,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.21936226, y: 0.037742883}
+  m_Offset: {x: -0.20827208, y: 0.037742883}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5060,7 +5060,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.22463715, y: 0.8126463}
+  m_Size: {x: 0.34046784, y: 0.8126463}
   m_EdgeRadius: 0
 --- !u!50 &-8885802370139102442
 Rigidbody2D:
@@ -5118,9 +5118,7 @@ MonoBehaviour:
   gravityMultiplierDescend: 4
   gravityMultiplierFall: 4
   jumpForceMultiplier: 1.5
-  carditemG: {fileID: 0}
   carditem: {fileID: 0}
-  shotgunG: {fileID: 0}
   shotgun: {fileID: 0}
   dashParticles: {fileID: 0}
   spriteRd: {fileID: 0}
@@ -5241,10 +5239,6 @@ MonoBehaviour:
     m_ActionName: Player/Use-Item[/Keyboard/e]
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: d8b1028c-2a70-495b-bc42-7d1e8b1759cf
-    m_ActionName: Canon/New action
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: e41f5121-900e-4b41-817e-49febb683e97
     m_ActionName: Player/HideShow[/Keyboard/q]
   m_NeverAutoSwitchControlSchemes: 0
@@ -5321,6 +5315,7 @@ MonoBehaviour:
   syncInterval: 0
   chaserWinsPanel: {fileID: 123259175669848780}
   runnerLosesPanel: {fileID: 4425112292316063399}
+  isover: 0
 --- !u!82 &5744411929810016264
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5626,6 +5621,7 @@ MonoBehaviour:
   syncInterval: 0
   chaserWinsPanel: {fileID: 123259175669848780}
   runnerLosesPanel: {fileID: 4425112292316063399}
+  isover: 0
 --- !u!61 &4965399765226985798
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5650,7 +5646,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.21072894, y: 0.80927646}
+  m_Size: {x: 0.3404678, y: 0.8126463}
   m_EdgeRadius: 0
 --- !u!50 &6726140882714057245
 Rigidbody2D:

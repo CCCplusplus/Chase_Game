@@ -5593,6 +5593,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Chaser (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7516127552348087921, guid: 13df6115919731f4886eb958038f5353, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 13df6115919731f4886eb958038f5353, type: 3}
 --- !u!1 &992579725
