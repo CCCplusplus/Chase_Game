@@ -5104,6 +5104,7 @@ MonoBehaviour:
   maxJumpHeight: 3
   dashDuration: 1
   dashCooldown: 5
+  speedBoost: 1.5
   colores: []
   pausa: {fileID: 5727712600670175975}
   groundCheck: {fileID: 3351564858983871116}
@@ -5136,6 +5137,7 @@ MonoBehaviour:
   shotgunController: {fileID: 0}
   isPaused: 0
   pausita: {fileID: 6827448231452345949}
+  died: 0
 --- !u!114 &-6129973816458940266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5635,7 +5637,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.22001809, y: 0.030380502}
+  m_Offset: {x: -0.21456176, y: 0.12995832}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -5646,7 +5648,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3404678, y: 0.8126463}
+  m_Size: {x: 0.2040599, y: 0.3188496}
   m_EdgeRadius: 0
 --- !u!50 &6726140882714057245
 Rigidbody2D:
