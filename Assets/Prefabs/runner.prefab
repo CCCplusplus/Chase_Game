@@ -67,7 +67,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6376415447245733665}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 60.34, y: 9.81, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -202,6 +202,7 @@ MonoBehaviour:
   maxJumpHeight: 3
   dashDuration: 1.5
   dashCooldown: 5
+  speedBoost: 1.5
   colores:
   - {r: 0.93752354, g: 0.9622642, b: 0.003631114, a: 1}
   - {r: 1, g: 0.49382716, b: 0, a: 1}
@@ -241,6 +242,7 @@ MonoBehaviour:
   shotgunController: {fileID: 9100000, guid: 49fc6340cdbaa554f9a49d5dd7669567, type: 2}
   isPaused: 0
   pausita: {fileID: 5391481826383929527}
+  died: 0
 --- !u!114 &-4525787995646508784
 MonoBehaviour:
   m_ObjectHideFlags: 0

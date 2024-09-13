@@ -17,9 +17,6 @@ public class RadarPointer : NetworkBehaviour
     void Start()
     {
         radarRenderer = GetComponent<Renderer>();
-
-        
-        radarRenderer.enabled = targetTransform != null;
     }
 
     void Update()
