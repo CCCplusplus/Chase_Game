@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3101304361583871074}
   - component: {fileID: 3101304361583871075}
   - component: {fileID: 9133128391906672643}
+  - component: {fileID: 4262323092292982311}
   m_Layer: 7
   m_Name: FallingPlatform
   m_TagString: Untagged
@@ -167,6 +168,32 @@ MonoBehaviour:
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
+--- !u!61 &4262323092292982311
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3101304361583871069}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.04473567, y: 0.62532413}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6.99, y: 1.706543}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 6.751349, y: 0.4558947}
+  m_EdgeRadius: 0
 --- !u!1 &8317756508186929954
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,7 +244,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
