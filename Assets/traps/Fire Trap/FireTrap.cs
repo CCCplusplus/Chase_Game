@@ -32,6 +32,8 @@ public class FireTrap : MonoBehaviour
 
             if (active)
             {
+                PlayerController player = collision.GetComponent<PlayerController>();
+                player.died = true;
                 if (collision.gameObject.tag == "Runner" || collision.gameObject.tag == "Invencible")
                     collision.gameObject.transform.position = runnerTransform.position;
                 else if (collision.gameObject.tag == "Chaser")

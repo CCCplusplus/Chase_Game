@@ -21,6 +21,8 @@ public class PlayerController : NetworkBehaviour
     [SerializeField]
     private float dashCooldown = 5f;
     [SerializeField]
+    private float speedBoost = 1.5f;
+    [SerializeField]
     private Color[] colores;
     [SerializeField]
     private GameObject pausa;
@@ -100,6 +102,7 @@ public class PlayerController : NetworkBehaviour
     private float lastGroundedTime;
     public bool isPaused = false;
     public Pausa pausita;
+    public bool died = false;
 
 #pragma warning disable CS0108 // Member hides inherited member; missing new keyword
     private SpriteRenderer renderer;
@@ -381,6 +384,17 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
+        if (died)
+        {
+            if (playerType == PlayerType.Runner)
+            {
+                died = false;
+                StartCoroutine(Invencible2());
+                StartCoroutine(InvincibilityColorChange());
+            }
+            else { died = false; }
+        }
+
         if (shotgun != null)
         {
             if (shotgun.shotgunPicked)
@@ -522,6 +536,13 @@ public class PlayerController : NetworkBehaviour
         CmdSetTag("Runner"); // Comando para volver a la etiqueta original en todos los clientes
     }
 
+    private IEnumerator Invencible2()
+    {
+        CmdSetTag("Invencible"); // Comando para cambiar la etiqueta en todos los clientes
+        yield return new WaitForSeconds(2.0f);
+        CmdSetTag("Runner"); // Comando para volver a la etiqueta original en todos los clientes
+    }
+
     [Command]
     private void CmdSetTag(string newTag)
     {
@@ -548,14 +569,39 @@ public class PlayerController : NetworkBehaviour
                 newColorIndex = Random.Range(0, colores.Length);
             } while (newColorIndex == lastColorIndex);
 
-            CmdChangeColor(newColorIndex);  // Comando para cambiar el color en todos los clientes
+            CmdChangeColor(newColorIndex);
             lastColorIndex = newColorIndex;
 
             yield return new WaitForSeconds(0.1f);
         }
 
-        CmdChangeColorFinal(new Color(255f, 255f, 255f, 255f)); // Comando para establecer el color final
+        CmdChangeColorFinal(new Color(255f, 255f, 255f, 255f));
     }
+
+    private IEnumerator InvincibilityColorChange()
+    {
+        Color semiTransparentColor = new Color(255f, 255f, 255f, 0.5f); 
+        Color originalColor = new Color(255f, 255f, 255f, 255f); 
+        float blinkInterval = 0.1f;
+        float invincibilityDuration = 2.0f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < invincibilityDuration)
+        {
+            
+            CmdChangeColorFinal(semiTransparentColor); 
+            yield return new WaitForSeconds(blinkInterval);
+
+            
+            CmdChangeColorFinal(originalColor); 
+            yield return new WaitForSeconds(blinkInterval);
+
+            elapsedTime += blinkInterval * 2;
+        }
+
+        CmdChangeColorFinal(originalColor);
+    }
+
 
     [Command]
     private void CmdChangeColor(int colorIndex)
@@ -592,7 +638,7 @@ public class PlayerController : NetworkBehaviour
                 if (!isDashing)
                     rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
                 else
-                    rb.velocity = new Vector2(moveInput.x * moveSpeed * 2, rb.velocity.y);
+                    rb.velocity = new Vector2(moveInput.x * moveSpeed * speedBoost, rb.velocity.y);
             }
             else
             {
@@ -601,7 +647,7 @@ public class PlayerController : NetworkBehaviour
                     if (!isDashing)
                         rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed, rb.velocity.y);
                     else
-                        rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed * 2, rb.velocity.y);
+                        rb.velocity = new Vector2(moveInput.x * -1 * moveSpeed * speedBoost, rb.velocity.y);
                 }
             }
         }
@@ -610,7 +656,7 @@ public class PlayerController : NetworkBehaviour
             if (!isDashing)
                 rb.velocity = new Vector2(moveInput.x * moveSpeed, rb.velocity.y);
             else
-                rb.velocity = new Vector2(moveInput.x * moveSpeed * 2, rb.velocity.y);
+                rb.velocity = new Vector2(moveInput.x * moveSpeed * speedBoost, rb.velocity.y);
         }
     }
 
