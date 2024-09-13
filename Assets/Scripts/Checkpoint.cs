@@ -4,14 +4,8 @@ public class Checkpoint : MonoBehaviour
 {
     public Transform runnerTransform;
     public Transform chaserTransform;
-    private Animator animator;
 
     private Transform own;
-
-    private void Start()
-    {
-        animator = GetComponent<Animator>();
-    }
 
     private void Awake()
     {
@@ -26,7 +20,6 @@ public class Checkpoint : MonoBehaviour
             Debug.Log("passed");
             runnerTransform.position = own.position;
             runnerTransform = own;
-            animator.SetTrigger("Activar");
         }
         else if (collision.gameObject.tag == "Chaser")
         {
