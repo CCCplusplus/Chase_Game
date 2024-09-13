@@ -3,7 +3,9 @@ guid: 6aea84c43fd4471498f6fd5e5449d224
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - runnerTransform: {instanceID: 0}
+  - chaserTransform: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

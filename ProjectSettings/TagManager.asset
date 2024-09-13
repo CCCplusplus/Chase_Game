@@ -18,6 +18,7 @@ TagManager:
   - DashParticle
   - Shotgun
   - Level
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
