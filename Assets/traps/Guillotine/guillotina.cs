@@ -8,16 +8,22 @@ public class guillotina : MonoBehaviour
     [SerializeField] float riseSpeed = 2f;  // subida
     [SerializeField] float waitTime = 2f;   // tiempo que espera en el suelo
     [SerializeField] float cycleTime = 5f;  // tiempo de espera
+    //[SerializeField] float warningTime = 1f;
 
     private Vector3 initialPosition;
     private Vector3 targetPosition;
     private bool isDropping = true;
+
+    private Color warningColor = Color.red;
+    private Color normalColor = Color.white;
+    private SpriteRenderer renderer;
 
     public Transform runnerTransform;
     public Transform chaserTransform;
 
     void Start()
     {
+        renderer = GetComponent<SpriteRenderer>();
         initialPosition = transform.position;
         targetPosition = new Vector3(transform.position.x, transform.position.y - 4f, transform.position.z);
         StartCoroutine(GuillotineCycle());
@@ -27,9 +33,14 @@ public class guillotina : MonoBehaviour
     {
         while (true)
         {
+            //warning
+            renderer.color = warningColor;
+            //yield return new WaitForSeconds(warningTime);
+
             //caida
             while (isDropping && transform.position.y > targetPosition.y)
             {
+                renderer.color = normalColor;
                 transform.position = Vector3.MoveTowards(transform.position, targetPosition, dropSpeed * Time.deltaTime);
                 yield return null;
             }

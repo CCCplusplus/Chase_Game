@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b12b978dbb9e44b4a820b3678de04fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropSpeed: 10
-  riseSpeed: 2
+  dropSpeed: 12
+  riseSpeed: 4
   waitTime: 2
   cycleTime: 5
   runnerTransform: {fileID: 0}
@@ -129,6 +129,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
+    - - {x: 3.1157923, y: -0.82277703}
+      - {x: -3.0151653, y: -0.84393644}
+      - {x: -3.004468, y: -4.2327094}
+      - {x: 3.1227903, y: -2.4578907}
