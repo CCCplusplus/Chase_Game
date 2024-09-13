@@ -10903,7 +10903,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Scroll down to continue.
+  m_text: 'Drop down to continue.
 
 '
   m_isRightToLeft: 0
