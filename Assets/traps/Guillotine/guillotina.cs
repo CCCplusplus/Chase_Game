@@ -8,7 +8,7 @@ public class guillotina : MonoBehaviour
     [SerializeField] float riseSpeed = 2f;  // subida
     [SerializeField] float waitTime = 2f;   // tiempo que espera en el suelo
     [SerializeField] float cycleTime = 5f;  // tiempo de espera
-    //[SerializeField] float warningTime = 1f;
+    [SerializeField] float warningTime = 1f;
 
     private Vector3 initialPosition;
     private Vector3 targetPosition;
@@ -35,7 +35,7 @@ public class guillotina : MonoBehaviour
         {
             //warning
             renderer.color = warningColor;
-            //yield return new WaitForSeconds(warningTime);
+            yield return new WaitForSeconds(warningTime);
 
             //caida
             while (isDropping && transform.position.y > targetPosition.y)
