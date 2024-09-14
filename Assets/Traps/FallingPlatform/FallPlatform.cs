@@ -8,31 +8,27 @@ public class FallPlatform : MonoBehaviour
     [SerializeField] private float tiempoReaparicion = 2f;
     private Collider2D col2D;
     private Renderer platformRd;
-    private bool runnerEncima = false;
+    private ParticleSystem particle;
+    private bool touched = false;
 
     private void Start()
     {
         col2D = GetComponent<Collider2D>();
         platformRd = GetComponent<Renderer>();
+        particle = GetComponentInChildren<ParticleSystem>();
     }
 
-    private void OnCollisionStay2D(Collision2D other)
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Runner") || other.gameObject.CompareTag("Chaser"))
         {
-            if (!runnerEncima)
+            if (!touched)
             {
-                runnerEncima = true;
+                particle.Play();
+                touched = true;
                 StartCoroutine(Desaparece());
             }
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Runner") || other.gameObject.CompareTag("Chaser"))
-        {
-            runnerEncima = false;
         }
     }
 
@@ -40,19 +36,18 @@ public class FallPlatform : MonoBehaviour
     {
         yield return new WaitForSeconds(tiempoEspera);
 
-        if (runnerEncima)
-        {
-            // Desactiva la plataforma (desaparece)
-            col2D.enabled = false;
-            platformRd.enabled = false;
+        particle.Stop();
+        // Desactiva la plataforma (desaparece)
+        col2D.enabled = false;
+        platformRd.enabled = false;
+        
+        // Espera un tiempo antes de reaparecer la plataforma
+        yield return new WaitForSeconds(tiempoReaparicion);
+        
+        // Reactiva la plataforma (reaparece)
+        col2D.enabled = true;
+        platformRd.enabled = true;
+        touched = false;
 
-            // Espera un tiempo antes de reaparecer la plataforma
-            yield return new WaitForSeconds(tiempoReaparicion);
-
-            // Reactiva la plataforma (reaparece)
-            col2D.enabled = true;
-            platformRd.enabled = true;
-            runnerEncima = false;
-        }
     }
 }

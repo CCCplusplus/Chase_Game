@@ -4182,7 +4182,11 @@ PrefabInstance:
     - target: {fileID: 6525745880608873971, guid: 238d1fe7919361044a307ce680f6a011, type: 3}
       propertyPath: chaserTransform
       value: 
-      objectReference: {fileID: 788159748628684926, guid: 13df6115919731f4886eb958038f5353, type: 3}
+      objectReference: {fileID: 1598001577}
+    - target: {fileID: 6525745880608873971, guid: 238d1fe7919361044a307ce680f6a011, type: 3}
+      propertyPath: runnerTransform
+      value: 
+      objectReference: {fileID: 1627158859}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 238d1fe7919361044a307ce680f6a011, type: 3}
 --- !u!1001 &772319495
