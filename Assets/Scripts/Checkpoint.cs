@@ -32,7 +32,8 @@ public class Checkpoint : MonoBehaviour
         {
             chaserTransform.position = own.position;
             chaserTransform = own;
+            animator.SetTrigger("Activar");
         }
-            
+
     }
 }
