@@ -1,6 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Respawn : MonoBehaviour
+public class TutorialRespawn : MonoBehaviour
 {
     public Transform runnerTransform;
     public Transform chaserTransform;
@@ -9,8 +11,8 @@ public class Respawn : MonoBehaviour
         PlayerController player = collision.GetComponent<PlayerController>();
         if (player != null)
             player.died = true;
-        
-        if (collision.gameObject.tag == "Runner" || collision.gameObject.tag == "Invencible")
+
+        if (collision.gameObject.tag == "Runner")
             collision.gameObject.transform.position = runnerTransform.position;
         else if (collision.gameObject.tag == "Chaser")
             collision.gameObject.transform.position = chaserTransform.position;
