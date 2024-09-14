@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2782127845704272992}
   - component: {fileID: 2782127845704272993}
-  - component: {fileID: 2782127845704272994}
   - component: {fileID: 2782127845704272995}
   - component: {fileID: 2782127845704273004}
+  - component: {fileID: 2546555514919570974}
   m_Layer: 0
   m_Name: SawTrap
   m_TagString: Untagged
@@ -87,32 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &2782127845704272994
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2782127845704273005}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.009111971, y: 0.0007009208}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.38, y: 0.38}
-    newSize: {x: 0.38, y: 0.38}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.3000949, y: 0.29448754}
-  m_EdgeRadius: 0
 --- !u!95 &2782127845704272995
 Animator:
   serializedVersion: 5
@@ -151,3 +125,19 @@ MonoBehaviour:
   damage: 2
   runnerTransform: {fileID: 4573329763581803320, guid: 1c14826ee2cc6ee4eaffeac0851482fb, type: 3}
   chaserTransform: {fileID: 788159748628684926, guid: 13df6115919731f4886eb958038f5353, type: 3}
+--- !u!58 &2546555514919570974
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2782127845704273005}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.00280369, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.122711495
